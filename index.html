@@ -1480,24 +1480,56 @@
 
         /* Chat IA */
         .chat-bubble-btn {
-            position: fixed; bottom: 32px; right: 32px; width: 60px; height: 60px;
-            border-radius: 50%; background: linear-gradient(135deg, var(--electric-blue), #0066AA);
-            border: none; cursor: pointer; z-index: 9990;
+            position: fixed; bottom: 32px; right: 32px; width: 64px; height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0a0a12, #0d1a2e);
+            border: 1.5px solid rgba(0,209,255,0.4);
+            cursor: pointer; z-index: 9990;
             display: flex; align-items: center; justify-content: center;
             animation: chatPulse 2.5s infinite; transition: transform 0.2s ease;
         }
-        .chat-bubble-btn:hover { transform: scale(1.1); }
+        .chat-bubble-btn:hover { transform: scale(1.08); }
+
+        /* Bocadillo ¡Hablamos! */
+        .chat-bubble-label {
+            position: absolute;
+            right: 76px;
+            bottom: 16px;
+            background: white;
+            color: #0a0a12;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: var(--font-display);
+            padding: 8px 14px;
+            border-radius: 16px 16px 4px 16px;
+            white-space: nowrap;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+            opacity: 0;
+            transform: translateX(6px) scale(0.9);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            pointer-events: none;
+        }
+        .chat-bubble-label::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            bottom: 8px;
+            border-left: 9px solid white;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+        .chat-bubble-btn:hover .chat-bubble-label {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+        .chat-bubble-inner { display: flex; align-items: center; justify-content: center; }
         @keyframes chatPulse {
             0%   { box-shadow: 0 0 0 0 rgba(0,209,255,0.4); }
             70%  { box-shadow: 0 0 0 16px rgba(0,209,255,0); }
             100% { box-shadow: 0 0 0 0 rgba(0,209,255,0); }
         }
         .chat-bubble-btn svg { width: 28px; height: 28px; fill: white; }
-        .chat-badge {
-            position: absolute; top: -4px; right: -4px; width: 20px; height: 20px;
-            background: var(--copper-gold); border-radius: 50%; font-size: 10px;
-            color: white; font-weight: bold; display: flex; align-items: center; justify-content: center;
-        }
+
         .chat-panel {
             position: fixed; bottom: 108px; right: 32px; width: 360px; max-height: 520px;
             background: rgba(10,10,18,0.97); border: 1px solid rgba(0,209,255,0.2);
@@ -1542,6 +1574,68 @@
         .chat-send-btn:hover { transform: scale(1.1); }
         .chat-send-btn:disabled { opacity: 0.4; }
         .chat-send-btn svg { width: 16px; height: 16px; fill: white; }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 32px;
+            left: 32px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #25D366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9990;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            animation: waPulse 2.5s infinite;
+            text-decoration: none;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 28px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes waPulse {
+            0%   { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            70%  { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-btn svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            left: 72px;
+            background: rgba(10,10,18,0.95);
+            color: white;
+            font-size: 13px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            border: 1px solid rgba(37,211,102,0.3);
+            font-family: var(--font-body);
+        }
+
+        .whatsapp-btn:hover .whatsapp-tooltip {
+            opacity: 1;
+        }
+
+        @media (max-width: 480px) {
+            .whatsapp-btn { bottom: 24px; left: 16px; width: 52px; height: 52px; }
+            .chat-bubble-btn { bottom: 24px; right: 16px; width: 56px; height: 56px; }
+            .chat-bubble-label { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -3019,10 +3113,45 @@
 
     </script>
 
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/34624029617?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20vuestros%20servicios." 
+       class="whatsapp-btn" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       aria-label="Contactar por WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span class="whatsapp-tooltip">💬 Escríbenos por WhatsApp</span>
+    </a>
+
     <!-- Chat IA -->
-    <button class="chat-bubble-btn" id="chatBtn" aria-label="Hablar con nuestro asistente IA">
-        <div class="chat-badge">IA</div>
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+    <button class="chat-bubble-btn" id="chatBtn" aria-label="Hablar con nuestro asistente">
+        <div class="chat-bubble-inner">
+            <svg viewBox="0 0 64 64" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
+                <!-- Cabeza robot -->
+                <rect x="16" y="10" width="32" height="26" rx="6" fill="white" opacity="0.95"/>
+                <!-- Ojos -->
+                <circle cx="24" cy="22" r="4" fill="#00D1FF"/>
+                <circle cx="40" cy="22" r="4" fill="#00D1FF"/>
+                <circle cx="25" cy="21" r="1.5" fill="white"/>
+                <circle cx="41" cy="21" r="1.5" fill="white"/>
+                <!-- Boca -->
+                <rect x="22" y="30" width="20" height="3" rx="1.5" fill="#00D1FF" opacity="0.8"/>
+                <!-- Antena -->
+                <line x1="32" y1="10" x2="32" y2="4" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="32" cy="3" r="2.5" fill="#C87533"/>
+                <!-- Cuello -->
+                <rect x="28" y="36" width="8" height="4" rx="2" fill="white" opacity="0.7"/>
+                <!-- Cuerpo -->
+                <rect x="18" y="40" width="28" height="18" rx="5" fill="white" opacity="0.85"/>
+                <!-- Botones cuerpo -->
+                <circle cx="27" cy="49" r="3" fill="#00D1FF" opacity="0.9"/>
+                <circle cx="37" cy="49" r="3" fill="#C87533" opacity="0.9"/>
+            </svg>
+        </div>
+        <span class="chat-bubble-label">¡Hablamos!</span>
     </button>
 
     <div class="chat-panel" id="chatPanel">
