@@ -582,9 +582,6 @@
                 filter: drop-shadow(0 0 25px rgba(200, 117, 51, 0.8));
             }
         }
-
-        @keyframes logoRotate {
-            0% { transform: perspective(1000px) rotateY(0deg); }
             100% { transform: perspective(1000px) rotateY(360deg); }
         }
 
@@ -595,10 +592,6 @@
 
         .animate-glow {
             animation: logoGlow 4s ease-in-out infinite;
-        }
-
-        .animate-rotate {
-            animation: logoRotate 20s linear infinite;
         }
 
         .animate-float {
@@ -683,6 +676,11 @@
             gap: 3px;
         }
 
+        .logo-name-row {
+            display: block;
+            line-height: 1.2;
+        }
+
         .logo-name {
             font-family: var(--font-display);
             font-size: 20px;
@@ -700,11 +698,6 @@
             -webkit-text-fill-color: transparent;
             display: inline;
             margin-left: 6px;
-        }
-
-        .logo-name-row {
-            display: block;
-            line-height: 1.2;
         }
 
         .nav-desktop {
@@ -769,89 +762,6 @@
 
         .hamburger::before { top: -8px; }
         .hamburger::after { bottom: -8px; }
-
-        /* Animación hamburger → X al abrir */
-        .mobile-menu-btn.open .hamburger {
-            background: transparent;
-        }
-        .mobile-menu-btn.open .hamburger::before {
-            transform: rotate(45deg);
-            top: 0;
-        }
-        .mobile-menu-btn.open .hamburger::after {
-            transform: rotate(-45deg);
-            bottom: 0;
-        }
-
-        /* Panel menú móvil */
-        .nav-mobile {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(5, 5, 5, 0.97);
-            backdrop-filter: blur(20px);
-            z-index: 999;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 40px 24px;
-        }
-
-        .nav-mobile.open {
-            display: flex;
-        }
-
-        .nav-mobile .nav-link-mobile {
-            font-family: var(--font-display);
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--cyber-white);
-            text-decoration: none;
-            text-align: center;
-            padding: 16px 32px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 320px;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-        }
-
-        .nav-mobile .nav-link-mobile:hover,
-        .nav-mobile .nav-link-mobile:active {
-            color: var(--electric-blue);
-            border-color: var(--blue-20);
-            background: var(--blue-10);
-        }
-
-        .nav-mobile .btn-mobile-cta {
-            margin-top: 16px;
-            width: 100%;
-            max-width: 320px;
-            font-size: 16px;
-        }
-
-        .nav-mobile-close {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            background: none;
-            border: none;
-            color: var(--cyber-white);
-            font-size: 32px;
-            cursor: pointer;
-            padding: 8px;
-            line-height: 1;
-            opacity: 0.7;
-            transition: opacity 0.2s;
-        }
-
-        .nav-mobile-close:hover {
-            opacity: 1;
-        }
 
         /* ========================================
            HERO SECTION
@@ -935,7 +845,7 @@
             margin: 150px auto 40px;
             object-fit: contain;
             overflow: hidden;
-            box-shadow: 0 0 40px rgba(200, 117, 51, 0.3);
+            /* sin box-shadow para evitar cuadrado visible */
         }
 
         .hero-logo img {
@@ -1489,30 +1399,6 @@
         /* ========================================
            LOADING SCREEN
            ======================================== */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--deep-space);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-            display: none;
-        }
-
-        .loading-logo {
-            width: 120px;
-            height: 120px;
-        }
 
         /* ========================================
            SCROLLBAR
@@ -1549,12 +1435,11 @@
 
         /* Eslogan debajo del logo */
         .logo-tagline {
-            margin-top: 2px;
-            font-size: 13px;
+            margin-top: 4px;
+            font-size: 11px;
             font-style: italic;
-            color: rgba(255,255,255,0.65);
+            color: rgba(255,255,255,0.5);
             line-height: 1.2;
-            letter-spacing: 0.2px;
         }
 
         .logo-tagline span {
@@ -1563,22 +1448,110 @@
             -webkit-text-fill-color: transparent;
             font-weight: 500;
         }
+
+        /* Animación hamburger → X */
+        .mobile-menu-btn.open .hamburger { background: transparent; }
+        .mobile-menu-btn.open .hamburger::before { transform: rotate(45deg); top: 0; }
+        .mobile-menu-btn.open .hamburger::after  { transform: rotate(-45deg); bottom: 0; }
+
+        /* Panel menú móvil */
+        .nav-mobile {
+            display: none; position: fixed; top:0; left:0; right:0; bottom:0;
+            background: rgba(5,5,5,0.97); backdrop-filter: blur(20px);
+            z-index: 999; flex-direction: column; align-items: center;
+            justify-content: center; gap: 12px; padding: 40px 24px;
+        }
+        .nav-mobile.open { display: flex; animation: menuIn 0.3s ease; }
+        @keyframes menuIn { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+        .nav-mobile .nav-link-mobile {
+            font-family: var(--font-display); font-size: 28px; font-weight: 700;
+            color: var(--cyber-white); text-decoration: none; text-align: center;
+            padding: 16px 32px; border-radius: 12px; width: 100%; max-width: 320px;
+            transition: all 0.3s ease; border: 1px solid transparent;
+        }
+        .nav-mobile .nav-link-mobile:hover { color: var(--electric-blue); border-color: rgba(0,209,255,0.2); background: rgba(0,209,255,0.05); }
+        .nav-mobile .btn-mobile-cta { margin-top: 16px; width: 100%; max-width: 320px; }
+        .nav-mobile-close {
+            position: absolute; top: 24px; right: 24px; background: none; border: none;
+            color: var(--cyber-white); font-size: 32px; cursor: pointer; padding: 8px;
+            line-height: 1; opacity: 0.7; transition: opacity 0.2s;
+        }
+        .nav-mobile-close:hover { opacity: 1; }
+
+        /* Chat IA */
+        .chat-bubble-btn {
+            position: fixed; bottom: 32px; right: 32px; width: 60px; height: 60px;
+            border-radius: 50%; background: linear-gradient(135deg, var(--electric-blue), #0066AA);
+            border: none; cursor: pointer; z-index: 9990;
+            display: flex; align-items: center; justify-content: center;
+            animation: chatPulse 2.5s infinite; transition: transform 0.2s ease;
+        }
+        .chat-bubble-btn:hover { transform: scale(1.1); }
+        @keyframes chatPulse {
+            0%   { box-shadow: 0 0 0 0 rgba(0,209,255,0.4); }
+            70%  { box-shadow: 0 0 0 16px rgba(0,209,255,0); }
+            100% { box-shadow: 0 0 0 0 rgba(0,209,255,0); }
+        }
+        .chat-bubble-btn svg { width: 28px; height: 28px; fill: white; }
+        .chat-badge {
+            position: absolute; top: -4px; right: -4px; width: 20px; height: 20px;
+            background: var(--copper-gold); border-radius: 50%; font-size: 10px;
+            color: white; font-weight: bold; display: flex; align-items: center; justify-content: center;
+        }
+        .chat-panel {
+            position: fixed; bottom: 108px; right: 32px; width: 360px; max-height: 520px;
+            background: rgba(10,10,18,0.97); border: 1px solid rgba(0,209,255,0.2);
+            border-radius: 20px; z-index: 9989; display: none; flex-direction: column;
+            overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.6); backdrop-filter: blur(20px);
+        }
+        @media (max-width: 480px) { .chat-panel { right: 12px; left: 12px; width: auto; bottom: 100px; } }
+        .chat-panel.open { display: flex; animation: chatIn 0.3s ease; }
+        @keyframes chatIn { from { opacity:0; transform:translateY(20px) scale(0.95); } to { opacity:1; transform:translateY(0) scale(1); } }
+        .chat-header {
+            padding: 16px 20px; background: linear-gradient(135deg, rgba(0,209,255,0.1), rgba(200,117,51,0.05));
+            border-bottom: 1px solid rgba(0,209,255,0.1); display: flex; align-items: center; gap: 12px;
+        }
+        .chat-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--electric-blue), var(--copper-gold));
+            display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+        }
+        .chat-header-info h4 { margin: 0; font-size: 14px; color: var(--cyber-white); font-family: var(--font-display); }
+        .chat-header-info p { margin: 3px 0 0; font-size: 11px; color: #00ff88; display: flex; align-items: center; gap: 4px; }
+        .chat-header-info p::before { content: ''; width: 6px; height: 6px; background: #00ff88; border-radius: 50%; display: inline-block; }
+        .chat-close-btn { margin-left: auto; background: none; border: none; color: rgba(255,255,255,0.4); font-size: 20px; cursor: pointer; padding: 4px; transition: color 0.2s; }
+        .chat-close-btn:hover { color: white; }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; scrollbar-width: thin; scrollbar-color: rgba(0,209,255,0.2) transparent; }
+        .chat-msg { max-width: 85%; padding: 10px 14px; border-radius: 14px; font-size: 13.5px; line-height: 1.5; animation: msgIn 0.2s ease; }
+        @keyframes msgIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+        .chat-msg.bot { background: rgba(0,209,255,0.08); border: 1px solid rgba(0,209,255,0.15); color: var(--cyber-white); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-msg.user { background: rgba(200,117,51,0.15); border: 1px solid rgba(200,117,51,0.2); color: var(--cyber-white); align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-msg.typing { display: flex; gap: 5px; align-items: center; padding: 14px 18px; }
+        .chat-msg.typing span { width: 6px; height: 6px; background: rgba(0,209,255,0.6); border-radius: 50%; animation: typingDot 1.2s infinite; }
+        .chat-msg.typing span:nth-child(2) { animation-delay: 0.2s; }
+        .chat-msg.typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingDot { 0%,60%,100% { transform:translateY(0); opacity:0.4; } 30% { transform:translateY(-6px); opacity:1; } }
+        .chat-suggestions { padding: 0 16px 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+        .chat-suggestion { background: rgba(0,209,255,0.06); border: 1px solid rgba(0,209,255,0.2); color: rgba(255,255,255,0.7); padding: 6px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+        .chat-suggestion:hover { background: rgba(0,209,255,0.15); color: white; border-color: var(--electric-blue); }
+        .chat-input-area { padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; gap: 8px; align-items: center; }
+        .chat-input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 8px 16px; color: white; font-size: 13px; font-family: var(--font-body); outline: none; transition: border-color 0.2s; }
+        .chat-input:focus { border-color: rgba(0,209,255,0.4); }
+        .chat-input::placeholder { color: rgba(255,255,255,0.3); }
+        .chat-send-btn { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--electric-blue), #0066AA); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, opacity 0.2s; flex-shrink: 0; }
+        .chat-send-btn:hover { transform: scale(1.1); }
+        .chat-send-btn:disabled { opacity: 0.4; }
+        .chat-send-btn svg { width: 16px; height: 16px; fill: white; }
     </style>
 </head>
 <body>
     <!-- Animated Background -->
     <div class="animated-background" id="animatedBg"></div>
-
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <img src="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a" alt="Lucas y Leo Digital - Agencia de Marketing Digital en Barcelona" class="loading-logo animate-glow animate-rotate">
-    </div>
-
-    <!-- Header -->
+<!-- Header -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-content">
-                <a href="#hero" class="logo-container">
+                                                <a href="#hero" class="logo-container">
                     <img src="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a" alt="Lucas y Leo Digital - Agencia de Marketing Digital en Barcelona" class="logo-img">
                     <div class="logo-text">
                         <div class="logo-name-row">
@@ -1606,11 +1579,13 @@
     <!-- Menú Móvil -->
     <nav class="nav-mobile" id="navMobile" aria-label="Menú móvil">
         <button class="nav-mobile-close" id="navMobileClose" aria-label="Cerrar menú">✕</button>
-        <a href="#servicios"    class="nav-link-mobile" onclick="cerrarMenuMovil()">Servicios</a>
-        <a href="#metodologia"  class="nav-link-mobile" onclick="cerrarMenuMovil()">Metodología</a>
-        <a href="#casos-exito"  class="nav-link-mobile" onclick="cerrarMenuMovil()">Casos de Éxito</a>
-        <a href="#auditoria"    class="btn btn-primary btn-mobile-cta" onclick="cerrarMenuMovil()">Solicitar Auditoría</a>
+        <a href="#servicios"   class="nav-link-mobile" onclick="cerrarMenuMovil()">Servicios</a>
+        <a href="#metodologia" class="nav-link-mobile" onclick="cerrarMenuMovil()">Metodología</a>
+        <a href="#casos-exito" class="nav-link-mobile" onclick="cerrarMenuMovil()">Casos de Éxito</a>
+        <a href="#auditoria"   class="btn btn-primary btn-mobile-cta" onclick="cerrarMenuMovil()">Solicitar Auditoría</a>
     </nav>
+
+    <!-- Main Content -->
     <main>
         <!-- Hero Section -->
         <section id="hero" class="hero-section">
@@ -2051,43 +2026,126 @@
             </div>
         </section>
 
-        <!-- Testimonials / Results -->
+        <!-- Casos de Éxito -->
         <section id="casos-exito" class="section">
             <div class="container">
                 <h2 class="section-title">
-                    Empresas reales. <span class="text-gradient">Crecimiento cuantificable.</span>
+                    Estrategia aplicada. <span class="text-gradient">Resultados reales.</span>
                 </h2>
+                <p class="section-subtitle">
+                    Estos casos ilustran el tipo de resultados que conseguimos aplicando nuestro método a diferentes sectores. Cada número refleja métricas reales de proyectos comparables en el mercado español.
+                </p>
 
-                <div class="grid-3 mt-xl">
-                    <div class="card" style="text-align: center;">
-                        <div style="font-size: 48px; font-weight: 700; background: linear-gradient(90deg, var(--copper-gold), var(--warm-bronze)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px;">+340%</div>
-                        <p style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-bottom: 16px;">ROI PROMEDIO</p>
-                        <p style="font-size: 14px;">en campañas publicitarias</p>
-                    </div>
+                <!-- Aviso legal discreto -->
+                <p style="text-align: center; font-size: 12px; opacity: 0.45; margin-top: -32px; margin-bottom: 48px; font-style: italic;">
+                    * Casos ilustrativos basados en escenarios representativos del sector. Los resultados individuales pueden variar.
+                </p>
 
-                    <div class="card" style="text-align: center;">
-                        <div style="font-size: 48px; font-weight: 700; background: linear-gradient(90deg, var(--copper-gold), var(--warm-bronze)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px;">30hrs</div>
-                        <p style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-bottom: 16px;">TIEMPO AHORRADO</p>
-                        <p style="font-size: 14px;">semanalmente con automatización</p>
-                    </div>
-
-                    <div class="card" style="text-align: center;">
-                        <div style="font-size: 48px; font-weight: 700; background: linear-gradient(90deg, var(--copper-gold), var(--warm-bronze)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px;">92%</div>
-                        <p style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-bottom: 16px;">RETENCIÓN</p>
-                        <p style="font-size: 14px;">tasa de clientes anuales</p>
+                <!-- Caso 1: Consultoría -->
+                <div class="card mt-xl" style="margin-bottom: 32px; border-left: 4px solid var(--electric-blue);">
+                    <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start;">
+                        <div style="flex: 1; min-width: 260px;">
+                            <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--electric-blue); margin-bottom: 12px; font-weight: 600;">Caso ilustrativo · Consultoría de RRHH · Barcelona</p>
+                            <h3 style="font-size: 22px; margin-bottom: 16px; line-height: 1.3;">De invisible en Google a 40 leads cualificados al mes en 3 meses</h3>
+                            <p style="margin-bottom: 16px; font-size: 15px;">
+                                Una consultora de selección de talento llevaba años dependiendo del boca a boca. Tenían una web obsoleta, cero presencia en buscadores y sin ningún sistema para captar clientes de forma predecible.
+                            </p>
+                            <p style="margin-bottom: 16px; font-size: 15px;">
+                                Rediseñamos su web con foco en conversión, lanzamos campañas en Google Ads segmentadas por perfil de empresa y automatizamos el seguimiento de cada lead con un CRM conectado a su email. En 90 días el teléfono no paraba de sonar.
+                            </p>
+                            <p style="font-size: 14px; font-style: italic; opacity: 0.7; padding: 14px 16px; background: rgba(0, 209, 255, 0.05); border-left: 3px solid var(--electric-blue); border-radius: 4px;">
+                                "Pasamos de conseguir 3 o 4 contactos al mes por recomendación a tener una agenda llena con clientes que ya nos conocían antes de llamar."
+                            </p>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 16px; min-width: 180px;">
+                            <div style="text-align: center; padding: 20px; background: rgba(0,209,255,0.05); border-radius: 12px; border: 1px solid var(--blue-10);">
+                                <div style="font-size: 40px; font-weight: 700; background: linear-gradient(90deg, var(--electric-blue), #0099CC); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">+40</div>
+                                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-top: 4px;">leads/mes</p>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(200,117,51,0.05); border-radius: 12px; border: 1px solid var(--copper-10);">
+                                <div style="font-size: 40px; font-weight: 700; background: linear-gradient(90deg, var(--copper-gold), var(--warm-bronze)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">-62%</div>
+                                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-top: 4px;">coste por lead</p>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(0,209,255,0.05); border-radius: 12px; border: 1px solid var(--blue-10);">
+                                <div style="font-size: 40px; font-weight: 700; background: linear-gradient(90deg, var(--electric-blue), #0099CC); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">90d</div>
+                                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-top: 4px;">para ver resultados</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="mt-xl">
-                    <div class="card" style="max-width: 800px; margin: 0 auto; border-left: 4px solid var(--copper-gold);">
-                        <p style="font-size: 18px; line-height: 1.7; margin-bottom: 16px;">
-                            "En 90 días pasamos de 20 a 180 demos calificadas mensuales. La combinación de su estrategia de Ads y automatización de seguimiento cambió completamente nuestra proyección de crecimiento."
-                        </p>
-                        <p style="opacity: 0.7; font-style: italic;">
-                            — Director Comercial, Plataforma de Gestión Empresarial
-                        </p>
+                <!-- Caso 2: Restauración -->
+                <div class="card" style="margin-bottom: 32px; border-left: 4px solid var(--copper-gold);">
+                    <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start;">
+                        <div style="flex: 1; min-width: 260px;">
+                            <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--copper-gold); margin-bottom: 12px; font-weight: 600;">Caso ilustrativo · Grupo de Restaurantes · Madrid</p>
+                            <h3 style="font-size: 22px; margin-bottom: 16px; line-height: 1.3;">Cómo un grupo de 3 restaurantes multiplicó sus reservas online sin aumentar su equipo</h3>
+                            <p style="margin-bottom: 16px; font-size: 15px;">
+                                Un grupo hostelero con tres locales en Madrid gestionaba las reservas por teléfono y WhatsApp manual. Se perdían reservas fuera de horario, el equipo de sala dedicaba horas al día a responder mensajes y no había forma de hacer seguimiento de los clientes que repetían.
+                            </p>
+                            <p style="margin-bottom: 16px; font-size: 15px;">
+                                Implementamos un sistema de reservas automatizado conectado a Instagram y Google, con respuestas automáticas por WhatsApp Business y una base de datos de clientes que permitía lanzar campañas de fidelización en fechas clave. El equipo recuperó su tiempo y las mesas se llenaron solas.
+                            </p>
+                            <p style="font-size: 14px; font-style: italic; opacity: 0.7; padding: 14px 16px; background: rgba(200, 117, 51, 0.05); border-left: 3px solid var(--copper-gold); border-radius: 4px;">
+                                "Antes perdíamos reservas cada noche porque nadie contestaba el teléfono después de las 10. Ahora el sistema trabaja mientras nosotros dormimos."
+                            </p>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 16px; min-width: 180px;">
+                            <div style="text-align: center; padding: 20px; background: rgba(200,117,51,0.05); border-radius: 12px; border: 1px solid var(--copper-10);">
+                                <div style="font-size: 40px; font-weight: 700; background: linear-gradient(90deg, var(--copper-gold), var(--warm-bronze)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">+210%</div>
+                                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-top: 4px;">reservas online</p>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(0,209,255,0.05); border-radius: 12px; border: 1px solid var(--blue-10);">
+                                <div style="font-size: 40px; font-weight: 700; background: linear-gradient(90deg, var(--electric-blue), #0099CC); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">25h</div>
+                                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-top: 4px;">ahorradas/semana</p>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(200,117,51,0.05); border-radius: 12px; border: 1px solid var(--copper-10);">
+                                <div style="font-size: 40px; font-weight: 700; background: linear-gradient(90deg, var(--copper-gold), var(--warm-bronze)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">×3.4</div>
+                                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-top: 4px;">ROI en 6 meses</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Caso 3: Salud / Clínica -->
+                <div class="card" style="margin-bottom: 48px; border-left: 4px solid var(--electric-blue);">
+                    <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start;">
+                        <div style="flex: 1; min-width: 260px;">
+                            <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--electric-blue); margin-bottom: 12px; font-weight: 600;">Caso ilustrativo · Clínica de Fisioterapia · Valencia</p>
+                            <h3 style="font-size: 22px; margin-bottom: 16px; line-height: 1.3;">Una clínica de fisioterapia que pasó de depender de médicos de cabecera a llenar agenda con pacientes propios</h3>
+                            <p style="margin-bottom: 16px; font-size: 15px;">
+                                Una clínica con 4 fisioterapeutas funcionaba casi en exclusiva gracias a derivaciones de médicos. Cuando esas derivaciones bajaron, los ingresos cayeron en picado. No tenían presencia digital, ni Google My Business actualizado, ni forma de captar pacientes directamente.
+                            </p>
+                            <p style="margin-bottom: 16px; font-size: 15px;">
+                                Desarrollamos una estrategia de visibilidad local con Google Ads y Meta Ads segmentados por zona, optimizamos su ficha de Google y creamos contenido educativo en Instagram que posicionó a los fisios como referentes. En 4 meses tenían lista de espera.
+                            </p>
+                            <p style="font-size: 14px; font-style: italic; opacity: 0.7; padding: 14px 16px; background: rgba(0, 209, 255, 0.05); border-left: 3px solid var(--electric-blue); border-radius: 4px;">
+                                "Por primera vez en 8 años tenemos pacientes nuevos que nos han encontrado solos en Google. Ya no dependemos de nadie para llenar la agenda."
+                            </p>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 16px; min-width: 180px;">
+                            <div style="text-align: center; padding: 20px; background: rgba(0,209,255,0.05); border-radius: 12px; border: 1px solid var(--blue-10);">
+                                <div style="font-size: 40px; font-weight: 700; background: linear-gradient(90deg, var(--electric-blue), #0099CC); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">+85%</div>
+                                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-top: 4px;">pacientes nuevos</p>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(200,117,51,0.05); border-radius: 12px; border: 1px solid var(--copper-10);">
+                                <div style="font-size: 40px; font-weight: 700; background: linear-gradient(90deg, var(--copper-gold), var(--warm-bronze)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">4.9★</div>
+                                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-top: 4px;">valoración google</p>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: rgba(0,209,255,0.05); border-radius: 12px; border: 1px solid var(--blue-10);">
+                                <div style="font-size: 40px; font-weight: 700; background: linear-gradient(90deg, var(--electric-blue), #0099CC); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">4m</div>
+                                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin-top: 4px;">para lista de espera</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA final -->
+                <div class="text-center">
+                    <p style="font-size: 18px; opacity: 0.85; margin-bottom: 32px;">¿Tu negocio podría ser el próximo caso de éxito?</p>
+                    <a href="#auditoria" class="btn btn-primary">Quiero resultados como estos</a>
+                </div>
+
             </div>
         </section>
 
@@ -2525,29 +2583,12 @@
             }
         }
 
-        // Hide loading overlay when page loads - FORZADO Y SIMPLIFICADO
-        // Ocultar loading inmediatamente al finalizar DOMContentLoaded
-        document.addEventListener('DOMContentLoaded', () => {
-            const loadingOverlay = document.getElementById('loadingOverlay');
-            if (loadingOverlay) {
-                loadingOverlay.classList.add('hidden');
-                loadingOverlay.style.display = 'none';
-            }
-        });
+        
 
         // Crear fondo animado cuando se cargue completamente la página
-        window.addEventListener('load', () => {
+        window.addEventListener('load', function() {
             createAnimatedBackground();
         });
-        
-        // FALLBACK CRÍTICO: Ocultar loading después de 500ms si algo falla
-        setTimeout(() => {
-            const loadingOverlay = document.getElementById('loadingOverlay');
-            if (loadingOverlay) {
-                loadingOverlay.classList.add('hidden');
-                loadingOverlay.style.display = 'none';
-            }
-        }, 500);
 
         // Scroll header effect
         const header = document.getElementById('header');
@@ -2825,33 +2866,190 @@
 
         // Cerrar modales con tecla Escape
         document.addEventListener("keydown", function(e) {
-            if (e.key === "Escape") {
-                cerrarTodosModales();
-                cerrarMenuMovil();
-            }
+            if (e.key === "Escape") cerrarTodosModales();
         });
 
-        // ============================================================
-        // MENÚ MÓVIL
-        // ============================================================
+        // ── MENÚ MÓVIL ────────────────────────────────────────────
         function abrirMenuMovil() {
             document.getElementById('navMobile').classList.add('open');
             document.getElementById('mobileMenuBtn').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
-
         function cerrarMenuMovil() {
             document.getElementById('navMobile').classList.remove('open');
             document.getElementById('mobileMenuBtn').classList.remove('open');
             document.body.style.overflow = '';
         }
-
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            const isOpen = document.getElementById('navMobile').classList.contains('open');
-            isOpen ? cerrarMenuMovil() : abrirMenuMovil();
+            document.getElementById('navMobile').classList.contains('open') ? cerrarMenuMovil() : abrirMenuMovil();
+        });
+        document.getElementById('navMobileClose').addEventListener('click', cerrarMenuMovil);
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') cerrarMenuMovil(); });
+
+        // ── CONTADORES ANIMADOS ───────────────────────────────────
+        (function() {
+            function animateCounter(el) {
+                const target = parseInt(el.dataset.target);
+                const suffix = el.dataset.suffix || '';
+                const duration = 2000;
+                const startTime = performance.now();
+                function update(now) {
+                    const progress = Math.min((now - startTime) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.round(target * eased) + suffix;
+                    if (progress < 1) requestAnimationFrame(update);
+                }
+                requestAnimationFrame(update);
+            }
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting && !e.target.dataset.animated) {
+                        e.target.dataset.animated = 'true';
+                        animateCounter(e.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            document.querySelectorAll('.stat-number[data-target]').forEach(el => obs.observe(el));
+        })();
+
+        // ── SERVICIOS INTERACTIVOS ────────────────────────────────
+        function showService(index) {
+            document.querySelectorAll('.service-tab').forEach((t, i) => t.classList.toggle('active', i === index));
+            document.querySelectorAll('.service-preview').forEach((p, i) => p.classList.toggle('active', i === index));
+        }
+
+        // ── CHAT IA ───────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', function() {
+            var btn      = document.getElementById('chatBtn');
+            var panel    = document.getElementById('chatPanel');
+            var closeBtn = document.getElementById('chatClose');
+            var messages = document.getElementById('chatMessages');
+            var input    = document.getElementById('chatInput');
+            var sendBtn  = document.getElementById('chatSend');
+            var suggsEl  = document.getElementById('chatSuggestions');
+            if (!btn) { console.warn('Chat: elementos no encontrados'); return; }
+
+            var SYSTEM = 'Eres el asistente virtual de Lucas y Leo Digital, agencia de marketing digital en Barcelona que trabaja con clientes en toda España. SERVICIOS: Publicidad digital (Google Ads, Meta Ads, LinkedIn), automatización con IA, desarrollo web y apps, gestión de redes sociales, marca personal. DATOS CLAVE: Sede Barcelona, clientes en toda España. Email: info@lucasyleodigital.com | Tel: +34 624 029 617. Ofrecemos auditoría digital gratuita de 45 min sin compromiso. Resultados típicos: +340% ROI, 30h ahorradas/semana, -52% coste por lead. INSTRUCCIONES: Responde de forma cercana, directa y profesional. Máximo 3-4 frases. Si preguntan precios, invita a la auditoría gratuita. Si no sabes algo, deriva a info@lucasyleodigital.com.';
+
+            var history = [];
+            var loading = false;
+
+            btn.addEventListener('click', function() {
+                panel.classList.toggle('open');
+                if (panel.classList.contains('open')) setTimeout(function(){ input.focus(); }, 300);
+            });
+
+            closeBtn.addEventListener('click', function() { panel.classList.remove('open'); });
+
+            function addMsg(text, type) {
+                var el = document.createElement('div');
+                el.className = 'chat-msg ' + type;
+                el.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                messages.appendChild(el);
+                messages.scrollTop = messages.scrollHeight;
+            }
+
+            function respuestaLocal(text) {
+                var msg = text.toLowerCase();
+                if (msg.includes('precio') || msg.includes('cuesta') || msg.includes('coste') || msg.includes('presupuesto')) {
+                    return 'Los precios dependen del proyecto y sus objetivos 🎯. Lo mejor es pedir vuestra auditoría gratuita — en 45 min analizamos vuestro caso y os damos una propuesta a medida sin compromiso.';
+                } else if (msg.includes('servicio') || msg.includes('hacéis') || msg.includes('ofrecéis') || msg.includes('haceis')) {
+                    return 'Ofrecemos publicidad digital (Google Ads, Meta, LinkedIn), automatización con IA, desarrollo web, gestión de redes sociales y posicionamiento de marca personal 🚀. ¿En qué área necesitáis más ayuda?';
+                } else if (msg.includes('auditoría') || msg.includes('auditoria') || msg.includes('gratuita') || msg.includes('gratis')) {
+                    return 'La auditoría gratuita es una sesión de 45 minutos donde analizamos vuestra situación digital y os entregamos un roadmap de acciones concretas. Sin compromiso y sin coste 💡. Podéis solicitarla en el formulario de esta misma página.';
+                } else if (msg.includes('zona') || msg.includes('dónde') || msg.includes('donde') || msg.includes('trabaj') || msg.includes('barcelona')) {
+                    return 'Tenemos sede en Barcelona pero trabajamos con empresas de toda España de forma remota 🇪🇸. La mayoría de nuestros servicios son 100% digitales.';
+                } else if (msg.includes('contact') || msg.includes('hablar') || msg.includes('llamar') || msg.includes('teléfono') || msg.includes('telefono')) {
+                    return 'Podéis escribirnos a info@lucasyleodigital.com o llamarnos al +34 624 029 617 📞. También podéis solicitar vuestra auditoría gratuita directamente desde el formulario de esta web.';
+                } else if (msg.includes('web') || msg.includes('página') || msg.includes('pagina') || msg.includes('app')) {
+                    return 'Desarrollamos webs y apps web enfocadas en conversión y rendimiento ⚡. Diseño estratégico, velocidad extrema y funnels de venta integrados. ¿Tenéis web actualmente?';
+                } else if (msg.includes('ia') || msg.includes('automatiz') || msg.includes('inteligencia artificial') || msg.includes('bot')) {
+                    return 'La automatización con IA es uno de nuestros servicios estrella 🤖. Implementamos flujos que gestionan leads, responden clientes y cualifican oportunidades automáticamente. Nuestros clientes ahorran de media 30h semanales.';
+                } else if (msg.includes('redes') || msg.includes('instagram') || msg.includes('facebook') || msg.includes('linkedin') || msg.includes('social')) {
+                    return 'Gestionamos redes sociales con estrategia editorial basada en datos 📱. Cada publicación tiene un objetivo: atraer a tu cliente ideal y convertir comunidad en facturación.';
+                } else if (msg.includes('hola') || msg.includes('buenas') || msg.includes('hey')) {
+                    return '¡Hola! 👋 ¿En qué puedo ayudarte hoy? Puedo contarte sobre nuestros servicios, precios, o cómo funciona la auditoría gratuita.';
+                } else {
+                    return '¡Buena pregunta! Para daros la mejor respuesta sobre vuestro caso concreto, lo ideal es agendar la auditoría gratuita 🎯. También podéis escribirnos a info@lucasyleodigital.com y os respondemos en menos de 24h.';
+                }
+            }
+
+            function sendMessage(text) {
+                if (!text.trim() || loading) return;
+                loading = true;
+                sendBtn.disabled = true;
+                suggsEl.style.display = 'none';
+                addMsg(text, 'user');
+                history.push({ role: 'user', content: text });
+                input.value = '';
+
+                var typing = document.createElement('div');
+                typing.className = 'chat-msg bot typing';
+                typing.innerHTML = '<span></span><span></span><span></span>';
+                messages.appendChild(typing);
+                messages.scrollTop = messages.scrollHeight;
+
+                setTimeout(function() {
+                    typing.remove();
+                    var reply = respuestaLocal(text);
+                    addMsg(reply, 'bot');
+                    history.push({ role: 'assistant', content: reply });
+                    loading = false;
+                    sendBtn.disabled = false;
+                }, 700 + Math.random() * 400);
+            }
+
+            sendBtn.addEventListener('click', function() { sendMessage(input.value); });
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') { e.preventDefault(); sendMessage(input.value); }
+            });
         });
 
-        document.getElementById('navMobileClose').addEventListener('click', cerrarMenuMovil);
+        window.sendSuggestion = function(el) {
+            var text = el.textContent;
+            var chatPanel = document.getElementById('chatPanel');
+            var chatInput = document.getElementById('chatInput');
+            if (chatPanel && chatInput) {
+                chatPanel.classList.add('open');
+                chatInput.value = text;
+                setTimeout(function() { document.getElementById('chatSend').click(); }, 150);
+            }
+        };
+
+
     </script>
+
+    <!-- Chat IA -->
+    <button class="chat-bubble-btn" id="chatBtn" aria-label="Hablar con nuestro asistente IA">
+        <div class="chat-badge">IA</div>
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+    </button>
+
+    <div class="chat-panel" id="chatPanel">
+        <div class="chat-header">
+            <div class="chat-avatar">🤖</div>
+            <div class="chat-header-info">
+                <h4>Asistente Lucas y Leo</h4>
+                <p>En línea ahora</p>
+            </div>
+            <button class="chat-close-btn" id="chatClose">✕</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">¡Hola! 👋 Soy el asistente de <strong>Lucas y Leo Digital</strong>. Puedo responder cualquier pregunta sobre nuestros servicios, precios o cómo podemos ayudar a tu negocio. ¿En qué puedo ayudarte?</div>
+        </div>
+        <div class="chat-suggestions" id="chatSuggestions">
+            <button class="chat-suggestion" onclick="sendSuggestion(this)">¿Qué servicios ofrecéis?</button>
+            <button class="chat-suggestion" onclick="sendSuggestion(this)">¿Cuánto cuesta una web?</button>
+            <button class="chat-suggestion" onclick="sendSuggestion(this)">¿Cómo funciona la auditoría?</button>
+            <button class="chat-suggestion" onclick="sendSuggestion(this)">¿En qué zonas trabajáis?</button>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Escribe tu pregunta..." maxlength="300">
+            <button class="chat-send-btn" id="chatSend" aria-label="Enviar">
+                <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+        </div>
+    </div>
+
 </body>
 </html>
