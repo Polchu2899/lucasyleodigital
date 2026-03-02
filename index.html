@@ -3345,10 +3345,10 @@
         };
 
 
-
         // ── BOCADILLO MÓVIL — aparece al llegar a metodología ────────────────
-        (function() {
-            if (window.innerWidth > 768) return; // solo móvil
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.innerWidth > 768) return;
+
             var label = document.querySelector('.chat-bubble-label');
             var trigger = document.getElementById('metodologia');
             if (!label || !trigger) return;
@@ -3359,23 +3359,20 @@
                 if (mostrado) return;
                 mostrado = true;
                 label.classList.add('visible');
-                // Desaparece a los 3 segundos
                 setTimeout(function() {
                     label.classList.remove('visible');
-                    // Vuelve a aparecer cada 30 segundos mientras sigue en móvil
                     setTimeout(function() { mostrado = false; }, 30000);
                 }, 3000);
             }
 
-            // Observer que detecta cuando llega a la sección metodología
             var obs = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) mostrarBocadillo();
+                entries.forEach(function(e) {
+                    if (e.isIntersecting) mostrarBocadillo();
                 });
             }, { threshold: 0.2 });
 
             obs.observe(trigger);
-        })();
+        });
 
     </script>
 
