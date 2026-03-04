@@ -46,6 +46,38 @@
         "areaServed": "ES",
         "serviceType": ["Marketing Digital", "Automatización IA", "Publicidad Digital", "Desarrollo Web"]
     }
+
+        // ── COOKIES RGPD ──────────────────────────────────────────────────────
+        (function() {
+            var KEY = 'lucas_leo_cookies_landing';
+            var consent = localStorage.getItem(KEY);
+            if (!consent) {
+                setTimeout(function() {
+                    var b = document.getElementById('cookie-banner');
+                    if (b) b.classList.add('visible');
+                }, 1200);
+            }
+        })();
+
+        function gestionarCookies(decision) {
+            localStorage.setItem('lucas_leo_cookies_landing', decision);
+            var b = document.getElementById('cookie-banner');
+            if (b) {
+                b.style.transition = 'all 0.3s ease';
+                b.style.opacity = '0';
+                b.style.transform = 'translateY(100%)';
+                setTimeout(function() { b.classList.remove('visible'); }, 300);
+            }
+        }
+        function abrirModalCookies() {
+            var m = document.getElementById('modal-cookies');
+            if (m) m.classList.add('visible');
+        }
+        function cerrarModalCookies() {
+            var m = document.getElementById('modal-cookies');
+            if (m) m.classList.remove('visible');
+        }
+
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,6 +93,7 @@
             --warm-bronze: #8B4513;
             --font-display: 'Space Grotesk', sans-serif;
             --font-body: 'Inter', sans-serif;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -138,6 +171,23 @@
 
         .hero-sub { font-size: clamp(15px, 2vw, 19px); line-height: 1.75; opacity: 0.68; max-width: 680px; margin: 0 auto 48px; position: relative; z-index: 1; }
 
+
+        /* Hero logo badge */
+        .hero-logo-badge {
+            display: flex; justify-content: center; margin-bottom: 28px;
+        }
+        .hero-badge-logo {
+            height: 64px; width: auto;
+            filter: drop-shadow(0 0 20px rgba(200,117,51,0.4));
+            animation: logoPulse 4s ease-in-out infinite;
+        }
+        @keyframes logoPulse {
+            0%, 100% { filter: drop-shadow(0 0 16px rgba(200,117,51,0.35)); }
+            50%       { filter: drop-shadow(0 0 32px rgba(200,117,51,0.65)); }
+        }
+
+        /* Remove old badge styles (no longer needed) */
+        .badge { display: none; }
         /* ── BOTONES ── */
         .cta-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; position: relative; z-index: 1; }
 
@@ -167,12 +217,19 @@
 
         .btn-secondary {
             display: inline-flex; align-items: center; gap: 8px;
-            border: 1px solid rgba(255,255,255,0.13); color: rgba(255,255,255,0.6);
-            font-family: var(--font-display); font-size: 13px; font-weight: 600;
-            padding: 13px 26px; border-radius: 50px; text-decoration: none;
+            border: 2px solid var(--copper-gold);
+            background: rgba(200,117,51,0.08);
+            color: var(--copper-gold);
+            font-family: var(--font-display); font-size: 14px; font-weight: 700;
+            padding: 14px 28px; border-radius: 50px; text-decoration: none;
             transition: all 0.2s; position: relative; z-index: 1;
+            letter-spacing: 0.04em;
         }
-        .btn-secondary:hover { border-color: var(--electric-blue); color: var(--electric-blue); }
+        .btn-secondary:hover {
+            background: var(--copper-gold); color: #050505;
+            box-shadow: 0 8px 24px rgba(200,117,51,0.35);
+            transform: translateY(-2px);
+        }
 
         /* ── SECCIÓN LABEL ── */
         .section-label {
@@ -199,15 +256,29 @@
 
         /* Icono SVG en lugar de emoji */
         .pain-icon {
-            width: 44px; height: 44px; border-radius: 12px;
-            background: rgba(200,117,51,0.1); border: 1px solid rgba(200,117,51,0.2);
+            width: 60px; height: 60px; border-radius: 16px;
+            background: linear-gradient(135deg, rgba(0,30,50,0.9), rgba(0,15,30,0.95));
+            border: 1px solid rgba(0,209,255,0.12);
             display: flex; align-items: center; justify-content: center;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04);
+            position: relative; overflow: hidden;
         }
-        .pain-icon svg { width: 22px; height: 22px; stroke: var(--copper-gold); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .pain-icon::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(0,209,255,0.08), transparent);
+            border-radius: inherit;
+        }
+        .pain-icon svg {
+            width: 28px; height: 28px;
+            stroke: var(--electric-blue); fill: none;
+            stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+            position: relative; z-index: 1;
+            filter: drop-shadow(0 0 6px rgba(0,209,255,0.5));
+        }
 
-        .pain-card h3 { font-family: var(--font-display); font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--cyber-white); }
-        .pain-card p { font-size: 13px; line-height: 1.7; opacity: 0.65; }
+        .pain-card h3 { font-family: var(--font-display); font-size: 17px; font-weight: 700; margin-bottom: 10px; color: #ffffff; }
+        .pain-card p { font-size: 14px; line-height: 1.7; opacity: 0.65; }
 
         /* ── PASOS ── */
         .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
@@ -220,12 +291,17 @@
         }
         .step:hover { border-color: rgba(0,209,255,0.2); background: rgba(0,209,255,0.05); transform: translateY(-4px); }
         .step-num {
-            width: 52px; height: 52px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--electric-blue), #0055AA);
-            font-family: var(--font-display); font-size: 22px; font-weight: 800;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 20px; color: white;
-            box-shadow: 0 8px 24px rgba(0,209,255,0.3);
+            font-family: var(--font-display);
+            font-size: 72px; font-weight: 800;
+            line-height: 1;
+            color: var(--copper-gold);
+            opacity: 0.85;
+            margin-bottom: 12px;
+            letter-spacing: -0.03em;
+            display: block;
+            background: linear-gradient(135deg, var(--copper-gold), var(--warm-bronze));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .step h3 { font-family: var(--font-display); font-size: 17px; font-weight: 700; margin-bottom: 10px; }
         .step p { font-size: 13px; opacity: 0.65; line-height: 1.65; }
@@ -302,9 +378,26 @@
             100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
         }
 
+
+        /* Hero elements animate on load */
+        .hero-anim {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroReveal 0.7s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)) forwards;
+        }
+        @keyframes heroReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* ── FADE IN SCROLL ── */
-        .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        /* Only hide elements when JS is ready (js-loaded class on body) */
+        body.js-loaded .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+            will-change: opacity, transform;
+        }
+        body.js-loaded .fade-in.visible { opacity: 1; transform: translateY(0); }
         .fade-in-delay-1 { transition-delay: 0.1s; }
         .fade-in-delay-2 { transition-delay: 0.2s; }
         .fade-in-delay-3 { transition-delay: 0.3s; }
@@ -314,6 +407,56 @@
             .section { padding: 64px 0; }
             .wa-float { bottom: 20px; left: 16px; width: 50px; height: 50px; }
         }
+
+        /* ── COOKIE BANNER RGPD ── */
+        .cookie-banner {
+            display: none; position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(10,10,18,0.97); border-top: 1px solid rgba(0,209,255,0.15);
+            z-index: 99999; padding: 20px 24px; backdrop-filter: blur(20px);
+        }
+        .cookie-banner.visible { display: block; animation: slideUp 0.4s ease; }
+        @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .cookie-banner-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .cookie-banner-text { flex: 1; font-size: 13px; line-height: 1.6; opacity: 0.85; min-width: 260px; }
+        .cookie-banner-text a { color: var(--electric-blue); text-decoration: none; }
+        .cookie-banner-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn-cookie-accept, .btn-cookie-reject, .btn-cookie-config {
+            padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
+            cursor: pointer; border: none; font-family: var(--font-display); transition: all 0.2s;
+        }
+        .btn-cookie-accept { background: var(--electric-blue); color: #050505; }
+        .btn-cookie-accept:hover { opacity: 0.85; }
+        .btn-cookie-reject { background: rgba(255,255,255,0.08); color: var(--cyber-white); border: 1px solid rgba(255,255,255,0.15); }
+        .btn-cookie-reject:hover { background: rgba(255,255,255,0.14); }
+        .btn-cookie-config { background: rgba(200,117,51,0.15); color: var(--copper-gold); border: 1px solid rgba(200,117,51,0.3); }
+        .btn-cookie-config:hover { background: rgba(200,117,51,0.25); }
+
+        /* Modal cookies */
+        .modal-cookies-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+            z-index: 99998; align-items: center; justify-content: center; padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+        .modal-cookies-overlay.visible { display: flex; }
+        .modal-cookies-box {
+            background: #0a0a12; border: 1px solid rgba(0,209,255,0.15);
+            border-radius: 20px; max-width: 640px; width: 100%; max-height: 80vh;
+            overflow-y: auto; padding: 36px; position: relative;
+        }
+        .modal-cookies-box h2 { font-family: var(--font-display); font-size: 22px; font-weight: 700; margin-bottom: 20px; }
+        .modal-cookies-box h3 { font-family: var(--font-display); font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--electric-blue); }
+        .modal-cookies-box p, .modal-cookies-box li { font-size: 13px; line-height: 1.7; opacity: 0.75; }
+        .modal-cookies-box ul { padding-left: 20px; margin-top: 8px; }
+        .modal-cookies-box a { color: var(--electric-blue); }
+        .modal-close-btn {
+            position: absolute; top: 16px; right: 16px;
+            background: rgba(255,255,255,0.08); border: none; color: white;
+            width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+            font-size: 16px; display: flex; align-items: center; justify-content: center;
+        }
+        .modal-close-btn:hover { background: rgba(255,255,255,0.15); }
+        .cookie-actions-modal { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+
     </style>
 </head>
 <body>
@@ -342,18 +485,18 @@
             alt="" class="hero-logo-bg" aria-hidden="true">
 
         <div class="container">
-            <div class="badge fade-in">
-                <span class="badge-dot"></span>
-                Para emprendedores que empiezan su sistema digital
+            <div class="hero-logo-badge hero-anim" style="animation-delay:0s">
+                <img src="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a"
+                     alt="Lucas y Leo Digital" class="hero-badge-logo">
             </div>
-            <h1 class="fade-in fade-in-delay-1">
+            <h1 class="hero-anim" style="animation-delay:0.15s">
                 Construye tu primer sistema digital<br>
                 que trae clientes <span class="grad-copper">aunque estés durmiendo</span>
             </h1>
-            <p class="hero-sub fade-in fade-in-delay-2">
+            <p class="hero-sub hero-anim" style="animation-delay:0.3s">
                 Acompañamos a emprendedores que están montando su primer sistema digital: publicidad, automatización y web de conversión — sin tecnicismos ni humo. Desde Barcelona, trabajamos con toda España.
             </p>
-            <div class="cta-group fade-in fade-in-delay-3">
+            <div class="cta-group hero-anim" style="animation-delay:0.45s">
                 <a href="#formulario" class="btn-primary">Quiero revisar mi sistema →</a>
                 <a href="https://wa.me/34624029617?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20c%C3%B3mo%20montar%20mi%20primer%20sistema%20digital."
                    target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
@@ -361,7 +504,7 @@
                     WhatsApp directo
                 </a>
             </div>
-            <a href="/agencia" class="btn-secondary fade-in">Ver todo lo que hace nuestra agencia →</a>
+            <a href="/agencia" class="btn-secondary hero-anim" style="animation-delay:0.55s">Ver todo lo que hace nuestra agencia →</a>
         </div>
     </section>
 
@@ -375,7 +518,7 @@
                 <div class="pain-card fade-in">
                     <div class="pain-icon">
                         <!-- Icono puzzle/piezas sueltas -->
-                        <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2v1h3a1 1 0 0 1 1 1v3h1a2 2 0 0 1 0 4h-1v3a1 1 0 0 1-1 1h-3v1a2 2 0 0 1-4 0v-1H7a1 1 0 0 1-1-1v-3H5a2 2 0 0 1 0-4h1V6a1 1 0 0 1 1-1h3V4a2 2 0 0 1 2-2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2a2 2 0 0 1 2 2v1h3a1 1 0 0 1 1 1v3h1a2 2 0 0 1 0 4h-1v3a1 1 0 0 1-1 1h-3v1a2 2 0 0 1-4 0v-1H7a1 1 0 0 1-1-1v-3H5a2 2 0 0 1 0-4h1V6a1 1 0 0 1 1-1h3V4a2 2 0 0 1 2-2z"/></svg>
                     </div>
                     <h3>Piezas sueltas sin conectar</h3>
                     <p>Has probado web, anuncios, Instagram — pero nada termina de encajar ni de dar resultados concretos.</p>
@@ -383,7 +526,7 @@
                 <div class="pain-card fade-in fade-in-delay-1">
                     <div class="pain-icon">
                         <!-- Icono mapa/confusión -->
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor"/><path d="M12 8v4l3 3"/></svg>
                     </div>
                     <h3>Sin saber por dónde empezar</h3>
                     <p>Te hablan de embudos, CRM y automatizaciones y no sabes qué necesitas realmente ni en qué orden.</p>
@@ -391,7 +534,7 @@
                 <div class="pain-card fade-in fade-in-delay-2">
                     <div class="pain-icon">
                         <!-- Icono sistema/engranaje -->
-                        <svg viewBox="0 0 24 24"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
                     </div>
                     <h3>Quieres un sistema, no parches</h3>
                     <p>No quieres que "solo te pongan anuncios". Quieres un sistema que funcione solo y que escale contigo.</p>
@@ -413,17 +556,17 @@
             </p>
             <div class="steps">
                 <div class="step fade-in">
-                    <div class="step-num">1</div>
+                    <span class="step-num">01</span>
                     <h3>Diagnóstico</h3>
                     <p>Analizamos tu situación, tus objetivos y qué piezas del sistema te faltan o no están conectadas entre sí.</p>
                 </div>
                 <div class="step fade-in fade-in-delay-1">
-                    <div class="step-num">2</div>
+                    <span class="step-num">02</span>
                     <h3>Diseño del sistema</h3>
                     <p>Definimos el sistema mínimo viable que necesitas: qué herramientas, qué canales y en qué orden exacto.</p>
                 </div>
                 <div class="step fade-in fade-in-delay-2">
-                    <div class="step-num">3</div>
+                    <span class="step-num">03</span>
                     <h3>Implementación</h3>
                     <p>Lo construimos y activamos contigo. Sin tecnicismos, con resultados medibles desde el primer mes.</p>
                 </div>
@@ -496,8 +639,8 @@
             <p class="footer-tagline">Soluciones digitales / a problemas reales</p>
             <nav class="footer-links" aria-label="Enlaces del footer">
                 <a href="/agencia">Ver agencia completa</a>
-                <a href="mailto:info@lucasyleodigital.com">info@lucasyleodigital.com</a>
-                <a href="tel:+34624029617">+34 624 029 617</a>
+                <a href="#formulario">Contactar</a>
+                <a href="https://wa.me/34624029617" target="_blank" rel="noopener noreferrer">WhatsApp</a>
             </nav>
             <p class="footer-copy">© 2026 Lucas y Leo Digital · Barcelona · Todos los derechos reservados</p>
         </div>
@@ -509,7 +652,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Partículas
         (function() {
             var bg = document.getElementById('animatedBg');
@@ -524,14 +667,40 @@
             }
         })();
 
-        // Fade in scroll
+        // Fade in scroll — progressive enhancement
         (function() {
-            var obs = new IntersectionObserver(function(entries) {
-                entries.forEach(function(e) {
-                    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+            // Add js-loaded so CSS hides elements (without JS, everything visible)
+            document.body.classList.add('js-loaded');
+
+            function activar(el) { el.classList.add('visible'); }
+
+            function checkVisible() {
+                document.querySelectorAll('.fade-in:not(.visible)').forEach(function(el) {
+                    var r = el.getBoundingClientRect();
+                    if (r.top < window.innerHeight + 10) activar(el);
                 });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
+            }
+
+            if ('IntersectionObserver' in window) {
+                var obs = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(e) {
+                        if (e.isIntersecting) { activar(e.target); obs.unobserve(e.target); }
+                    });
+                }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+                document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
+            } else {
+                document.querySelectorAll('.fade-in').forEach(activar);
+            }
+
+            // Immediate check + fallback every 100ms for first second
+            checkVisible();
+            window.addEventListener('scroll', checkVisible, { passive: true });
+            var t = setInterval(checkVisible, 100);
+            setTimeout(function() {
+                clearInterval(t);
+                // Nuclear fallback: show everything after 1.5s regardless
+                document.querySelectorAll('.fade-in').forEach(activar);
+            }, 1500);
         })();
 
         // Formulario → Google Sheets
@@ -576,19 +745,9 @@
                 document.getElementById('landingForm').reset();
             })
             .catch(function() {
-                showNotif('⚠️ Error al enviar. Escríbenos a info@lucasyleodigital.com', 'error');
+                showNotif('⚠️ Error al enviar. Contáctanos por WhatsApp.', 'error');
             })
             .finally(function() {
                 submit.textContent = 'Enviar y que me contactéis →';
                 submit.disabled = false;
-            });
-
-            function showNotif(msg, type) {
-                notif.textContent = msg;
-                notif.className = 'notif ' + type;
-                notif.style.display = 'block';
-            }
-        });
-    </script>
-</body>
-</html>
+ 
