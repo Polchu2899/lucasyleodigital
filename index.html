@@ -46,38 +46,6 @@
         "areaServed": "ES",
         "serviceType": ["Marketing Digital", "Automatización IA", "Publicidad Digital", "Desarrollo Web"]
     }
-
-        // ── COOKIES RGPD ──────────────────────────────────────────────────────
-        (function() {
-            var KEY = 'lucas_leo_cookies_landing';
-            var consent = localStorage.getItem(KEY);
-            if (!consent) {
-                setTimeout(function() {
-                    var b = document.getElementById('cookie-banner');
-                    if (b) b.classList.add('visible');
-                }, 1200);
-            }
-        })();
-
-        function gestionarCookies(decision) {
-            localStorage.setItem('lucas_leo_cookies_landing', decision);
-            var b = document.getElementById('cookie-banner');
-            if (b) {
-                b.style.transition = 'all 0.3s ease';
-                b.style.opacity = '0';
-                b.style.transform = 'translateY(100%)';
-                setTimeout(function() { b.classList.remove('visible'); }, 300);
-            }
-        }
-        function abrirModalCookies() {
-            var m = document.getElementById('modal-cookies');
-            if (m) m.classList.add('visible');
-        }
-        function cerrarModalCookies() {
-            var m = document.getElementById('modal-cookies');
-            if (m) m.classList.remove('visible');
-        }
-
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -365,6 +333,10 @@
         .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
         .footer-links a { font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
         .footer-links a:hover { color: var(--electric-blue); }
+
+        .footer-legal { font-size: 12px; opacity: 0.35; margin-bottom: 16px; }
+        .footer-legal a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+        .footer-legal a:hover { color: var(--electric-blue); }
         .footer-copy { font-size: 12px; opacity: 0.25; }
 
         /* ── WA FLOTANTE ── */
@@ -460,6 +432,29 @@
             font-size: 16px; display: flex; align-items: center; justify-content: center;
         }
         .modal-close-btn:hover { background: rgba(255,255,255,0.15); }
+        .cookie-actions-modal { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+
+
+        /* ── MODALES LEGALES ── */
+        .modal-legal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.8); z-index: 99998;
+            align-items: center; justify-content: center;
+            padding: 20px; backdrop-filter: blur(6px);
+        }
+        .modal-legal-overlay.visible { display: flex; }
+        .modal-legal-box {
+            background: #0a0a12; border: 1px solid rgba(0,209,255,0.15);
+            border-radius: 20px; max-width: 640px; width: 100%;
+            max-height: 82vh; overflow-y: auto; padding: 36px;
+            position: relative;
+        }
+        .modal-legal-box h2 { font-family: var(--font-display); font-size: 22px; font-weight: 700; margin-bottom: 20px; }
+        .modal-legal-box h3 { font-family: var(--font-display); font-size: 14px; font-weight: 700; margin: 18px 0 6px; color: var(--electric-blue); text-transform: uppercase; letter-spacing: 0.05em; }
+        .modal-legal-box p { font-size: 13px; line-height: 1.75; opacity: 0.75; margin-bottom: 8px; }
+        .modal-legal-box ul { padding-left: 18px; margin-top: 6px; }
+        .modal-legal-box li { font-size: 13px; line-height: 1.7; opacity: 0.75; margin-bottom: 6px; }
+        .modal-legal-box a { color: var(--electric-blue); text-decoration: none; }
         .cookie-actions-modal { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
 
     </style>
@@ -647,6 +642,13 @@
                 <a href="#formulario">Contactar</a>
                 <a href="https://wa.me/34624029617" target="_blank" rel="noopener noreferrer">WhatsApp</a>
             </nav>
+            <div class="footer-legal">
+                <a href="#" onclick="abrirModal('modal-privacidad'); return false;">Política de Privacidad</a>
+                &nbsp;·&nbsp;
+                <a href="#" onclick="abrirModal('modal-legal'); return false;">Aviso Legal</a>
+                &nbsp;·&nbsp;
+                <a href="#" onclick="abrirModal('modal-cookies'); return false;">Política de Cookies</a>
+            </div>
             <p class="footer-copy">© 2026 Lucas y Leo Digital · Barcelona · Todos los derechos reservados</p>
         </div>
     </footer>
@@ -755,4 +757,132 @@
             .finally(function() {
                 submit.textContent = 'Enviar y que me contactéis →';
                 submit.disabled = false;
- 
+            });
+        });
+    </script>
+    </div>
+    <!-- ── MODALES LEGALES ─────────────────────────────────── -->
+
+    <!-- Modal Privacidad -->
+    <div id="modal-privacidad" class="modal-legal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-legal-box">
+            <button class="modal-close-btn" onclick="cerrarModal('modal-privacidad')" aria-label="Cerrar">✕</button>
+            <h2>Política de Privacidad</h2>
+            <p><em>Última actualización: febrero de 2026</em></p>
+            <h3>Responsable del tratamiento</h3>
+            <p>Lucas y Leo Digital · info@lucasyleodigital.com · +34 624 029 617 · Barcelona, España.</p>
+            <h3>Datos que recogemos</h3>
+            <p>Nombre, email, teléfono y consulta enviada a través del formulario de contacto de esta página.</p>
+            <h3>Finalidad y base legal</h3>
+            <p>Gestionar tu solicitud y enviarte información sobre nuestros servicios (interés legítimo y consentimiento expreso — Art. 6.1.a y 6.1.f RGPD).</p>
+            <h3>Conservación</h3>
+            <p>Tus datos se conservan mientras exista relación comercial o durante el tiempo necesario para cumplir obligaciones legales.</p>
+            <h3>Tus derechos</h3>
+            <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, portabilidad y oposición escribiendo a info@lucasyleodigital.com. También puedes reclamar ante la AEPD (aepd.es).</p>
+            <h3>Cesión de datos</h3>
+            <p>No cedemos tus datos a terceros salvo obligación legal. Usamos Google Workspace para gestión de emails (con acuerdo de encargado de tratamiento).</p>
+        </div>
+    </div>
+
+    <!-- Modal Aviso Legal -->
+    <div id="modal-legal" class="modal-legal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-legal-box">
+            <button class="modal-close-btn" onclick="cerrarModal('modal-legal')" aria-label="Cerrar">✕</button>
+            <h2>Aviso Legal</h2>
+            <p><em>En cumplimiento del Art. 10 de la Ley 34/2002 (LSSI-CE)</em></p>
+            <h3>Titular de la web</h3>
+            <p>Lucas y Leo Digital · info@lucasyleodigital.com · Barcelona, España.</p>
+            <h3>Objeto</h3>
+            <p>Esta web tiene carácter informativo y comercial. Lucas y Leo Digital presta servicios de marketing digital, automatización e inteligencia artificial.</p>
+            <h3>Propiedad intelectual</h3>
+            <p>Todos los contenidos de esta web (textos, imágenes, diseño, código) son propiedad de Lucas y Leo Digital o de sus licenciantes. Queda prohibida su reproducción sin autorización expresa.</p>
+            <h3>Limitación de responsabilidad</h3>
+            <p>Lucas y Leo Digital no se responsabiliza de los daños derivados del uso de la web ni de los enlaces a terceros que pudiera contener.</p>
+            <h3>Legislación aplicable</h3>
+            <p>Este aviso se rige por la legislación española. Para cualquier controversia, las partes se someten a los juzgados de Barcelona.</p>
+        </div>
+    </div>
+
+    <!-- Modal Cookies -->
+    <div id="modal-cookies" class="modal-legal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-legal-box">
+            <button class="modal-close-btn" onclick="cerrarModal('modal-cookies')" aria-label="Cerrar">✕</button>
+            <h2>Política de Cookies</h2>
+            <p><em>Última actualización: febrero de 2026</em></p>
+            <h3>¿Qué son las cookies?</h3>
+            <p>Las cookies son pequeños archivos de texto que los sitios web guardan en tu dispositivo para recordar tus preferencias, conforme al artículo 22 LSSI-CE y el RGPD (UE) 2016/679.</p>
+            <h3>Cookies que utilizamos</h3>
+            <ul>
+                <li><strong>Técnicas / necesarias:</strong> Imprescindibles para el funcionamiento. No requieren consentimiento.</li>
+                <li><strong>Analíticas (Google Analytics):</strong> Miden el tráfico de forma anónima. Solo con tu consentimiento.</li>
+                <li><strong>Marketing (Meta Pixel):</strong> Optimización de anuncios. Solo con consentimiento expreso.</li>
+            </ul>
+            <h3>Gestión del consentimiento</h3>
+            <p>Puedes aceptar, rechazar o modificar tu elección en cualquier momento.</p>
+            <div class="cookie-actions-modal">
+                <button class="btn-cookie-reject" onclick="gestionarCookies('rechazar'); cerrarModal('modal-cookies')">Solo necesarias</button>
+                <button class="btn-cookie-accept" onclick="gestionarCookies('aceptar'); cerrarModal('modal-cookies')">Aceptar todas</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Banner RGPD -->
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Aviso de cookies">
+        <div class="cookie-banner-inner">
+            <div class="cookie-banner-text">
+                <strong>🍪 Usamos cookies</strong><br>
+                Utilizamos cookies propias y de terceros para mejorar tu experiencia y analizar el tráfico.
+                <a href="#" onclick="cerrarModal('x'); abrirModal('modal-cookies'); return false;">Más información</a>
+            </div>
+            <div class="cookie-banner-actions">
+                <button class="btn-cookie-reject" onclick="gestionarCookies('rechazar')">Solo necesarias</button>
+                <button class="btn-cookie-config" onclick="abrirModal('modal-cookies')">Configurar</button>
+                <button class="btn-cookie-accept" onclick="gestionarCookies('aceptar')">Aceptar todas</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ── MODALES ───────────────────────────────────────────────────────────
+        function abrirModal(id) {
+            var m = document.getElementById(id);
+            if (m) m.classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+        function cerrarModal(id) {
+            var m = document.getElementById(id);
+            if (m) m.classList.remove('visible');
+            document.body.style.overflow = '';
+        }
+        // Cerrar con Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                ['modal-privacidad','modal-legal','modal-cookies'].forEach(cerrarModal);
+            }
+        });
+
+        // ── COOKIES RGPD ──────────────────────────────────────────────────────
+        (function() {
+            var KEY = 'lucas_leo_cookies_landing';
+            var consent = localStorage.getItem(KEY);
+            if (!consent) {
+                setTimeout(function() {
+                    var b = document.getElementById('cookie-banner');
+                    if (b) b.classList.add('visible');
+                }, 1200);
+            }
+        })();
+
+        function gestionarCookies(decision) {
+            localStorage.setItem('lucas_leo_cookies_landing', decision);
+            var b = document.getElementById('cookie-banner');
+            if (b) {
+                b.style.transition = 'all 0.3s ease';
+                b.style.opacity = '0';
+                b.style.transform = 'translateY(100%)';
+                setTimeout(function() { b.classList.remove('visible'); }, 300);
+            }
+        }
+    </script>
+</body>
+</html>
