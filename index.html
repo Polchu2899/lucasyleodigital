@@ -70,7 +70,8 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-        body { font-family: var(--font-body); background: var(--deep-space); color: var(--cyber-white); overflow-x: hidden; line-height: 1.6; }
+        html { background: var(--deep-space); }
+        body { font-family: var(--font-body); background: transparent; color: var(--cyber-white); overflow-x: hidden; line-height: 1.6; }
 
         /* ── FONDO ── */
         .animated-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
@@ -78,13 +79,25 @@
         @keyframes float-particle {
             0% { transform: translateY(100vh) translateX(0); opacity: 0; }
             10% { opacity: 1; } 90% { opacity: 1; }
-            100% { transform: translateY(-100px) translateX(30px); opacity: 0; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+        .circuit-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent 0%, var(--electric-blue) 50%, transparent 100%);
+            height: 1px; opacity: 0.2; animation: circuit-move 8s linear infinite;
+        }
+        @keyframes circuit-move { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+        .glow-orb { position: absolute; filter: blur(80px); animation: float-orb 20s ease-in-out infinite; }
+        @keyframes float-orb {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(100px, -100px); }
+            66% { transform: translate(-100px, 100px); }
         }
         .grid-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(0,209,255,0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0,209,255,0.03) 1px, transparent 1px);
-            background-size: 50px 50px; z-index: 0; pointer-events: none;
+            background-image: linear-gradient(rgba(0,209,255,0.04) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0,209,255,0.04) 1px, transparent 1px);
+            background-size: 40px 40px; z-index: 0; pointer-events: none;
         }
 
         /* ── LAYOUT ── */
@@ -102,7 +115,7 @@
         .logo-sub { font-size: 12px; font-style: italic; color: rgba(255,255,255,0.5); letter-spacing: 0.3px; }
 
         /* ── HERO ── */
-        .hero { min-height: 92vh; display: flex; align-items: center; padding: 80px 0 60px; text-align: center; position: relative; overflow: hidden; }
+        .hero { min-height: 92vh; display: flex; align-items: center; padding: 80px 0 60px; text-align: center; position: relative; }
 
         /* Logo flotante difuminado como en web principal */
         .hero-logo-bg {
@@ -391,26 +404,28 @@
 
         /* ── COOKIE BANNER RGPD ── */
         .cookie-banner {
-            display: none; position: fixed; bottom: 0; left: 0; right: 0;
-            background: rgba(10,10,18,0.97); border-top: 1px solid rgba(0,209,255,0.15);
-            z-index: 99999; padding: 20px 24px; backdrop-filter: blur(20px);
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(5, 10, 20, 0.97); backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 209, 255, 0.2);
+            padding: 20px 32px; z-index: 99999; display: none;
         }
-        .cookie-banner.visible { display: block; animation: slideUp 0.4s ease; }
-        @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .cookie-banner-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-        .cookie-banner-text { flex: 1; font-size: 13px; line-height: 1.6; opacity: 0.85; min-width: 260px; }
-        .cookie-banner-text a { color: var(--electric-blue); text-decoration: none; }
-        .cookie-banner-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .cookie-banner.visible { display: block; animation: slideUpCookie 0.4s ease; }
+        @keyframes slideUpCookie { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .cookie-banner-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+        .cookie-banner-text { flex: 1; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.85); min-width: 280px; }
+        .cookie-banner-text a { color: var(--electric-blue); text-decoration: underline; }
+        .cookie-banner-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
         .btn-cookie-accept, .btn-cookie-reject, .btn-cookie-config {
-            padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
+            padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600;
             cursor: pointer; border: none; font-family: var(--font-display); transition: all 0.2s;
         }
-        .btn-cookie-accept { background: var(--electric-blue); color: #050505; }
-        .btn-cookie-accept:hover { opacity: 0.85; }
-        .btn-cookie-reject { background: rgba(255,255,255,0.08); color: var(--cyber-white); border: 1px solid rgba(255,255,255,0.15); }
-        .btn-cookie-reject:hover { background: rgba(255,255,255,0.14); }
-        .btn-cookie-config { background: rgba(200,117,51,0.15); color: var(--copper-gold); border: 1px solid rgba(200,117,51,0.3); }
-        .btn-cookie-config:hover { background: rgba(200,117,51,0.25); }
+        .btn-cookie-accept { background: linear-gradient(135deg, var(--copper-gold), #a0522d); color: #fff; }
+        .btn-cookie-accept:hover { opacity: 0.85; transform: translateY(-1px); }
+        .btn-cookie-reject { background: transparent; border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); }
+        .btn-cookie-reject:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+        .btn-cookie-config { background: rgba(0,209,255,0.1); border: 1px solid rgba(0,209,255,0.3); color: var(--electric-blue); }
+        .btn-cookie-config:hover { background: rgba(0,209,255,0.2); }
+        @media(max-width:640px){ .cookie-banner-inner { flex-direction: column; align-items: flex-start; } }
 
         /* Modal cookies */
         .modal-cookies-overlay {
@@ -973,19 +988,42 @@
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Partículas
-  (function(){
-    var bg=document.getElementById('animatedBg');
-    for(var i=0;i<20;i++){
-      var p=document.createElement('div');
-      p.className='particle';
-      p.style.left=Math.random()*100+'%';
-      p.style.animationDuration=(8+Math.random()*14)+'s';
-      p.style.animationDelay=(Math.random()*12)+'s';
-      p.style.opacity=Math.random()*.5+.2;
+  // Fondo animado — partículas + circuit lines + orbs (igual que web agencia)
+  function createAnimatedBackground() {
+    var bg = document.getElementById('animatedBg');
+    if (!bg) return;
+    for (var i = 0; i < 30; i++) {
+      var p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (Math.random() * 20 + 15) + 's';
+      p.style.animationDelay = Math.random() * 10 + 's';
       bg.appendChild(p);
     }
-  })();
+    for (var j = 0; j < 10; j++) {
+      var line = document.createElement('div');
+      line.className = 'circuit-line';
+      line.style.top = Math.random() * 100 + '%';
+      line.style.width = (Math.random() * 50 + 30) + '%';
+      line.style.animationDuration = (Math.random() * 4 + 6) + 's';
+      line.style.animationDelay = Math.random() * 5 + 's';
+      bg.appendChild(line);
+    }
+    var colors = ['rgba(0, 209, 255, 0.1)', 'rgba(200, 117, 51, 0.1)'];
+    for (var k = 0; k < 3; k++) {
+      var orb = document.createElement('div');
+      orb.className = 'glow-orb';
+      orb.style.left = Math.random() * 100 + '%';
+      orb.style.top = Math.random() * 100 + '%';
+      orb.style.width = (Math.random() * 300 + 200) + 'px';
+      orb.style.height = orb.style.width;
+      orb.style.background = colors[k % 2];
+      orb.style.animationDuration = (Math.random() * 10 + 15) + 's';
+      orb.style.animationDelay = (k * 3) + 's';
+      bg.appendChild(orb);
+    }
+  }
+  window.addEventListener('load', function() { createAnimatedBackground(); });
 
   // Fade-in — progressive enhancement
   (function(){
@@ -1023,17 +1061,28 @@
 
   // Cookies RGPD
   (function(){
-    if(!localStorage.getItem('lucas_leo_cookies_landing')){
+    var consent = localStorage.getItem('lucas_leo_cookies') || localStorage.getItem('lucas_leo_cookies_landing');
+    if(!consent){
       setTimeout(function(){
         var b=document.getElementById('cookie-banner');
-        if(b)b.classList.add('visible');
+        if(b) b.classList.add('visible');
       },1200);
     }
   })();
   function gestionarCookies(d){
+    localStorage.setItem('lucas_leo_cookies',d);
     localStorage.setItem('lucas_leo_cookies_landing',d);
     var b=document.getElementById('cookie-banner');
-    if(b){b.style.transition='all .3s ease';b.style.opacity='0';b.style.transform='translateY(100%)';setTimeout(function(){b.classList.remove('visible');},300);}
+    if(b){
+      b.style.transition='all .35s ease';
+      b.style.opacity='0';
+      b.style.transform='translateY(100%)';
+      setTimeout(function(){
+        b.classList.remove('visible');
+        b.style.opacity='';
+        b.style.transform='';
+      },380);
+    }
   }
 
   // Formulario → Google Sheets
@@ -1060,4 +1109,25 @@
       telefono:tel,desafio:bloqueo||'Sin especificar',
       origen:'Landing Asesor Lucas'
     }).toString(),{method:'GET',mode:'no-cors'})
-    .then(function(){show
+    .then(function(){showwNotif('✅ ¡Sesión solicitada! Te respondo en menos de 24h.','success');
+    }).catch(function(){
+      showNotif('✅ ¡Solicitud enviada! Te respondo en menos de 24h.','success');
+    }).finally(function(){
+      submit.textContent='Quiero reservar mi sesión gratuita →';
+      submit.disabled=false;
+      document.getElementById('landingForm').reset();
+    });
+  });
+
+  function showNotif(msg,type){
+    var n=document.getElementById('lNotif');
+    if(!n)return;
+    n.textContent=msg;
+    n.className='notif '+type;
+    n.style.display='block';
+    setTimeout(function(){n.style.display='none';},5000);
+  }
+
+</script>
+</body>
+</html>
