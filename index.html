@@ -1102,14 +1102,14 @@
     if(!rgpd){showNotif('⚠️ Debes aceptar la Política de Privacidad.','error');return;}
     submit.textContent='Enviando...';
     submit.disabled=true;
-    fetch('https://script.google.com/macros/s/AKfycbzeMVMw3B7jcGUoTJPOEqTgTW1yy6chz0JrlyDhF40PpL-R7O9CW0Dz_zwzeRSFKfnT/exec?'+new URLSearchParams({
+    fetch('https://script.google.com/macros/s/AKfycbwk9dZm2FG3UwUaRVHd73Lx2WQA1mcBvFcWx14AiRTqiSlWAb7CIWvmOK4F7N0NJmc/exec?'+new URLSearchParams({
       nombre:nombre,email:email,
       empresa:tipo||'Sin especificar',
       industria:'Asesoría digital / Sesión estratégica',
       telefono:tel,desafio:bloqueo||'Sin especificar',
       origen:'Landing Asesor Lucas'
     }).toString(),{method:'GET',mode:'no-cors'})
-    .then(function(){showNotif('✅ ¡Sesión solicitada! Te respondo en menos de 24h.','success');
+    .then(function(){showwNotif('✅ ¡Sesión solicitada! Te respondo en menos de 24h.','success');
     }).catch(function(){
       showNotif('✅ ¡Solicitud enviada! Te respondo en menos de 24h.','success');
     }).finally(function(){
