@@ -47,11 +47,9 @@
     {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://lucasyleodigital.com"},{"@type":"ListItem","position":2,"name":"Sesión gratuita","item":"https://lucasyleodigital.com#sesion"}]}
     </script>
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué es la sesión estratégica gratuita?","acceptedAnswer":{"@type":"Answer","text":"Una reunión de 45 minutos para analizar tu situación digital, identificar oportunidades y definir los próximos pasos. Sin compromiso ni obligación de contratar."}},{"@type":"Question","name":"¿Para qué tipo de negocios trabajas?","acceptedAnswer":{"@type":"Answer","text":"Trabajo con pequeños y medianos negocios que ya tienen clientes y quieren crecer de forma ordenada con un sistema digital claro."}},{"@type":"Question","name":"¿Trabajas solo en Barcelona?","acceptedAnswer":{"@type":"Answer","text":"No, trabajo con negocios de toda España de forma 100% online."}},{"@type":"Question","name":"¿Cuánto cuesta trabajar contigo?","acceptedAnswer":{"@type":"Answer","text":"Depende del servicio y las necesidades de tu negocio. La sesión estratégica inicial es completamente gratuita. A partir de ahí, si hay encaje, te presento una propuesta a medida sin compromiso."}},{"@type":"Question","name":"¿Cuánto tiempo tarda en verse resultados?","acceptedAnswer":{"@type":"Answer","text":"Depende del punto de partida y del servicio contratado. Lo que sí garantizo es que trabajamos con objetivos claros desde el primer día, sin promesas de resultados milagrosos en 30 días."}},{"@type":"Question","name":"¿Qué diferencia hay entre el asesor y la agencia?","acceptedAnswer":{"@type":"Answer","text":"Como asesor independiente trabajo contigo de forma directa y personalizada, con pocos clientes a la vez. La agencia Lucas y Leo Digital ofrece servicios más completos de ejecución: web, publicidad, automatización y gestión integral."}}]}
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué es la sesión estratégica gratuita?","acceptedAnswer":{"@type":"Answer","text":"Una reunión de 45 minutos para analizar tu situación digital, identificar oportunidades y definir los próximos pasos. Sin compromiso."}},{"@type":"Question","name":"¿Para qué tipo de negocios trabajas?","acceptedAnswer":{"@type":"Answer","text":"Trabajo con pequeños y medianos negocios que ya tienen clientes y quieren crecer de forma ordenada con un sistema digital claro."}},{"@type":"Question","name":"¿Trabajas solo en Barcelona?","acceptedAnswer":{"@type":"Answer","text":"No, trabajo con negocios de toda España de forma 100% online."}}]}
     </script>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-<link rel="icon" type="image/png" href="https://i.ibb.co/nN2rxdN9/6.png">
-<link rel="apple-touch-icon" href="https://i.ibb.co/nN2rxdN9/6.png">
 <link rel="dns-prefetch" href="//fonts.googleapis.com">
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -165,7 +163,7 @@
             display: flex; justify-content: center; margin-bottom: 28px;
         }
         .hero-badge-logo {
-            height: 150px; width: auto;
+            height: 64px; width: auto;
             filter: drop-shadow(0 0 20px rgba(200,117,51,0.4));
             animation: logoPulse 4s ease-in-out infinite;
         }
@@ -624,39 +622,6 @@
         .sec-title{font-family:var(--font-display);font-size:clamp(26px,3.5vw,40px);font-weight:800;text-align:center;margin-bottom:14px;letter-spacing:-.02em}
         .sec-sub{text-align:center;opacity:.6;font-size:16px;max-width:520px;margin:0 auto 52px;line-height:1.7}
 
-
-        /* ── FAQ ── */
-        .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
-        .faq-item {
-            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 16px; overflow: hidden; transition: border-color 0.3s;
-        }
-        .faq-item.open { border-color: rgba(0,209,255,0.2); }
-        .faq-question {
-            width: 100%; background: none; border: none; color: var(--cyber-white);
-            font-family: var(--font-display); font-size: 16px; font-weight: 600;
-            padding: 22px 24px; text-align: left; cursor: pointer;
-            display: flex; justify-content: space-between; align-items: center; gap: 16px;
-            transition: color 0.2s;
-        }
-        .faq-question:hover { color: var(--electric-blue); }
-        .faq-item.open .faq-question { color: var(--electric-blue); }
-        .faq-icon {
-            width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
-            background: rgba(0,209,255,0.08); border: 1px solid rgba(0,209,255,0.15);
-            display: flex; align-items: center; justify-content: center;
-            transition: transform 0.3s, background 0.3s;
-        }
-        .faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(0,209,255,0.15); }
-        .faq-icon svg { width: 14px; height: 14px; stroke: var(--electric-blue); fill: none; stroke-width: 2.5; stroke-linecap: round; }
-        .faq-answer {
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1), padding 0.3s;
-            padding: 0 24px;
-        }
-        .faq-item.open .faq-answer { max-height: 300px; padding: 0 24px 22px; }
-        .faq-answer p { font-size: 14px; line-height: 1.8; opacity: 0.7; }
-
 </style>
 </head>
 <body>
@@ -809,7 +774,9 @@
   <div class="container">
     <div class="sobre-grid">
       <div class="sobre-avatar fade-in">
-        <img src="https://i.ibb.co/CKj7jLRP/IMG-20260305-220052.png" alt="Lucas — Asesor Digital" style="width:100%;height:100%;object-fit:cover;border-radius:24px;">
+        <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="rgba(0,209,255,0.5)" stroke-width="0.7">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
       </div>
       <div class="sobre-text fade-in fade-in-delay-1">
         <h2>Hola, soy <span style="background:linear-gradient(90deg,var(--copper-gold),var(--warm-bronze));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Lucas</span></h2>
@@ -864,68 +831,6 @@
   </div>
 </section>
 
-
-<div class="divider"></div>
-
-<!-- ══ FAQ ══════════════════════════════════════════════════════════════ -->
-<section class="section" aria-label="Preguntas frecuentes">
-  <div class="container">
-    <h2 class="sec-title fade-in">Preguntas <span style="background:linear-gradient(90deg,var(--electric-blue),#0099CC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">frecuentes</span></h2>
-    <p class="sec-sub fade-in">Todo lo que suelen preguntarme antes de reservar la sesión</p>
-    <div class="faq-list">
-
-      <div class="faq-item fade-in">
-        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-          ¿Qué es la sesión estratégica gratuita?
-          <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-        </button>
-        <div class="faq-answer"><p>Una reunión de 45 minutos en la que analizamos tu situación digital actual, identificamos qué está fallando y definimos los próximos pasos. Sin compromiso ni obligación de contratar. Si veo que no puedo ayudarte, te lo digo directamente.</p></div>
-      </div>
-
-      <div class="faq-item fade-in fade-in-delay-1">
-        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-          ¿Para qué tipo de negocios trabajas?
-          <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-        </button>
-        <div class="faq-answer"><p>Trabajo con pequeños y medianos negocios que ya tienen clientes reales y quieren crecer de forma ordenada. Servicios profesionales, comercios, hostelería, salud, formación y consultoría. Lo importante es que haya negocio funcionando y ganas de mejorarlo con estrategia.</p></div>
-      </div>
-
-      <div class="faq-item fade-in fade-in-delay-2">
-        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-          ¿Cuánto cuesta trabajar contigo?
-          <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-        </button>
-        <div class="faq-answer"><p>La sesión estratégica inicial es completamente gratuita. A partir de ahí, si hay encaje, te presento una propuesta a medida según lo que necesita tu negocio. No hay tarifas fijas publicadas porque cada proyecto es diferente.</p></div>
-      </div>
-
-      <div class="faq-item fade-in">
-        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-          ¿Cuánto tiempo tarda en verse resultados?
-          <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-        </button>
-        <div class="faq-answer"><p>Depende del punto de partida y del tipo de trabajo. Algunos cambios tienen impacto rápido (publicidad, landing page), otros son más progresivos (SEO, posicionamiento). Lo que sí garantizo es que trabajamos con objetivos claros desde el primer día, sin promesas de resultados milagrosos en 30 días.</p></div>
-      </div>
-
-      <div class="faq-item fade-in fade-in-delay-1">
-        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-          ¿Trabajas solo en Barcelona?
-          <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-        </button>
-        <div class="faq-answer"><p>No, trabajo con negocios de toda España de forma 100% online. Las sesiones son por videollamada y todo el trabajo se gestiona de forma remota sin ningún problema.</p></div>
-      </div>
-
-      <div class="faq-item fade-in fade-in-delay-2">
-        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-          ¿Qué diferencia hay entre el asesor y la agencia?
-          <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-        </button>
-        <div class="faq-answer"><p>Como asesor independiente trabajo contigo de forma directa y muy personalizada, con pocos clientes a la vez y foco en la estrategia. La agencia Lucas y Leo Digital ofrece servicios más completos de ejecución: web, publicidad, automatización y gestión integral. En la sesión gratuita vemos qué encaja mejor con tu situación.</p></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <div class="divider"></div>
 
 <!-- ══ 7. CTA FINAL / FORMULARIO ════════════════════════════════════════ -->
@@ -959,7 +864,7 @@
             </select>
           </div>
           <div class="form-field fade-in fade-in-delay-1">
-            <label for="lTelefono">Teléfono / WhatsApp (opcional)</label>
+            <label for="lTelefono">WhatsApp (opcional)</label>
             <input type="tel" id="lTelefono" name="telefono" placeholder="+34 600 000 000" autocomplete="tel">
           </div>
           <div class="form-field full fade-in">
@@ -1202,9 +1107,9 @@
       empresa:tipo||'Sin especificar',
       industria:'Asesoría digital / Sesión estratégica',
       telefono:tel,desafio:bloqueo||'Sin especificar',
-      origen:'Landing Asesor Lucas'
+      origin:'Landing Asesor Lucas'
     }).toString(),{method:'GET',mode:'no-cors'})
-    .then(function(){showNotif('✅ ¡Sesión solicitada! Te respondo en menos de 24h.','success');
+    .then(function(){showwNotif('✅ ¡Sesión solicitada! Te respondo en menos de 24h.','success');
     }).catch(function(){
       showNotif('✅ ¡Solicitud enviada! Te respondo en menos de 24h.','success');
     }).finally(function(){
@@ -1214,19 +1119,6 @@
     });
   });
 
-
-  function toggleFaq(btn) {
-    var item = btn.parentElement;
-    var isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(function(el) {
-      el.classList.remove('open');
-      el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-    });
-    if (!isOpen) {
-      item.classList.add('open');
-      btn.setAttribute('aria-expanded', 'true');
-    }
-  }
   function showNotif(msg,type){
     var n=document.getElementById('lNotif');
     if(!n)return;
