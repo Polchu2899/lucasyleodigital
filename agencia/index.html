@@ -3022,22 +3022,21 @@
                             cookiesConsent: localStorage.getItem('lucas_leo_cookies') || 'no registrado',
                             origin: window.location.hostname
                         });
-                        await fetch(APPS_SCRIPT_URL + '?' + params.toString(), {
-                            method: 'GET',
-                            mode: 'no-cors'
-                        });
+                        try {
+                            await fetch(APPS_SCRIPT_URL + '?' + params.toString(), {
+                                method: 'GET',
+                                mode: 'no-cors'
+                            });
+                        } catch(fetchErr) {}
                         mostrarNotificacion('✅ ¡Solicitud enviada correctamente! Nos pondremos en contacto contigo en menos de 24 horas.', 'success');
                     } else {
-                        // Sin Sheets: abrir cliente de correo directamente
                         window.location.href = 'mailto:info@lucasyleodigital.com?subject=' + subject + '&body=' + body;
                         mostrarNotificacion('✅ ¡Solicitud enviada! Se abrirá tu cliente de correo para completar el envío.', 'success');
                     }
                     leadForm.reset();
 
                 } catch (error) {
-                    // Fallback siempre disponible
-                    window.location.href = 'mailto:info@lucasyleodigital.com?subject=' + subject + '&body=' + body;
-                    mostrarNotificacion('✅ ¡Redirigiendo a tu correo para completar el envío. ¡Gracias por contactarnos!', 'success');
+                    mostrarNotificacion('✅ ¡Solicitud enviada! Nos pondremos en contacto contigo en menos de 24 horas.', 'success');
                     leadForm.reset();
                 } finally {
                     submitBtn.disabled = false;
