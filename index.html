@@ -1102,11 +1102,16 @@
     if(!rgpd){showNotif('⚠️ Debes aceptar la Política de Privacidad.','error');return;}
     submit.textContent='Enviando...';
     submit.disabled=true;
+    var tsLanding = new Date().toISOString();
     fetch('https://script.google.com/macros/s/AKfycbxMowit4KbOOgZtB5MIYrv33zUaPcJJsQ7rW5-zQn0-FwPfkm3nt4VZDEtMF3eo8hsgqA/exec?'+new URLSearchParams({
       nombre:nombre,email:email,
       empresa:tipo||'Sin especificar',
       industria:'Asesoría digital / Sesión estratégica',
       telefono:tel,desafio:bloqueo||'Sin especificar',
+      timestamp:tsLanding,
+      marketingConsent:'no registrado',
+      consentimientoRGPD:'Sí — '+tsLanding,
+      cookiesConsent:localStorage.getItem('lucas_leo_cookies')||'no registrado',
       origin:'Landing Asesor Lucas'
     }).toString(),{method:'GET',mode:'no-cors'})
     .then(function(){showNotif('✅ ¡Sesión solicitada! Te respondo en menos de 24h.','success');
