@@ -3054,12 +3054,12 @@
             notif.id = 'form-notification';
             notif.style.cssText = `
                 position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
-                background: ${tipo === 'success' ? 'rgba(0,209,255,0.15)' : 'rgba(200,50,50,0.15)'};
-                border: 1px solid ${tipo === 'success' ? 'var(--electric-blue)' : '#cc3333'};
-                color: var(--cyber-white); padding: 20px 32px; border-radius: 12px;
-                font-family: var(--font-body); font-size: 15px; z-index: 9999;
-                backdrop-filter: blur(12px); max-width: 520px; text-align: center;
-                box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+                background: ${tipo === 'success' ? 'rgba(0,30,50,0.97)' : 'rgba(80,0,0,0.97)'};
+                border: 2px solid ${tipo === 'success' ? '#00d1ff' : '#cc3333'};
+                color: #ffffff; padding: 20px 32px; border-radius: 12px;
+                font-family: sans-serif; font-size: 15px; z-index: 999999;
+                max-width: 520px; text-align: center;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.8);
                 transition: opacity 0.5s ease;
             `;
             notif.textContent = mensaje;
