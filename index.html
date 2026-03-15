@@ -831,6 +831,128 @@
 
 <div class="divider"></div>
 
+<!-- ══ FAQ ════════════════════════════════════════════════════════════════ -->
+<section class="section" id="faq" aria-label="Preguntas frecuentes" style="padding:80px 0;">
+  <div class="container" style="max-width:780px;margin:0 auto;padding:0 24px;">
+    <h2 style="text-align:center;margin-bottom:12px;">Preguntas <span style="background:linear-gradient(90deg,var(--electric-blue),var(--copper-gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">frecuentes</span></h2>
+    <p style="text-align:center;color:var(--soft-gray);margin-bottom:48px;">Todo lo que necesitas saber antes de reservar tu sesión.</p>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          ¿En qué consiste exactamente la sesión gratuita?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Es una llamada o videollamada de 45 minutos (como prefieras) en la que analizamos juntos tu situación digital actual. Sin guiones ni presentaciones genéricas. Te hago las preguntas correctas, identificamos los cuellos de botella y te cuento qué haría yo en tu lugar — trabajes conmigo después o no.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          ¿Me van a intentar vender algo en la sesión?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No. El objetivo de la sesión es que salgas con claridad, no con una propuesta de venta bajo el brazo. Si al final tiene sentido trabajar juntos, te lo diré con honestidad. Y si no encajamos, también.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          ¿Cuánto cuestan los servicios de Lucas?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Depende del proyecto y de lo que necesites. Trabajo con sesiones puntuales de consultoría, acompañamiento mensual y proyectos específicos. Los precios los hablamos en la sesión una vez que entiendo tu situación real — no tiene sentido poner una tarifa sin saber qué necesitas.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          ¿Trabajas solo con negocios de Barcelona?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No, trabajo con negocios de toda España (y también fuera). Todo es online. Estoy en Barcelona, pero la mayoría de mis clientes los atiendo por videollamada sin ningún problema.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          ¿En cuánto tiempo se ven resultados?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Depende del punto de partida y de las acciones que decidamos priorizar. Hay mejoras que se notan en semanas (optimización de anuncios, conversión web) y otras que requieren meses de trabajo constante (posicionamiento, autoridad de marca). Lo que sí te puedo decir es que no te vendo resultados milagrosos ni plazos imposibles.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          ¿Qué pasa después de la sesión?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Te envío un resumen con los puntos clave que hemos tratado y, si tiene sentido, una propuesta adaptada a tu situación. Sin presiones ni seguimientos agresivos. Tú decides si quieres seguir adelante y cuándo.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-list { display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    border: 1px solid rgba(0,209,255,0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(0,209,255,0.03);
+    transition: border-color 0.3s ease;
+  }
+  .faq-item:hover { border-color: rgba(0,209,255,0.35); }
+  .faq-question {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 24px; background: none; border: none; cursor: pointer;
+    color: var(--cyber-white); font-size: 16px; font-weight: 600;
+    font-family: var(--font-body); text-align: left; gap: 16px;
+    transition: color 0.3s ease;
+  }
+  .faq-question:hover { color: var(--electric-blue); }
+  .faq-question[aria-expanded="true"] { color: var(--electric-blue); }
+  .faq-icon {
+    font-size: 22px; font-weight: 300; flex-shrink: 0;
+    color: var(--electric-blue); transition: transform 0.3s ease;
+  }
+  .faq-question[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
+  .faq-answer {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 24px;
+  }
+  .faq-answer.open { max-height: 300px; padding: 0 24px 20px; }
+  .faq-answer p { color: var(--soft-gray); line-height: 1.7; margin: 0; font-size: 15px; }
+</style>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.faq-question').forEach(function(b) {
+        b.setAttribute('aria-expanded', 'false');
+        b.nextElementSibling.classList.remove('open');
+      });
+      if (!expanded) {
+        this.setAttribute('aria-expanded', 'true');
+        this.nextElementSibling.classList.add('open');
+      }
+    });
+  });
+</script>
+
+
 <!-- ══ 7. CTA FINAL / FORMULARIO ════════════════════════════════════════ -->
 <section class="section form-section" id="sesion" aria-label="Reservar sesión gratuita">
   <div class="container">
