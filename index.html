@@ -1363,17 +1363,24 @@
   (async function(){
     const MESES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
     const APPS='https://script.google.com/macros/s/AKfycbxMowit4KbOOgZtB5MIYrv33zUaPcJJsQ7rW5-zQn0-FwPfkm3nt4VZDEtMF3eo8hsgqA/exec';
-    const FB_CONFIG={apiKey:"AIzaSyAf5cYK5vRUtfZ2RikRSu5qjqUAJHMhLiM",authDomain:"reservify-lucasyleo.firebaseapp.com",projectId:"reservify-lucasyleo",storageBucket:"reservify-lucasyleo.firebasestorage.app",messagingSenderId:"464767738256",appId:"1:464767738256:web:c0692dc6ba98d162101315"};
 
-    // Firebase dinámico
-    var db=null;
+    // Firebase — imports directos como módulo ES
+    var db=null,_fs=null;
     try{
       const {initializeApp}=await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js');
-      const {getFirestore,collection,addDoc,getDocs,doc,setDoc,serverTimestamp}=await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
-      const fbApp=initializeApp(FB_CONFIG,'lucas-landing');
-      db=getFirestore(fbApp);
-      window._resyFs={collection,addDoc,getDocs,doc,setDoc,serverTimestamp,db};
-    }catch(e){console.log('Firebase no disponible, solo Sheets');}
+      const fs=await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+      const fbApp=initializeApp({
+        apiKey:"AIzaSyAf5cYK5vRUtfZ2RikRSu5qjqUAJHMhLiM",
+        authDomain:"reservify-lucasyleo.firebaseapp.com",
+        projectId:"reservify-lucasyleo",
+        storageBucket:"reservify-lucasyleo.firebasestorage.app",
+        messagingSenderId:"464767738256",
+        appId:"1:464767738256:web:c0692dc6ba98d162101315"
+      },'lucas-landing');
+      db=fs.getFirestore(fbApp);
+      _fs=fs;
+      console.log('Firebase OK — proyecto reservify-lucasyleo');
+    }catch(e){console.warn('Firebase init error:',e);}
 
     const hoy=new Date();
     var cY=hoy.getFullYear(),cM=hoy.getMonth();
@@ -1384,15 +1391,15 @@
 
     // Cargar ocupados desde Firestore
     async function cargarOcupados(){
-      if(!db)return;
+      if(!db||!_fs)return;
       try{
-        const snap=await window._resyFs.getDocs(window._resyFs.collection(db,'calendario_publico'));
+        const snap=await _fs.getDocs(_fs.collection(db,'calendario_publico'));
         snap.forEach(function(d){
           var dato=d.data(),f=dato.fecha,fr=(dato.franja||'').toLowerCase();
           if(!ocupados[f])ocupados[f]={};
           ocupados[f][fr]=true;
         });
-      }catch(e){}
+      }catch(e){console.warn('cargarOcupados error:',e);}
     }
 
     function setStep(n){
@@ -1534,16 +1541,22 @@
       var ts=new Date().toISOString();
 
       try{
-        // 1. Firebase
-        if(db&&window._resyFs){
-          await window._resyFs.addDoc(window._resyFs.collection(db,'reservas'),{
-            nombre:nombre,email:email,telefono:tel,negocio:tipo||'Sin especificar',
-            bloqueo:reto,fecha:selDate,franja:selFranja,
-            estado:'pendiente',origen:'web',createdAt:window._resyFs.serverTimestamp()
-          });
-          await window._resyFs.setDoc(window._resyFs.doc(db,'calendario_publico',selDate+'_'+selFranja.toLowerCase().replace(/ /g,'_')),{
-            fecha:selDate,franja:selFranja,ocupado:true,updatedAt:window._resyFs.serverTimestamp()
-          });
+        // 1. Firebase — guardar reserva
+        if(db&&_fs){
+          try{
+            await _fs.addDoc(_fs.collection(db,'reservas'),{
+              nombre:nombre,email:email,telefono:tel,negocio:tipo||'Sin especificar',
+              bloqueo:reto,fecha:selDate,franja:selFranja,
+              estado:'pendiente',origen:'web',createdAt:_fs.serverTimestamp()
+            });
+            var calKey=selDate+'_'+selFranja.replace(/[^a-zA-Z0-9\-:\s]/g,'_');
+            await _fs.setDoc(_fs.doc(db,'calendario_publico',calKey),{
+              fecha:selDate,franja:selFranja,ocupado:true,updatedAt:_fs.serverTimestamp()
+            });
+            console.log('Reserva guardada en Firestore OK');
+          }catch(fbErr){console.error('Firestore write error:',fbErr);}
+        } else {
+          console.warn('Firebase no disponible — solo Sheets');
         }
         // 2. Google Sheets + email
         await fetch(APPS+'?'+new URLSearchParams({
