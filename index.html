@@ -956,27 +956,128 @@
 </script>
 
 
-<!-- ══ 7. CTA FINAL / FORMULARIO ════════════════════════════════════════ -->
-<section class="section form-section" id="sesion" aria-label="Reservar sesión gratuita">
-  <div class="container">
-    <div class="form-wrap">
-      <h2 class="form-title fade-in">Reserva tu sesión estratégica gratuita</h2>
-      <p class="form-note fade-in">
-        45 minutos. Sin compromiso. Cuéntame tu situación y te digo honestamente si puedo ayudarte — y cómo. Te respondo en menos de <strong>24h</strong>.
+<!-- ══ 7. RESERVA DE CITA ═════════════════════════════════════════════════ -->
+<section class="section" id="sesion" aria-label="Reservar sesión estratégica gratuita" style="padding:80px 0;background:linear-gradient(180deg,transparent 0%,rgba(200,117,51,0.03) 50%,transparent 100%);">
+  <div class="container" style="max-width:760px;">
+
+    <div style="text-align:center;margin-bottom:48px;">
+      <div style="display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--copper-gold);margin-bottom:16px;">
+        <span style="display:block;width:28px;height:1px;background:rgba(200,117,51,.35)"></span>
+        Sesión estratégica gratuita
+        <span style="display:block;width:28px;height:1px;background:rgba(200,117,51,.35)"></span>
+      </div>
+      <h2 class="fade-in" style="font-family:var(--font-display);font-size:clamp(28px,4.5vw,46px);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px;">
+        Elige tu día y reserva<br>
+        <span style="background:linear-gradient(90deg,var(--copper-gold),#e09a50,var(--electric-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">tu sesión gratuita</span>
+      </h2>
+      <p class="fade-in" style="font-size:16px;opacity:.55;max-width:480px;margin:0 auto;line-height:1.7;">
+        45 minutos · Sin compromiso · Te confirmo la hora exacta en menos de 24h
       </p>
-      <form id="landingForm" novalidate>
-        <div class="form-grid">
-          <div class="form-field fade-in">
-            <label for="lNombre">Tu nombre *</label>
-            <input type="text" id="lNombre" name="nombre" placeholder="¿Cómo te llamas?" required autocomplete="name">
+    </div>
+
+    <!-- STEPPER -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:32px;" id="resy-steps">
+      <div class="resy-step resy-step--active" id="resy-st1">
+        <div class="resy-step-num">1</div>
+        <span class="resy-step-lbl">Elige día</span>
+      </div>
+      <div class="resy-step-line"></div>
+      <div class="resy-step" id="resy-st2">
+        <div class="resy-step-num">2</div>
+        <span class="resy-step-lbl">Franja</span>
+      </div>
+      <div class="resy-step-line"></div>
+      <div class="resy-step" id="resy-st3">
+        <div class="resy-step-num">3</div>
+        <span class="resy-step-lbl">Tus datos</span>
+      </div>
+    </div>
+
+    <!-- CALENDARIO -->
+    <div class="resy-card fade-in">
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+        <button class="resy-nav-btn" id="resy-prev" aria-label="Mes anterior">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <span id="resy-month" style="font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:-.02em;">—</span>
+        <button class="resy-nav-btn" id="resy-next" aria-label="Mes siguiente">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:6px;">
+        <span class="resy-wday">Lun</span><span class="resy-wday">Mar</span><span class="resy-wday">Mié</span>
+        <span class="resy-wday">Jue</span><span class="resy-wday">Vie</span>
+        <span class="resy-wday resy-wday--sab">Sáb</span><span class="resy-wday resy-wday--dom">Dom</span>
+      </div>
+
+      <div id="resy-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;" role="grid" aria-label="Selecciona un día"></div>
+
+      <div style="display:flex;align-items:center;gap:16px;margin-top:12px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(240,240,240,.3);">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--copper-gold);opacity:.7;display:inline-block"></span>Día con franja ocupada
+        </div>
+        <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(240,240,240,.3);">
+          <span style="width:7px;height:7px;border-radius:50%;background:rgba(240,240,240,.18);display:inline-block"></span>No disponible
+        </div>
+      </div>
+
+      <!-- SELECTOR FRANJA -->
+      <!-- SELECTOR DE SLOTS -->
+      <div id="resy-slots-wrap" style="display:none;margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.07);">
+        <p style="font-size:12px;color:rgba(240,240,240,.45);margin-bottom:14px;font-weight:500;">
+          Elige tu hora para <strong style="color:rgba(240,240,240,.75)" id="resy-fecha-lbl">—</strong>
+          <span style="display:block;font-size:11px;margin-top:3px;color:rgba(240,240,240,.3);">Sesiones de 45 minutos</span>
+        </p>
+        <!-- L-V -->
+        <div id="resy-slots-lv" style="display:none;">
+          <div style="font-size:10px;font-weight:700;color:rgba(240,240,240,.35);text-transform:uppercase;letter-spacing:.09em;margin-bottom:10px;">
+            &#9788; Tarde · Lunes a Viernes
           </div>
-          <div class="form-field fade-in fade-in-delay-1">
-            <label for="lEmail">Email *</label>
-            <input type="email" id="lEmail" name="email" placeholder="tu@email.com" required autocomplete="email">
+          <div class="resy-slots-grid" id="resy-slots-lv-grid"></div>
+        </div>
+        <!-- Sábado mañana -->
+        <div id="resy-slots-sabm" style="display:none;">
+          <div style="font-size:10px;font-weight:700;color:rgba(200,117,51,.6);text-transform:uppercase;letter-spacing:.09em;margin-bottom:10px;">
+            &#9728; Mañana · Sábado
           </div>
-          <div class="form-field fade-in">
-            <label for="lTipo">¿A qué se dedica tu negocio?</label>
-            <select id="lTipo" name="tipo">
+          <div class="resy-slots-grid" id="resy-slots-sabm-grid"></div>
+        </div>
+        <!-- Sábado tarde -->
+        <div id="resy-slots-sabt" style="display:none;margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.06);">
+          <div style="font-size:10px;font-weight:700;color:rgba(200,117,51,.6);text-transform:uppercase;letter-spacing:.09em;margin-bottom:10px;">
+            &#9788; Tarde · Sábado
+          </div>
+          <div class="resy-slots-grid" id="resy-slots-sabt-grid"></div>
+        </div>
+      </div>
+
+      <!-- RESUMEN SELECCIÓN -->
+      <div id="resy-ok" style="display:none;align-items:center;gap:10px;margin-top:16px;padding:13px 16px;background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.18);border-radius:12px;font-size:13px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>
+        <span style="flex:1;color:rgba(240,240,240,.8);">Seleccionado: <strong style="color:#F0F0F0" id="resy-ok-txt">—</strong></span>
+        <button onclick="resyClear()" style="font-size:12px;font-weight:600;color:var(--copper-gold);background:none;border:none;cursor:pointer;font-family:var(--font-display);text-decoration:underline;">Cambiar</button>
+      </div>
+
+    </div><!-- /resy-card -->
+
+    <!-- FORMULARIO -->
+    <div id="resy-form-wrap" style="display:none;margin-top:24px;">
+      <p style="font-size:11px;font-weight:700;color:rgba(240,240,240,.3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:16px;">Tus datos de contacto</p>
+      <form id="resyForm" novalidate>
+        <div class="resy-form-grid">
+          <div class="resy-fg">
+            <label class="resy-fl">Tu nombre *</label>
+            <input type="text" class="resy-fi" id="rNombre" placeholder="¿Cómo te llamas?" autocomplete="name">
+          </div>
+          <div class="resy-fg">
+            <label class="resy-fl">Email *</label>
+            <input type="email" class="resy-fi" id="rEmail" placeholder="tu@email.com" autocomplete="email">
+          </div>
+          <div class="resy-fg">
+            <label class="resy-fl">¿A qué se dedica tu negocio?</label>
+            <select class="resy-fi resy-fsel" id="rTipo">
               <option value="">Selecciona...</option>
               <option>Servicios profesionales</option>
               <option>Comercio / Tienda</option>
@@ -986,33 +1087,83 @@
               <option>Otro</option>
             </select>
           </div>
-          <div class="form-field fade-in fade-in-delay-1">
-            <label for="lTelefono">WhatsApp (opcional)</label>
-            <input type="tel" id="lTelefono" name="telefono" placeholder="+34 600 000 000" autocomplete="tel">
+          <div class="resy-fg">
+            <label class="resy-fl">WhatsApp (opcional)</label>
+            <input type="tel" class="resy-fi" id="rTel" placeholder="+34 600 000 000" autocomplete="tel">
           </div>
-          <div class="form-field full fade-in">
-            <label for="lBloqueo">¿Cuál es tu mayor reto digital ahora mismo?</label>
-            <textarea id="lBloqueo" name="bloqueo" placeholder="Cuéntame brevemente qué no está funcionando o qué quieres conseguir..."></textarea>
+          <div class="resy-fg resy-full">
+            <label class="resy-fl">¿Cuál es tu mayor reto digital ahora mismo?</label>
+            <textarea class="resy-fi" id="rReto" style="min-height:80px;resize:vertical;" placeholder="Cuéntame brevemente..."></textarea>
           </div>
-          <div style="display:none" aria-hidden="true">
-            <input type="text" id="lHoneypot" name="honeypot" tabindex="-1" autocomplete="off">
-          </div>
-          <div class="form-field full fade-in">
-            <div class="form-rgpd">
-              <input type="checkbox" id="lRgpd" name="rgpd" required>
-              <label for="lRgpd">He leído y acepto la <a href="#" onclick="abrirModal('modal-privacidad');return false;">Política de Privacidad</a>. Consiento el tratamiento de mis datos para recibir información de Lucas y Leo Digital.</label>
-            </div>
+          <div style="display:none" aria-hidden="true"><input type="text" id="rHoneypot" tabindex="-1" autocomplete="off"></div>
+          <div class="resy-full">
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;color:rgba(240,240,240,.45);line-height:1.55;">
+              <input type="checkbox" id="rRgpd" style="margin-top:2px;accent-color:var(--copper-gold);flex-shrink:0;">
+              He leído y acepto la <a href="#" onclick="abrirModal('modal-privacidad');return false;" style="color:var(--electric-blue);text-decoration:none;">Política de Privacidad</a>. Consiento el tratamiento de mis datos para recibir información de Lucas y Leo Digital.
+            </label>
           </div>
         </div>
-        <div class="form-submit">
-          <button type="submit" class="btn-primary" id="lSubmit">Quiero reservar mi sesión gratuita →</button>
-          <p class="form-trust">🔒 Sin spam. Si no puedo ayudarte, te lo digo directamente.</p>
-          <div class="notif" id="lNotif" role="alert" aria-live="polite"></div>
+        <div style="margin-top:24px;text-align:center;">
+          <button type="submit" class="btn-primary" id="rSubmit" style="background:linear-gradient(135deg,var(--copper-gold),#d4893f);box-shadow:0 8px 28px rgba(200,117,51,.35);border:none;color:#fff;">
+            Solicitar mi sesión gratuita →
+          </button>
+          <p style="margin-top:10px;font-size:12px;opacity:.3;">🔒 Sin spam · Si no puedo ayudarte, te lo digo directamente</p>
+          <div id="rNotif" role="alert" aria-live="polite" style="margin-top:14px;"></div>
         </div>
       </form>
     </div>
+
   </div>
 </section>
+
+<style>
+/* ── RESERVAS CALENDAR ─────────────────────────────────────────── */
+.resy-card{background:rgba(255,255,255,.025);border:1px solid rgba(200,117,51,.15);border-radius:20px;padding:28px;backdrop-filter:blur(8px);}
+.resy-step{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:rgba(240,240,240,.28);transition:color .3s;}
+.resy-step--active{color:var(--copper-gold);}
+.resy-step--done{color:rgba(240,240,240,.45);}
+.resy-step-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1.5px solid rgba(240,240,240,.12);transition:all .3s;flex-shrink:0;}
+.resy-step--active .resy-step-num{border-color:var(--copper-gold);background:rgba(200,117,51,.12);color:var(--copper-gold);}
+.resy-step--done .resy-step-num{border-color:rgba(240,240,240,.28);color:rgba(240,240,240,.5);}
+.resy-step-lbl{font-family:var(--font-display);}
+@media(max-width:480px){.resy-step-lbl{display:none;}}
+.resy-step-line{width:36px;height:1px;background:rgba(240,240,240,.1);margin:0 4px;flex-shrink:0;}
+.resy-nav-btn{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#F0F0F0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.resy-nav-btn:hover{background:rgba(200,117,51,.1);border-color:rgba(200,117,51,.25);}
+.resy-wday{text-align:center;font-size:10px;font-weight:600;color:rgba(240,240,240,.28);text-transform:uppercase;letter-spacing:.07em;padding:6px 0;}
+.resy-wday--sab{color:rgba(200,117,51,.5);}
+.resy-wday--dom{color:rgba(240,240,240,.12);}
+.resy-day{aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;cursor:pointer;border:1px solid transparent;transition:all .18s;position:relative;background:transparent;color:#F0F0F0;font-family:var(--font-display);}
+.resy-day:hover:not(.rd-dis):not(.rd-emp):not(.rd-dom):not(.rd-past){background:rgba(200,117,51,.09);border-color:rgba(200,117,51,.25);}
+.rd-today{border-color:rgba(200,117,51,.35);color:var(--copper-gold);font-weight:700;}
+.rd-sel{background:linear-gradient(135deg,var(--copper-gold),#d4893f)!important;border-color:transparent!important;color:#fff!important;font-weight:700!important;box-shadow:0 4px 20px rgba(200,117,51,.4);}
+.rd-sab{color:rgba(200,117,51,.7);}
+.rd-dis,.rd-past,.rd-dom,.rd-emp{color:rgba(240,240,240,.14);cursor:default;pointer-events:none;}
+.rd-dot::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--copper-gold);opacity:.65;}
+.resy-franja-btn{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 14px;border-radius:14px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);color:#F0F0F0;cursor:pointer;transition:all .2s;font-family:var(--font-display);}
+.resy-franja-btn:hover:not(.rfb-ocupado){background:rgba(200,117,51,.07);border-color:rgba(200,117,51,.28);}
+.resy-franja-btn.rfb-sel{background:rgba(200,117,51,.1);border-color:var(--copper-gold);box-shadow:0 0 0 1px rgba(200,117,51,.15);}
+.resy-franja-btn.rfb-ocupado{opacity:.28;pointer-events:none;}
+.resy-fb-ico{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;}
+.resy-fb-ico--m{background:rgba(200,117,51,.12);color:var(--copper-gold);}
+.resy-fb-ico--s{background:rgba(0,209,255,.09);color:var(--electric-blue);}
+.resy-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:560px){.resy-form-grid{grid-template-columns:1fr;}}
+.resy-full{grid-column:span 2;}
+@media(max-width:560px){.resy-full{grid-column:span 1;}}
+.resy-fg{display:flex;flex-direction:column;gap:6px;}
+.resy-fl{font-size:11px;font-weight:600;color:rgba(240,240,240,.38);text-transform:uppercase;letter-spacing:.07em;}
+.resy-fi{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 14px;color:#F0F0F0;font-size:14px;font-family:var(--font-body);outline:none;transition:border-color .2s;}
+.resy-fi:focus{border-color:rgba(200,117,51,.5);}
+.resy-fi::placeholder{color:rgba(240,240,240,.2);}
+.resy-fsel{appearance:none;cursor:pointer;}
+.resy-fsel option{background:#050505;color:#F0F0F0;}
+.resy-slots-grid{display:flex;flex-wrap:wrap;gap:8px;}
+.resy-slot{padding:9px 16px;border-radius:10px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.09);color:#F0F0F0;font-size:14px;font-weight:600;cursor:pointer;transition:all .18s;font-family:var(--font-display);letter-spacing:.01em;}
+.resy-slot:hover:not(.rs-ocupado){background:rgba(200,117,51,.1);border-color:rgba(200,117,51,.3);color:var(--copper-gold);}
+.resy-slot.rs-sel{background:linear-gradient(135deg,var(--copper-gold),#d4893f);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(200,117,51,.35);}
+.resy-slot.rs-ocupado{opacity:.22;pointer-events:none;text-decoration:line-through;}
+</style>
 
 <!-- ══ 8. FOOTER ═════════════════════════════════════════════════════════ -->
 <footer>
@@ -1208,53 +1359,222 @@
     }
   }
 
-  // Formulario → Google Sheets
-  document.getElementById('landingForm').addEventListener('submit',function(e){
-    e.preventDefault();
-    var notif=document.getElementById('lNotif');
-    var submit=document.getElementById('lSubmit');
-    var nombre=document.getElementById('lNombre').value.trim();
-    var email=document.getElementById('lEmail').value.trim();
-    var tipo=document.getElementById('lTipo').value;
-    var tel=document.getElementById('lTelefono').value.trim();
-    var bloqueo=document.getElementById('lBloqueo').value.trim();
-    var rgpd=document.getElementById('lRgpd').checked;
-    if(document.getElementById('lHoneypot').value)return;
-    if(!nombre){showNotif('⚠️ Por favor introduce tu nombre.','error');return;}
-    if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showNotif('⚠️ Introduce un email válido.','error');return;}
-    if(!rgpd){showNotif('⚠️ Debes aceptar la Política de Privacidad.','error');return;}
-    submit.textContent='Enviando...';
-    submit.disabled=true;
-    var tsLanding = new Date().toISOString();
-    fetch('https://script.google.com/macros/s/AKfycbxMowit4KbOOgZtB5MIYrv33zUaPcJJsQ7rW5-zQn0-FwPfkm3nt4VZDEtMF3eo8hsgqA/exec?'+new URLSearchParams({
-      nombre:nombre,email:email,
-      empresa:tipo||'Sin especificar',
-      industria:'Asesoría digital / Sesión estratégica',
-      telefono:tel,desafio:bloqueo||'Sin especificar',
-      timestamp:tsLanding,
-      marketingConsent:'no registrado',
-      consentimientoRGPD:'Sí — '+tsLanding,
-      cookiesConsent:localStorage.getItem('lucas_leo_cookies')||'no registrado',
-      origin:'Landing Asesor Lucas'
-    }).toString(),{method:'GET',mode:'no-cors'})
-    .then(function(){showNotif('✅ ¡Sesión solicitada! Te respondo en menos de 24h.','success');
-    }).catch(function(){
-      showNotif('✅ ¡Solicitud enviada! Te respondo en menos de 24h.','success');
-    }).finally(function(){
-      submit.textContent='Quiero reservar mi sesión gratuita →';
-      submit.disabled=false;
-      document.getElementById('landingForm').reset();
-    });
-  });
+  // ── CALENDARIO DE RESERVAS ──────────────────────────────────────
+  (async function(){
+    const MESES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const APPS='https://script.google.com/macros/s/AKfycbxMowit4KbOOgZtB5MIYrv33zUaPcJJsQ7rW5-zQn0-FwPfkm3nt4VZDEtMF3eo8hsgqA/exec';
+    const FB_CONFIG={apiKey:"AIzaSyAf5cYK5vRUtfZ2RikRSu5qjqUAJHMhLiM",authDomain:"reservify-lucasyleo.firebaseapp.com",projectId:"reservify-lucasyleo",storageBucket:"reservify-lucasyleo.firebasestorage.app",messagingSenderId:"464767738256",appId:"1:464767738256:web:c0692dc6ba98d162101315"};
 
-  function showNotif(msg,type){
-    var n=document.getElementById('lNotif');
-    if(!n)return;
-    n.textContent=msg;
-    n.className='notif '+type;
-    n.style.display='block';
-    setTimeout(function(){n.style.display='none';},5000);
-  }
+    // Firebase dinámico
+    var db=null;
+    try{
+      const {initializeApp}=await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js');
+      const {getFirestore,collection,addDoc,getDocs,doc,setDoc,serverTimestamp}=await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+      const fbApp=initializeApp(FB_CONFIG,'lucas-landing');
+      db=getFirestore(fbApp);
+      window._resyFs={collection,addDoc,getDocs,doc,setDoc,serverTimestamp,db};
+    }catch(e){console.log('Firebase no disponible, solo Sheets');}
+
+    const hoy=new Date();
+    var cY=hoy.getFullYear(),cM=hoy.getMonth();
+    var selDate=null,selFranja=null,ocupados={};
+
+    function fmt(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+    function todayStr(){return fmt(hoy);}
+
+    // Cargar ocupados desde Firestore
+    async function cargarOcupados(){
+      if(!db)return;
+      try{
+        const snap=await window._resyFs.getDocs(window._resyFs.collection(db,'calendario_publico'));
+        snap.forEach(function(d){
+          var dato=d.data(),f=dato.fecha,fr=(dato.franja||'').toLowerCase();
+          if(!ocupados[f])ocupados[f]={};
+          ocupados[f][fr]=true;
+        });
+      }catch(e){}
+    }
+
+    function setStep(n){
+      for(var i=1;i<=3;i++){
+        var el=document.getElementById('resy-st'+i);
+        if(!el)continue;
+        el.className='resy-step'+(i===n?' resy-step--active':i<n?' resy-step--done':'');
+      }
+    }
+
+    function renderCal(){
+      document.getElementById('resy-month').textContent=MESES[cM]+' '+cY;
+      var grid=document.getElementById('resy-grid');
+      grid.innerHTML='';
+      var first=new Date(cY,cM,1).getDay();
+      var off=first===0?6:first-1;
+      var days=new Date(cY,cM+1,0).getDate();
+      var ts=todayStr();
+      for(var i=0;i<off;i++){var e=document.createElement('div');e.className='resy-day rd-emp';grid.appendChild(e);}
+      for(var d=1;d<=days;d++){
+        var fecha=cY+'-'+String(cM+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+        var dw=new Date(cY,cM,d).getDay();
+        var btn=document.createElement('button');
+        btn.className='resy-day';btn.textContent=d;
+        var past=fecha<ts,isHoy=fecha===ts,isSab=dw===6,isDom=dw===0;
+        if(isDom){btn.classList.add('rd-dom');}
+        else if(past){btn.classList.add('rd-past');}
+        else{
+          if(isSab)btn.classList.add('rd-sab');
+          if(isHoy)btn.classList.add('rd-today');
+          if(fecha===selDate)btn.classList.add('rd-sel');
+          if(ocupados[fecha])btn.classList.add('rd-dot');
+          (function(f,day,isSabado){btn.onclick=function(){resySelDia(f,day,btn,isSabado);};})(fecha,d,isSab);
+        }
+        grid.appendChild(btn);
+      }
+    }
+
+    // Slots definitivos
+    var SLOTS_LV    = ['17:00','17:45','18:30','19:15','20:00'];
+    var SLOTS_SABM  = ['09:00','09:45','10:30','11:15','12:00','12:45','13:30'];
+    var SLOTS_SABT  = ['16:00','16:45','17:30','18:15','19:00','19:45'];
+
+    function buildSlots(gridId, slots, fecha, tipo) {
+      var grid = document.getElementById(gridId);
+      grid.innerHTML = '';
+      var oc = ocupados[fecha] || {};
+      slots.forEach(function(hora) {
+        var key = hora + '_' + tipo;
+        var btn = document.createElement('button');
+        btn.className = 'resy-slot' + (oc[key] ? ' rs-ocupado' : '');
+        btn.textContent = hora;
+        btn.onclick = function() { resySelSlot(hora, tipo, btn); };
+        grid.appendChild(btn);
+      });
+    }
+
+    window.resySelDia = function(fecha, d, btn, isSab) {
+      selDate = fecha; selFranja = null;
+      document.querySelectorAll('.resy-day').forEach(function(b){b.classList.remove('rd-sel');});
+      btn.classList.add('rd-sel');
+      document.getElementById('resy-fecha-lbl').textContent = d + ' de ' + MESES[cM] + ' ' + cY;
+      // Ocultar todos los grupos de slots
+      ['resy-slots-lv','resy-slots-sabm','resy-slots-sabt'].forEach(function(id){
+        document.getElementById(id).style.display = 'none';
+      });
+      if (isSab) {
+        buildSlots('resy-slots-sabm-grid', SLOTS_SABM, fecha, 'sabm');
+        buildSlots('resy-slots-sabt-grid', SLOTS_SABT, fecha, 'sabt');
+        document.getElementById('resy-slots-sabm').style.display = 'block';
+        document.getElementById('resy-slots-sabt').style.display = 'block';
+      } else {
+        buildSlots('resy-slots-lv-grid', SLOTS_LV, fecha, 'lv');
+        document.getElementById('resy-slots-lv').style.display = 'block';
+      }
+      document.getElementById('resy-slots-wrap').style.display = 'block';
+      document.getElementById('resy-ok').style.display = 'none';
+      document.getElementById('resy-form-wrap').style.display = 'none';
+      setStep(2);
+      setTimeout(function(){document.getElementById('resy-slots-wrap').scrollIntoView({behavior:'smooth',block:'nearest'});},100);
+    };
+
+    window.resySelSlot = function(hora, tipo, btn) {
+      selFranja = hora + ' (' + (tipo==='lv'?'L-V':tipo==='sabm'?'Sáb mañana':'Sáb tarde') + ')';
+      document.querySelectorAll('.resy-slot').forEach(function(b){b.classList.remove('rs-sel');});
+      btn.classList.add('rs-sel');
+      var p = selDate.split('-');
+      document.getElementById('resy-ok-txt').textContent = parseInt(p[2]) + ' de ' + MESES[parseInt(p[1])-1] + ' ' + p[0] + ' · ' + hora + 'h';
+      document.getElementById('resy-ok').style.display = 'flex';
+      document.getElementById('resy-slots-wrap').style.display = 'none';
+      document.getElementById('resy-form-wrap').style.display = 'block';
+      setStep(3);
+      setTimeout(function(){document.getElementById('resy-form-wrap').scrollIntoView({behavior:'smooth',block:'start'});},150);
+    };
+
+    window.resyClear = function() {
+      selDate = null; selFranja = null;
+      document.getElementById('resy-ok').style.display = 'none';
+      document.getElementById('resy-slots-wrap').style.display = 'none';
+      document.getElementById('resy-form-wrap').style.display = 'none';
+      setStep(1); renderCal();
+    };
+
+    document.getElementById('resy-prev').onclick=function(){
+      if(cY===hoy.getFullYear()&&cM===hoy.getMonth())return;
+      cM--;if(cM<0){cM=11;cY--;}renderCal();
+    };
+    document.getElementById('resy-next').onclick=function(){
+      cM++;if(cM>11){cM=0;cY++;}renderCal();
+    };
+
+    function showRNotif(msg,tipo){
+      var el=document.getElementById('rNotif');
+      el.textContent=msg;
+      el.style.cssText='display:block;padding:12px 16px;border-radius:10px;font-size:14px;'
+        +'background:'+(tipo==='success'?'rgba(16,185,129,0.09)':'rgba(244,63,94,0.09)')+';'
+        +'border:1px solid '+(tipo==='success'?'rgba(16,185,129,0.25)':'rgba(244,63,94,0.25)')+';'
+        +'color:'+(tipo==='success'?'#6ee7b7':'#fca5a5')+';';
+    }
+
+    document.getElementById('resyForm').addEventListener('submit',async function(e){
+      e.preventDefault();
+      if(document.getElementById('rHoneypot').value)return;
+      var nombre=document.getElementById('rNombre').value.trim();
+      var email=document.getElementById('rEmail').value.trim();
+      var tipo=document.getElementById('rTipo').value;
+      var tel=document.getElementById('rTel').value.trim();
+      var reto=document.getElementById('rReto').value.trim();
+      var rgpd=document.getElementById('rRgpd').checked;
+      var btn=document.getElementById('rSubmit');
+
+      if(!nombre){showRNotif('⚠️ Introduce tu nombre.','error');return;}
+      if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showRNotif('⚠️ Introduce un email válido.','error');return;}
+      if(!selDate){showRNotif('⚠️ Selecciona un día en el calendario.','error');return;}
+      if(!selFranja){showRNotif('⚠️ Selecciona la franja horaria.','error');return;}
+      if(!rgpd){showRNotif('⚠️ Acepta la Política de Privacidad.','error');return;}
+
+      btn.textContent='Enviando...';btn.disabled=true;
+      var ts=new Date().toISOString();
+
+      try{
+        // 1. Firebase
+        if(db&&window._resyFs){
+          await window._resyFs.addDoc(window._resyFs.collection(db,'reservas'),{
+            nombre:nombre,email:email,telefono:tel,negocio:tipo||'Sin especificar',
+            bloqueo:reto,fecha:selDate,franja:selFranja,
+            estado:'pendiente',origen:'web',createdAt:window._resyFs.serverTimestamp()
+          });
+          await window._resyFs.setDoc(window._resyFs.doc(db,'calendario_publico',selDate+'_'+selFranja.toLowerCase().replace(/ /g,'_')),{
+            fecha:selDate,franja:selFranja,ocupado:true,updatedAt:window._resyFs.serverTimestamp()
+          });
+        }
+        // 2. Google Sheets + email
+        await fetch(APPS+'?'+new URLSearchParams({
+          nombre:nombre,email:email,empresa:tipo||'Sin especificar',
+          industria:'Sesión estratégica 45 min',telefono:tel,
+          desafio:reto||'Sin especificar',
+          fecha_cita:selDate,franja_cita:selFranja,
+          timestamp:ts,marketingConsent:'no registrado',
+          consentimientoRGPD:'Sí — '+ts,
+          cookiesConsent:localStorage.getItem('lucas_leo_cookies')||'no registrado',
+          origin:'Landing Asesor Lucas — Calendario'
+        }).toString(),{method:'GET',mode:'no-cors'});
+
+        showRNotif('✅ ¡Solicitud enviada! Te confirmo la hora exacta en menos de 24h.','success');
+        document.getElementById('resyForm').reset();
+        selDate=null;selFranja=null;renderCal();
+        document.getElementById('resy-ok').style.display='none';
+        document.getElementById('resy-slots-wrap').style.display='none';
+        document.getElementById('resy-form-wrap').style.display='none';
+        setStep(1);
+      }catch(err){
+        console.error(err);
+        showRNotif('✅ ¡Solicitud recibida! Te contactamos en menos de 24h.','success');
+      }finally{
+        btn.textContent='Solicitar mi sesión gratuita →';btn.disabled=false;
+      }
+    });
+
+    await cargarOcupados();
+    renderCal();
+  })();
 
 </script>
 </body>
