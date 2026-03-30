@@ -652,22 +652,50 @@ window.saveReserva = async () => {
   ['r-nombre','r-email','r-tel','r-negocio','r-notas'].forEach(id => document.getElementById(id).value='');
 };
 
+// Convierte franja guardada en key para calendario_publico
+// Ej: "17:00 (L-V)" → "2026-04-15_17:00_lv"
+//     "09:45 (Sáb mañana)" → "2026-04-15_09:45_sabm"
+//     "16:00 (Sáb tarde)"  → "2026-04-15_16:00_sabt"
+function franjaToCalKey(fecha, franja) {
+  if (!fecha || !franja) return null;
+  const hora = franja.split(' ')[0];
+  const fl = franja.toLowerCase();
+  let tipo = 'lv';
+  if (fl.includes('tarde') && (fl.includes('sáb') || fl.includes('sab'))) tipo = 'sabt';
+  else if (fl.includes('mañana') || (fl.includes('sáb') || fl.includes('sab'))) tipo = 'sabm';
+  return `${fecha}_${hora}_${tipo}`;
+}
+
 window.confirmarReserva = async (id) => {
   const reserva = allReservas.find(r => r.id === id);
   await updateDoc(doc(db,'reservas',id), {estado:'Confirmada'});
   if (reserva?.fecha && reserva?.franja) {
-    await setDoc(doc(db,'calendario_publico', reserva.fecha + '_' + reserva.franja.toLowerCase()), {
-      fecha: reserva.fecha, franja: reserva.franja, ocupado: true, updatedAt: serverTimestamp()
-    });
+    const calKey = franjaToCalKey(reserva.fecha, reserva.franja);
+    if (calKey) {
+      await setDoc(doc(db,'calendario_publico', calKey), {
+        fecha: reserva.fecha,
+        franja: reserva.franja,
+        hora: reserva.franja.split(' ')[0],
+        ocupado: true,
+        updatedAt: serverTimestamp()
+      });
+    }
   }
-  showToast('✓ Cita confirmada');
+  showToast('✓ Cita confirmada — slot bloqueado en el calendario');
   loadReservas();
 };
 
 window.cancelarReserva = async (id) => {
   if (!confirm('¿Cancelar esta cita?')) return;
+  const reserva = allReservas.find(r => r.id === id);
   await updateDoc(doc(db,'reservas',id), {estado:'Cancelada'});
-  showToast('Cita cancelada');
+  if (reserva?.fecha && reserva?.franja) {
+    try {
+      const calKey = franjaToCalKey(reserva.fecha, reserva.franja);
+      if (calKey) await deleteDoc(doc(db,'calendario_publico', calKey));
+    } catch(e) {}
+  }
+  showToast('Cita cancelada — slot liberado en el calendario');
   loadReservas();
 };
 
