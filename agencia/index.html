@@ -1744,40 +1744,41 @@
                 transition: opacity 0.4s ease, transform 0.4s ease;
                 pointer-events: none;
             }
-    
-        /* ── CALENDARIO RESERVAS AGENCIA ─────────────────────────────── */
-        .ag-resy-card{background:rgba(255,255,255,.025);border:1px solid rgba(200,117,51,.15);border-radius:20px;padding:28px;margin-top:32px;}
-        .ag-resy-step{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:rgba(240,240,240,.28);transition:color .3s;}
-        .ag-resy-step--active{color:var(--copper-gold);}
-        .ag-resy-step--done{color:rgba(240,240,240,.45);}
-        .ag-resy-step-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1.5px solid rgba(240,240,240,.12);transition:all .3s;flex-shrink:0;}
-        .ag-resy-step--active .ag-resy-step-num{border-color:var(--copper-gold);background:rgba(200,117,51,.12);color:var(--copper-gold);}
-        .ag-resy-step--done .ag-resy-step-num{border-color:rgba(240,240,240,.28);color:rgba(240,240,240,.5);}
-        .ag-resy-step-line{width:36px;height:1px;background:rgba(240,240,240,.1);margin:0 4px;flex-shrink:0;}
-        .ag-nav-btn{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#F0F0F0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
-        .ag-nav-btn:hover{background:rgba(200,117,51,.1);border-color:rgba(200,117,51,.25);}
-        .ag-wday{text-align:center;font-size:10px;font-weight:600;color:rgba(240,240,240,.28);text-transform:uppercase;letter-spacing:.07em;padding:6px 0;}
-        .ag-wday-sab{color:rgba(200,117,51,.5);}
-        .ag-wday-dom{color:rgba(240,240,240,.12);}
-        .ag-day{aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;cursor:pointer;border:1px solid transparent;transition:all .18s;position:relative;background:transparent;color:#F0F0F0;}
-        .ag-day:hover:not(.ag-dis):not(.ag-emp):not(.ag-dom):not(.ag-past){background:rgba(200,117,51,.09);border-color:rgba(200,117,51,.25);}
-        .ag-today{border-color:rgba(200,117,51,.35);color:var(--copper-gold);font-weight:700;}
-        .ag-sel{background:linear-gradient(135deg,var(--copper-gold),#d4893f)!important;border-color:transparent!important;color:#fff!important;font-weight:700!important;box-shadow:0 4px 20px rgba(200,117,51,.4);}
-        .ag-sab{color:rgba(200,117,51,.7);}
-        .ag-dis,.ag-past,.ag-dom,.ag-emp{color:rgba(240,240,240,.14);cursor:default;pointer-events:none;}
-        .ag-dot::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--copper-gold);opacity:.65;}
-        .ag-slots-grid{display:flex;flex-wrap:wrap;gap:8px;}
-        .ag-slot{padding:9px 18px;border-radius:10px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.09);color:#F0F0F0;font-size:14px;font-weight:600;cursor:pointer;transition:all .18s;font-family:var(--font-display);letter-spacing:.01em;}
-        .ag-slot:hover:not(.ag-slot-oc){background:rgba(200,117,51,.1);border-color:rgba(200,117,51,.3);color:var(--copper-gold);}
-        .ag-slot-sel{background:linear-gradient(135deg,var(--copper-gold),#d4893f)!important;border-color:transparent!important;color:#fff!important;box-shadow:0 4px 16px rgba(200,117,51,.35);}
-        .ag-slot-oc{opacity:.22;pointer-events:none;text-decoration:line-through;}
-        .ag-ok{display:flex;align-items:center;gap:10px;margin-top:16px;padding:13px 16px;background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.18);border-radius:12px;font-size:13px;}
-        .chat-bubble-label.visible {
+            .chat-bubble-label.visible {
                 opacity: 1;
                 transform: translateX(0) scale(1);
             }
         }
-    </style>
+    
+/* ══ CALENDARIO RESERVAS ══════════════════════════════════════ */
+.resy-step{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:rgba(240,240,240,.28);transition:color .3s;}
+.resy-step--active{color:#C87533;}.resy-step--done{color:rgba(240,240,240,.45);}
+.resy-step-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1.5px solid rgba(240,240,240,.12);transition:all .3s;flex-shrink:0;}
+.resy-step--active .resy-step-num{border-color:#C87533;background:rgba(200,117,51,.12);color:#C87533;}
+.resy-step--done .resy-step-num{border-color:rgba(240,240,240,.28);color:rgba(240,240,240,.5);}
+.resy-step-line{width:36px;height:1px;background:rgba(240,240,240,.1);margin:0 4px;flex-shrink:0;}
+@media(max-width:480px){.resy-step span:not(.resy-step-num){display:none;}}
+.resy-cal-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(200,117,51,.15);border-radius:16px;padding:24px;}
+.resy-nav-btn{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#F0F0F0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.resy-nav-btn:hover{background:rgba(200,117,51,.1);border-color:rgba(200,117,51,.25);}
+.resy-wday{text-align:center;font-size:10px;font-weight:600;color:rgba(240,240,240,.28);text-transform:uppercase;letter-spacing:.07em;padding:6px 0;}
+.resy-wday--sab{color:rgba(200,117,51,.5);}.resy-wday--dom{color:rgba(240,240,240,.12);}
+.resy-day{aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;cursor:pointer;border:1px solid transparent;transition:all .18s;position:relative;background:transparent;color:#F0F0F0;font-family:inherit;}
+.resy-day:hover:not(.rd-emp):not(.rd-dom):not(.rd-past){background:rgba(200,117,51,.09);border-color:rgba(200,117,51,.25);}
+.rd-today{border-color:rgba(200,117,51,.35);color:#C87533;font-weight:700;}
+.rd-sel{background:linear-gradient(135deg,#C87533,#d4893f)!important;border-color:transparent!important;color:#fff!important;font-weight:700!important;box-shadow:0 4px 20px rgba(200,117,51,.4);}
+.rd-sab{color:rgba(200,117,51,.7);}.rd-past,.rd-dom,.rd-emp{color:rgba(240,240,240,.14);cursor:default;pointer-events:none;}
+.rd-dot::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:#C87533;opacity:.65;}
+.resy-slots-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+.resy-slot{padding:9px 14px;border-radius:8px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.09);color:#F0F0F0;font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;font-family:inherit;}
+.resy-slot:hover:not(.rs-ocupado){background:rgba(200,117,51,.1);border-color:rgba(200,117,51,.3);color:#C87533;}
+.resy-slot.rs-sel{background:linear-gradient(135deg,#C87533,#d4893f);border-color:transparent;color:#fff;box-shadow:0 4px 14px rgba(200,117,51,.35);}
+.resy-slot.rs-ocupado{opacity:.22;pointer-events:none;text-decoration:line-through;}
+.resy-fi{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 13px;color:#F0F0F0;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;}
+.resy-fi:focus{border-color:rgba(200,117,51,.45);}.resy-fi::placeholder{color:rgba(240,240,240,.22);}
+.resy-fi option{background:#050505;}
+
+</style>
 </head>
 <body>
     <!-- Animated Background -->
@@ -1800,7 +1801,6 @@
                     <a href="#servicios" class="nav-link">Servicios</a>
                     <a href="#metodologia" class="nav-link">Metodología</a>
                     <a href="#casos-exito" class="nav-link">Casos de Éxito</a>
-                    <a href="/" class="nav-link" style="color:var(--copper-gold);">Lucas Asesor</a>
                 </nav>
 
                 <a href="#auditoria" class="btn btn-primary">Solicitar Auditoría</a>
@@ -1818,7 +1818,6 @@
         <a href="#servicios"   class="nav-link-mobile" onclick="cerrarMenuMovil()">Servicios</a>
         <a href="#metodologia" class="nav-link-mobile" onclick="cerrarMenuMovil()">Metodología</a>
         <a href="#casos-exito" class="nav-link-mobile" onclick="cerrarMenuMovil()">Casos de Éxito</a>
-        <a href="/" class="nav-link-mobile" onclick="cerrarMenuMovil()" style="color:var(--copper-gold);">← Lucas Asesor</a>
         <a href="#auditoria"   class="btn btn-primary btn-mobile-cta" onclick="cerrarMenuMovil()">Solicitar Auditoría</a>
     </nav>
 
@@ -2504,150 +2503,143 @@
                     <h2 class="text-center mb-md">
                         ¿Cuántos ingresos estás <span class="text-gradient">dejando sobre la mesa</span>?
                     </h2>
+
                     <p class="text-center mb-lg" style="font-size: 20px;">
-                        Elige tu día y solicita tu auditoría gratuita de 45 minutos
+                        Solicita un Análisis de Eficiencia Digital gratuito y descubre:
                     </p>
 
-                    <ul style="list-style: none; margin-bottom: 36px;">
-                        <li style="font-size: 16px; line-height: 1.8; margin-bottom: 12px; padding-left: 36px; position: relative;">
-                            <span style="position: absolute; left: 0; top: 0; color: var(--copper-gold); font-weight: bold; font-size: 24px;">✓</span>
+                    <ul style="list-style: none; margin-bottom: 48px;">
+                        <li style="font-size: 17px; line-height: 1.8; margin-bottom: 16px; padding-left: 36px; position: relative;">
+                            <span style="position: absolute; left: 0; top: 0; color: var(--copper-gold); font-weight: bold; font-size: 24px; filter: drop-shadow(0 0 8px var(--copper-gold));">✓</span>
                             Fugas de conversión en tu embudo actual
                         </li>
-                        <li style="font-size: 16px; line-height: 1.8; margin-bottom: 12px; padding-left: 36px; position: relative;">
-                            <span style="position: absolute; left: 0; top: 0; color: var(--copper-gold); font-weight: bold; font-size: 24px;">✓</span>
+                        <li style="font-size: 17px; line-height: 1.8; margin-bottom: 16px; padding-left: 36px; position: relative;">
+                            <span style="position: absolute; left: 0; top: 0; color: var(--copper-gold); font-weight: bold; font-size: 24px; filter: drop-shadow(0 0 8px var(--copper-gold));">✓</span>
                             Oportunidades de automatización que ahorran 15+ hrs/semana
                         </li>
-                        <li style="font-size: 16px; line-height: 1.8; margin-bottom: 12px; padding-left: 36px; position: relative;">
-                            <span style="position: absolute; left: 0; top: 0; color: var(--copper-gold); font-weight: bold; font-size: 24px;">✓</span>
+                        <li style="font-size: 17px; line-height: 1.8; margin-bottom: 16px; padding-left: 36px; position: relative;">
+                            <span style="position: absolute; left: 0; top: 0; color: var(--copper-gold); font-weight: bold; font-size: 24px; filter: drop-shadow(0 0 8px var(--copper-gold));">✓</span>
                             Estrategias de publicidad con mejor ROI para tu industria
                         </li>
-                        <li style="font-size: 16px; line-height: 1.8; padding-left: 36px; position: relative;">
-                            <span style="position: absolute; left: 0; top: 0; color: var(--copper-gold); font-weight: bold; font-size: 24px;">✓</span>
+                        <li style="font-size: 17px; line-height: 1.8; padding-left: 36px; position: relative;">
+                            <span style="position: absolute; left: 0; top: 0; color: var(--copper-gold); font-weight: bold; font-size: 24px; filter: drop-shadow(0 0 8px var(--copper-gold));">✓</span>
                             Análisis de competencia digital y gaps de posicionamiento
                         </li>
                     </ul>
 
+
                     <!-- STEPPER -->
-                    <div style="display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:24px;" id="ag-steps">
-                        <div class="ag-resy-step ag-resy-step--active" id="ag-st1"><div class="ag-resy-step-num">1</div><span style="font-family:var(--font-display);font-size:12px;">Elige día</span></div>
-                        <div class="ag-resy-step-line"></div>
-                        <div class="ag-resy-step" id="ag-st2"><div class="ag-resy-step-num">2</div><span style="font-family:var(--font-display);font-size:12px;">Hora</span></div>
-                        <div class="ag-resy-step-line"></div>
-                        <div class="ag-resy-step" id="ag-st3"><div class="ag-resy-step-num">3</div><span style="font-family:var(--font-display);font-size:12px;">Tus datos</span></div>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:0;margin:32px 0 24px;" >
+                      <div class="resy-step resy-step--active" id="ag-st1"><div class="resy-step-num">1</div><span style="font-family:var(--font-display);font-size:12px;font-weight:600;margin-left:6px;">Elige día</span></div>
+                      <div class="resy-step-line"></div>
+                      <div class="resy-step" id="ag-st2"><div class="resy-step-num">2</div><span style="font-family:var(--font-display);font-size:12px;font-weight:600;margin-left:6px;">Hora</span></div>
+                      <div class="resy-step-line"></div>
+                      <div class="resy-step" id="ag-st3"><div class="resy-step-num">3</div><span style="font-family:var(--font-display);font-size:12px;font-weight:600;margin-left:6px;">Tus datos</span></div>
                     </div>
 
                     <!-- CALENDARIO -->
-                    <div class="ag-resy-card">
-                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-                            <button class="ag-nav-btn" id="ag-prev">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-                            </button>
-                            <span id="ag-month" style="font-family:var(--font-display);font-size:16px;font-weight:700;">—</span>
-                            <button class="ag-nav-btn" id="ag-next">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-                            </button>
-                        </div>
-                        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:6px;">
-                            <span class="ag-wday">Lun</span><span class="ag-wday">Mar</span><span class="ag-wday">Mié</span>
-                            <span class="ag-wday">Jue</span><span class="ag-wday">Vie</span>
-                            <span class="ag-wday ag-wday-sab">Sáb</span><span class="ag-wday ag-wday-dom">Dom</span>
-                        </div>
-                        <div id="ag-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;"></div>
-                        <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;">
-                            <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(240,240,240,.3);">
-                                <span style="width:6px;height:6px;border-radius:50%;background:var(--copper-gold);opacity:.65;display:inline-block"></span>Franja ocupada
-                            </div>
-                        </div>
+                    <div class="resy-cal-wrap">
+                      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+                        <button class="resy-nav-btn" id="ag-prev" aria-label="Mes anterior">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+                        </button>
+                        <span id="ag-month" style="font-family:var(--font-display);font-size:15px;font-weight:700;">—</span>
+                        <button class="resy-nav-btn" id="ag-next" aria-label="Mes siguiente">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                        </button>
+                      </div>
+                      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:6px;">
+                        <span class="resy-wday">Lun</span><span class="resy-wday">Mar</span><span class="resy-wday">Mié</span>
+                        <span class="resy-wday">Jue</span><span class="resy-wday">Vie</span>
+                        <span class="resy-wday resy-wday--sab">Sáb</span><span class="resy-wday resy-wday--dom">Dom</span>
+                      </div>
+                      <div id="ag-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;" role="grid"></div>
+                      <div style="display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;">
+                        <span style="font-size:11px;color:rgba(240,240,240,.28);display:flex;align-items:center;gap:5px;"><span style="width:6px;height:6px;border-radius:50%;background:#C87533;opacity:.65;display:inline-block"></span>Con ocupación</span>
+                        <span style="font-size:11px;color:rgba(240,240,240,.28);display:flex;align-items:center;gap:5px;"><span style="width:6px;height:6px;border-radius:50%;background:rgba(240,240,240,.2);display:inline-block"></span>No disponible</span>
+                      </div>
 
-                        <!-- SLOTS -->
-                        <div id="ag-slots-wrap" style="display:none;margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.07);">
-                            <p style="font-size:12px;color:rgba(240,240,240,.45);margin-bottom:14px;font-weight:500;">
-                                Elige tu hora para <strong style="color:rgba(240,240,240,.75)" id="ag-fecha-lbl">—</strong>
-                                <span style="display:block;font-size:11px;margin-top:3px;color:rgba(240,240,240,.3);">Sesiones de 45 minutos</span>
-                            </p>
-                            <div id="ag-slots-lv" style="display:none;">
-                                <div style="font-size:10px;font-weight:700;color:rgba(240,240,240,.35);text-transform:uppercase;letter-spacing:.09em;margin-bottom:10px;">&#9788; Tarde · Lunes a Viernes</div>
-                                <div class="ag-slots-grid" id="ag-slots-lv-grid"></div>
-                            </div>
-                            <div id="ag-slots-sabm" style="display:none;">
-                                <div style="font-size:10px;font-weight:700;color:rgba(200,117,51,.6);text-transform:uppercase;letter-spacing:.09em;margin-bottom:10px;">&#9728; Mañana · Sábado</div>
-                                <div class="ag-slots-grid" id="ag-slots-sabm-grid"></div>
-                            </div>
-                            <div id="ag-slots-sabt" style="display:none;margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.06);">
-                                <div style="font-size:10px;font-weight:700;color:rgba(200,117,51,.6);text-transform:uppercase;letter-spacing:.09em;margin-bottom:10px;">&#9788; Tarde · Sábado</div>
-                                <div class="ag-slots-grid" id="ag-slots-sabt-grid"></div>
-                            </div>
+                      <!-- SLOTS -->
+                      <div id="ag-slots-wrap" style="display:none;margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.07);">
+                        <p style="font-size:12px;color:rgba(240,240,240,.45);margin-bottom:12px;font-weight:500;">
+                          Hora para <strong style="color:rgba(240,240,240,.8)" id="ag-fecha-lbl">—</strong>
+                          <span style="display:block;font-size:11px;color:rgba(240,240,240,.3);margin-top:2px;">Sesiones de 45 minutos</span>
+                        </p>
+                        <div id="ag-slots-lv" style="display:none;">
+                          <div style="font-size:10px;font-weight:700;color:rgba(240,240,240,.35);text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px;">&#9788; Tarde · L-V</div>
+                          <div class="resy-slots-grid" id="ag-slots-lv-grid"></div>
                         </div>
-
-                        <!-- OK resumen -->
-                        <div class="ag-ok" id="ag-ok" style="display:none;">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>
-                            <span style="flex:1;color:rgba(240,240,240,.8);">Seleccionado: <strong style="color:#F0F0F0" id="ag-ok-txt">—</strong></span>
-                            <button onclick="agClear()" style="font-size:12px;font-weight:600;color:var(--copper-gold);background:none;border:none;cursor:pointer;text-decoration:underline;font-family:var(--font-display);">Cambiar</button>
+                        <div id="ag-slots-sabm" style="display:none;">
+                          <div style="font-size:10px;font-weight:700;color:rgba(200,117,51,.6);text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px;">&#9728; Mañana · Sáb</div>
+                          <div class="resy-slots-grid" id="ag-slots-sabm-grid"></div>
                         </div>
-                    </div><!-- /ag-resy-card -->
+                        <div id="ag-slots-sabt" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.06);">
+                          <div style="font-size:10px;font-weight:700;color:rgba(200,117,51,.6);text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px;">&#9788; Tarde · Sáb</div>
+                          <div class="resy-slots-grid" id="ag-slots-sabt-grid"></div>
+                        </div>
+                      </div>
 
-                    <!-- FORMULARIO (aparece tras elegir slot) -->
-                    <div id="ag-form-wrap" style="display:none;margin-top:28px;position:relative;z-index:2;">
-                        <p style="font-size:11px;font-weight:700;color:rgba(240,240,240,.3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:16px;">Tus datos de contacto</p>
-                        <form id="leadForm" novalidate>
-                            <div style="display:none;" aria-hidden="true">
-                                <input type="text" name="website" id="hp-website" tabindex="-1" autocomplete="off" value="">
-                            </div>
-                            <div class="grid-2">
-                                <div class="form-group">
-                                    <label for="nombre" class="form-label">Nombre completo *</label>
-                                    <input type="text" id="nombre" name="nombre" required class="form-input">
-                                </div>
-                                <div class="form-group">
-                                    <label for="email" class="form-label">Email *</label>
-                                    <input type="email" id="email" name="email" required class="form-input">
-                                </div>
-                            </div>
-                            <div class="grid-2">
-                                <div class="form-group">
-                                    <label for="empresa" class="form-label">Empresa</label>
-                                    <input type="text" id="empresa" name="empresa" class="form-input">
-                                </div>
-                                <div class="form-group">
-                                    <label for="industria" class="form-label">Industria</label>
-                                    <select id="industria" name="industria" class="form-select">
-                                        <option value="">Selecciona...</option>
-                                        <option value="tecnologia">Tecnología / SaaS</option>
-                                        <option value="ecommerce">E-commerce / Retail</option>
-                                        <option value="servicios">Servicios Profesionales</option>
-                                        <option value="consultoria">Consultoría / Coaching</option>
-                                        <option value="salud">Salud / Wellness</option>
-                                        <option value="educacion">Educación</option>
-                                        <option value="finanzas">Finanzas</option>
-                                        <option value="otro">Otro</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="desafio" class="form-label">Principal desafío actual *</label>
-                                <textarea id="desafio" name="desafio" required class="form-textarea" rows="3" placeholder="Describe el principal reto que enfrentas actualmente..."></textarea>
-                            </div>
-                            <div class="form-group rgpd-consent">
-                                <label class="rgpd-label">
-                                    <input type="checkbox" id="rgpd-check" name="rgpd" required class="rgpd-checkbox">
-                                    <span class="rgpd-text">He leído y acepto la <a href="#" onclick="abrirModal('modal-privacidad'); return false;">Política de Privacidad</a>. Consiento el tratamiento de mis datos.*</span>
-                                </label>
-                            </div>
-                            <div class="form-group rgpd-consent">
-                                <label class="rgpd-label">
-                                    <input type="checkbox" id="rgpd-marketing" name="rgpdMarketing" class="rgpd-checkbox">
-                                    <span class="rgpd-text">Acepto recibir comunicaciones comerciales de Lucas y Leo Digital. (Opcional)</span>
-                                </label>
-                            </div>
-                            <button type="submit" id="ag-submit-btn" class="btn btn-primary" style="width:100%;margin-top:24px;">
-                                Solicitar Mi Análisis Gratuito →
-                            </button>
-                            <p class="text-center mt-md" style="font-size:14px;opacity:.55;font-style:italic;">
-                                45 minutos sin compromiso · Te confirmamos la hora exacta en menos de 24h
-                            </p>
-                            <div id="ag-notif" role="alert" aria-live="polite" style="margin-top:14px;"></div>
-                        </form>
+                      <!-- OK BAR -->
+                      <div id="ag-ok" style="display:none;align-items:center;gap:10px;margin-top:14px;padding:12px 16px;background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.18);border-radius:10px;font-size:13px;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span style="flex:1;color:rgba(240,240,240,.8);">Seleccionado: <strong style="color:#F0F0F0" id="ag-ok-txt">—</strong></span>
+                        <button onclick="ag_clearSel()" style="font-size:12px;font-weight:600;color:#C87533;background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline;">Cambiar</button>
+                      </div>
+                    </div>
+
+                    <!-- FORMULARIO DATOS -->
+                    <div id="ag-form-wrap" style="display:none;margin-top:24px;">
+                      <p style="font-size:11px;font-weight:700;color:rgba(240,240,240,.3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:16px;">Tus datos</p>
+                      <form id="ag-form" novalidate>
+                        <input type="text" id="ag-hp" style="display:none;" aria-hidden="true" tabindex="-1">
+                        <div class="grid-2" style="margin-bottom:16px;">
+                          <div class="form-group"><label class="form-label">Nombre completo *</label><input type="text" id="ag-nombre" class="resy-fi form-input" placeholder="Tu nombre completo" autocomplete="name"></div>
+                          <div class="form-group"><label class="form-label">Email *</label><input type="email" id="ag-email" class="resy-fi form-input" placeholder="tu@empresa.com" autocomplete="email"></div>
+                        </div>
+                        <div class="grid-2" style="margin-bottom:16px;">
+                          <div class="form-group"><label class="form-label">Empresa</label><input type="text" id="ag-empresa" class="resy-fi form-input" placeholder="Nombre de tu empresa"></div>
+                          <div class="form-group"><label class="form-label">Industria</label>
+                            <select id="ag-industria" class="resy-fi form-select">
+                              <option value="">Selecciona...</option>
+                              <option value="tecnologia">Tecnología / SaaS</option>
+                              <option value="ecommerce">E-commerce / Retail</option>
+                              <option value="servicios">Servicios Profesionales</option>
+                              <option value="consultoria">Consultoría / Coaching</option>
+                              <option value="salud">Salud / Wellness</option>
+                              <option value="educacion">Educación</option>
+                              <option value="finanzas">Finanzas</option>
+                              <option value="otro">Otro</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom:16px;">
+                          <label class="form-label">Teléfono / WhatsApp</label>
+                          <input type="tel" id="ag-tel" class="resy-fi form-input" placeholder="+34 600 000 000" autocomplete="tel">
+                        </div>
+                        <div class="form-group" style="margin-bottom:16px;">
+                          <label class="form-label">Principal desafío actual *</label>
+                          <textarea id="ag-reto" class="resy-fi form-textarea" rows="3" placeholder="Describe el principal reto que enfrentas ahora mismo..." style="min-height:80px;resize:vertical;"></textarea>
+                        </div>
+                        <div class="form-group rgpd-consent" style="margin-bottom:8px;">
+                          <label class="rgpd-label">
+                            <input type="checkbox" id="ag-rgpd" class="rgpd-checkbox">
+                            <span class="rgpd-text">He leído y acepto la <a href="#" onclick="abrirModal('modal-privacidad');return false;">Política de Privacidad</a>. Consiento el tratamiento de mis datos.*</span>
+                          </label>
+                        </div>
+                        <div class="form-group rgpd-consent" style="margin-bottom:24px;">
+                          <label class="rgpd-label">
+                            <input type="checkbox" id="ag-mkt" class="rgpd-checkbox">
+                            <span class="rgpd-text">Acepto recibir comunicaciones comerciales de Lucas y Leo Digital. (Opcional)</span>
+                          </label>
+                        </div>
+                        <button type="submit" id="ag-submit" data-label="Solicitar Mi Auditoría Gratuita" class="btn btn-primary" style="width:100%;">
+                          Solicitar Mi Auditoría Gratuita
+                        </button>
+                        <p style="text-align:center;margin-top:12px;font-size:13px;opacity:.55;font-style:italic;">
+                          Sesión estratégica de 45 minutos sin compromiso · Te confirmamos día y hora en menos de 24h
+                        </p>
+                        <div id="ag-notif" role="alert" aria-live="polite"></div>
+                      </form>
                     </div>
                 </div>
             </div>
@@ -2698,7 +2690,6 @@
                     <ul class="footer-links">
                         <li><a href="#metodologia">Metodología</a></li>
                         <li><a href="#casos-exito">Casos de Éxito</a></li>
-                        <li><a href="/" style="color:var(--copper-gold);">Lucas Asesor Digital</a></li>
                     </ul>
                 </div>
 
@@ -3034,217 +3025,29 @@
             });
         }
 
-        // ── CALENDARIO AGENCIA ─────────────────────────────────────
-        (async function(){
-            var MESES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-            var APPS='https://script.google.com/macros/s/AKfycbxMowit4KbOOgZtB5MIYrv33zUaPcJJsQ7rW5-zQn0-FwPfkm3nt4VZDEtMF3eo8hsgqA/exec';
-            var FB_CONFIG={apiKey:"AIzaSyAf5cYK5vRUtfZ2RikRSu5qjqUAJHMhLiM",authDomain:"reservify-lucasyleo.firebaseapp.com",projectId:"reservify-lucasyleo",storageBucket:"reservify-lucasyleo.firebasestorage.app",messagingSenderId:"464767738256",appId:"1:464767738256:web:c0692dc6ba98d162101315"};
-            var SLOTS_LV   =['17:00','17:45','18:30','19:15','20:00'];
-            var SLOTS_SABM =['09:00','09:45','10:30','11:15','12:00','12:45','13:30'];
-            var SLOTS_SABT =['16:00','16:45','17:30','18:15','19:00','19:45'];
+        function mostrarNotificacion(mensaje, tipo) {
+            const existing = document.getElementById('form-notification');
+            if (existing) existing.remove();
 
-            var db=null;
-            try{
-                var {initializeApp}=await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js');
-                var {getFirestore,collection,addDoc,getDocs,doc,setDoc,serverTimestamp}=await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
-                var fbApp=initializeApp(FB_CONFIG,'ag-reservas');
-                db=getFirestore(fbApp);
-                window._agFs={collection,addDoc,getDocs,doc,setDoc,serverTimestamp,db};
-            }catch(e){}
-
-            var hoy=new Date(),cY=hoy.getFullYear(),cM=hoy.getMonth();
-            var agSelDate=null,agSelFranja=null,agOcupados={};
-
-            function fmt(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-
-            async function agCargar(){
-                if(!db)return;
-                try{
-                    var snap=await window._agFs.getDocs(window._agFs.collection(db,'calendario_publico'));
-                    snap.forEach(function(d){
-                        var dato=d.data(),f=dato.fecha,fr=(dato.franja||'').toLowerCase();
-                        if(!agOcupados[f])agOcupados[f]={};
-                        agOcupados[f][fr]=true;
-                    });
-                }catch(e){}
-            }
-
-            function agSetStep(n){
-                for(var i=1;i<=3;i++){
-                    var el=document.getElementById('ag-st'+i);
-                    if(!el)continue;
-                    el.className='ag-resy-step'+(i===n?' ag-resy-step--active':i<n?' ag-resy-step--done':'');
-                }
-            }
-
-            function agRender(){
-                document.getElementById('ag-month').textContent=MESES[cM]+' '+cY;
-                var grid=document.getElementById('ag-grid');
-                grid.innerHTML='';
-                var first=new Date(cY,cM,1).getDay();
-                var off=first===0?6:first-1;
-                var days=new Date(cY,cM+1,0).getDate();
-                var ts=fmt(hoy);
-                for(var i=0;i<off;i++){var e=document.createElement('div');e.className='ag-day ag-emp';grid.appendChild(e);}
-                for(var d=1;d<=days;d++){
-                    var fecha=cY+'-'+String(cM+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
-                    var dw=new Date(cY,cM,d).getDay();
-                    var btn=document.createElement('button');
-                    btn.className='ag-day';btn.textContent=d;
-                    var past=fecha<ts,isH=fecha===ts,isSab=dw===6,isDom=dw===0;
-                    if(isDom){btn.classList.add('ag-dom');}
-                    else if(past){btn.classList.add('ag-past');}
-                    else{
-                        if(isSab)btn.classList.add('ag-sab');
-                        if(isH)btn.classList.add('ag-today');
-                        if(fecha===agSelDate)btn.classList.add('ag-sel');
-                        if(agOcupados[fecha])btn.classList.add('ag-dot');
-                        (function(f,day,isSabado){btn.onclick=function(){agSelDia(f,day,btn,isSabado);};})(fecha,d,isSab);
-                    }
-                    grid.appendChild(btn);
-                }
-            }
-
-            function agBuildSlots(gridId,slots,fecha,tipo){
-                var grid=document.getElementById(gridId);
-                grid.innerHTML='';
-                var oc=agOcupados[fecha]||{};
-                slots.forEach(function(hora){
-                    var key=hora+'_'+tipo;
-                    var btn=document.createElement('button');
-                    btn.className='ag-slot'+(oc[key]?' ag-slot-oc':'');
-                    btn.textContent=hora;
-                    btn.onclick=function(){agSelSlot(hora,tipo,btn);};
-                    grid.appendChild(btn);
-                });
-            }
-
-            window.agSelDia=function(fecha,d,btn,isSab){
-                agSelDate=fecha;agSelFranja=null;
-                document.querySelectorAll('.ag-day').forEach(function(b){b.classList.remove('ag-sel');});
-                btn.classList.add('ag-sel');
-                document.getElementById('ag-fecha-lbl').textContent=d+' de '+MESES[cM]+' '+cY;
-                ['ag-slots-lv','ag-slots-sabm','ag-slots-sabt'].forEach(function(id){document.getElementById(id).style.display='none';});
-                if(isSab){
-                    agBuildSlots('ag-slots-sabm-grid',SLOTS_SABM,fecha,'sabm');
-                    agBuildSlots('ag-slots-sabt-grid',SLOTS_SABT,fecha,'sabt');
-                    document.getElementById('ag-slots-sabm').style.display='block';
-                    document.getElementById('ag-slots-sabt').style.display='block';
-                }else{
-                    agBuildSlots('ag-slots-lv-grid',SLOTS_LV,fecha,'lv');
-                    document.getElementById('ag-slots-lv').style.display='block';
-                }
-                document.getElementById('ag-slots-wrap').style.display='block';
-                document.getElementById('ag-ok').style.display='none';
-                document.getElementById('ag-form-wrap').style.display='none';
-                agSetStep(2);
-                setTimeout(function(){document.getElementById('ag-slots-wrap').scrollIntoView({behavior:'smooth',block:'nearest'});},100);
-            };
-
-            window.agSelSlot=function(hora,tipo,btn){
-                agSelFranja=hora+' ('+(tipo==='lv'?'L-V':tipo==='sabm'?'Sáb mañana':'Sáb tarde')+')';
-                document.querySelectorAll('.ag-slot').forEach(function(b){b.classList.remove('ag-slot-sel');});
-                btn.classList.add('ag-slot-sel');
-                var p=agSelDate.split('-');
-                document.getElementById('ag-ok-txt').textContent=parseInt(p[2])+' de '+MESES[parseInt(p[1])-1]+' '+p[0]+' · '+hora+'h';
-                document.getElementById('ag-ok').style.display='flex';
-                document.getElementById('ag-slots-wrap').style.display='none';
-                document.getElementById('ag-form-wrap').style.display='block';
-                agSetStep(3);
-                setTimeout(function(){document.getElementById('ag-form-wrap').scrollIntoView({behavior:'smooth',block:'start'});},150);
-            };
-
-            window.agClear=function(){
-                agSelDate=null;agSelFranja=null;
-                document.getElementById('ag-ok').style.display='none';
-                document.getElementById('ag-slots-wrap').style.display='none';
-                document.getElementById('ag-form-wrap').style.display='none';
-                agSetStep(1);agRender();
-            };
-
-            document.getElementById('ag-prev').onclick=function(){
-                if(cY===hoy.getFullYear()&&cM===hoy.getMonth())return;
-                cM--;if(cM<0){cM=11;cY--;}agRender();
-            };
-            document.getElementById('ag-next').onclick=function(){
-                cM++;if(cM>11){cM=0;cY++;}agRender();
-            };
-
-            function agNotif(msg,tipo){
-                var el=document.getElementById('ag-notif');
-                el.textContent=msg;
-                el.style.cssText='display:block;padding:12px 16px;border-radius:10px;font-size:14px;'
-                    +'background:'+(tipo==='success'?'rgba(16,185,129,0.09)':'rgba(244,63,94,0.09)')+';'
-                    +'border:1px solid '+(tipo==='success'?'rgba(16,185,129,0.25)':'rgba(244,63,94,0.25)')+';'
-                    +'color:'+(tipo==='success'?'#6ee7b7':'#fca5a5')+';';
-            }
-
-            document.addEventListener('DOMContentLoaded',function(){
-                var form=document.getElementById('leadForm');
-                if(!form)return;
-                form.addEventListener('submit',async function(e){
-                    e.preventDefault();
-                    var hp=document.getElementById('hp-website');
-                    if(hp&&hp.value)return;
-                    var nombre=document.getElementById('nombre').value.trim();
-                    var email=document.getElementById('email').value.trim();
-                    var empresa=document.getElementById('empresa').value.trim();
-                    var industria=document.getElementById('industria').value;
-                    var desafio=document.getElementById('desafio').value.trim();
-                    var rgpd=document.getElementById('rgpd-check').checked;
-                    var mkt=document.getElementById('rgpd-marketing').checked;
-                    var btn=document.getElementById('ag-submit-btn');
-
-                    if(!nombre){agNotif('⚠️ Introduce tu nombre completo.','error');return;}
-                    if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){agNotif('⚠️ Introduce un email válido.','error');return;}
-                    if(!desafio){agNotif('⚠️ Describe tu principal desafío.','error');return;}
-                    if(!agSelDate){agNotif('⚠️ Selecciona un día en el calendario.','error');return;}
-                    if(!agSelFranja){agNotif('⚠️ Selecciona la hora.','error');return;}
-                    if(!rgpd){agNotif('⚠️ Acepta la Política de Privacidad.','error');return;}
-
-                    btn.disabled=true;btn.textContent='Enviando...';
-                    var ts=new Date().toISOString();
-
-                    try{
-                        if(db&&window._agFs){
-                            await window._agFs.addDoc(window._agFs.collection(db,'reservas'),{
-                                nombre,email,telefono:'—',negocio:empresa||'Sin especificar',
-                                industria:industria||'—',bloqueo:desafio,
-                                fecha:agSelDate,franja:agSelFranja,
-                                estado:'pendiente',origen:'web-agencia',
-                                createdAt:window._agFs.serverTimestamp()
-                            });
-                        }
-                        await fetch(APPS+'?'+new URLSearchParams({
-                            nombre,email,empresa:empresa||'Sin especificar',
-                            industria:industria||'Sin especificar',desafio,
-                            fecha_cita:agSelDate,franja_cita:agSelFranja,
-                            timestamp:ts,marketingConsent:mkt?'Sí':'No',
-                            consentimientoRGPD:'Sí — '+ts,
-                            cookiesConsent:localStorage.getItem('lucas_leo_cookies')||'no registrado',
-                            origin:'Agencia Lucas y Leo Digital — Calendario'
-                        }).toString(),{method:'GET',mode:'no-cors'});
-
-                        agNotif('✅ ¡Solicitud enviada! Te confirmamos la hora exacta en menos de 24h.','success');
-                        form.reset();agSelDate=null;agSelFranja=null;agRender();
-                        document.getElementById('ag-ok').style.display='none';
-                        document.getElementById('ag-slots-wrap').style.display='none';
-                        document.getElementById('ag-form-wrap').style.display='none';
-                        agSetStep(1);
-                    }catch(err){
-                        agNotif('✅ ¡Solicitud recibida! Os contactamos en menos de 24h.','success');
-                    }finally{
-                        btn.disabled=false;btn.textContent='Solicitar Mi Análisis Gratuito →';
-                    }
-                });
-            });
-
-            await agCargar();
-            agRender();
-        })();
+            const notif = document.createElement('div');
+            notif.id = 'form-notification';
+            notif.style.cssText = `
+                position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+                background: ${tipo === 'success' ? 'rgba(0,30,50,0.97)' : 'rgba(80,0,0,0.97)'};
+                border: 2px solid ${tipo === 'success' ? '#00d1ff' : '#cc3333'};
+                color: #ffffff; padding: 20px 32px; border-radius: 12px;
+                font-family: sans-serif; font-size: 15px; z-index: 999999;
+                max-width: 520px; text-align: center;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.8);
+                transition: opacity 0.5s ease;
+            `;
+            notif.textContent = mensaje;
+            document.body.appendChild(notif);
+            setTimeout(() => { notif.style.opacity = '0'; }, 4000);
+            setTimeout(() => { notif.remove(); }, 4600);
+        }
 
         // Intersection Observer for scroll animations
-
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
@@ -3549,7 +3352,216 @@
             obs.observe(trigger);
         });
 
-    </script>
+    
+        // ══ CALENDARIO AUDITORÍA ══════════════════════════════
+        (async function(){
+          var MESES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+          var SLOTS_LV   =['17:00','17:45','18:30','19:15','20:00'];
+          var SLOTS_SABM =['09:00','09:45','10:30','11:15','12:00','12:45','13:30'];
+          var SLOTS_SABT =['16:00','16:45','17:30','18:15','19:00','19:45'];
+          var APPS='https://script.google.com/macros/s/AKfycbxMowit4KbOOgZtB5MIYrv33zUaPcJJsQ7rW5-zQn0-FwPfkm3nt4VZDEtMF3eo8hsgqA/exec';
+          var db=null, fsLib=null;
+          var FB={apiKey:"AIzaSyAf5cYK5vRUtfZ2RikRSu5qjqUAJHMhLiM",authDomain:"reservify-lucasyleo.firebaseapp.com",projectId:"reservify-lucasyleo",storageBucket:"reservify-lucasyleo.firebasestorage.app",messagingSenderId:"464767738256",appId:"1:464767738256:web:c0692dc6ba98d162101315"};
+          try{
+            var {initializeApp}=await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js');
+            var {getFirestore,collection,addDoc,getDocs,doc,setDoc,serverTimestamp}=await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+            var fbApp=initializeApp(FB,'agencia-app');
+            db=getFirestore(fbApp);
+            fsLib={collection,addDoc,getDocs,doc,setDoc,serverTimestamp};
+          }catch(e){}
+
+          var hoy=new Date(),cY=hoy.getFullYear(),cM=hoy.getMonth();
+          var selDate=null,selSlot=null,ocupados={};
+          function fmt(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+
+          async function cargarOcupados(){
+            if(!db||!fsLib)return;
+            try{
+              var snap=await fsLib.getDocs(fsLib.collection(db,'calendario_publico'));
+              snap.forEach(function(d){var x=d.data();if(!ocupados[x.fecha])ocupados[x.fecha]={};ocupados[x.fecha][x.slot||x.franja]=true;});
+            }catch(e){}
+          }
+
+          function setStep(n){
+            [{id:'ag-st1',n:1},{id:'ag-st2',n:2},{id:'ag-st3',n:3}].forEach(function(s){
+              var el=document.getElementById(s.id);if(!el)return;
+              el.className='resy-step'+(s.n===n?' resy-step--active':s.n<n?' resy-step--done':'');
+            });
+          }
+
+          function renderCal(){
+            var monthEl=document.getElementById('ag-month');
+            if(monthEl)monthEl.textContent=MESES[cM]+' '+cY;
+            var grid=document.getElementById('ag-grid');if(!grid)return;
+            grid.innerHTML='';
+            var first=new Date(cY,cM,1).getDay(),off=first===0?6:first-1;
+            var days=new Date(cY,cM+1,0).getDate(),ts=fmt(hoy);
+            for(var i=0;i<off;i++){var e=document.createElement('div');e.className='resy-day rd-emp';grid.appendChild(e);}
+            for(var d=1;d<=days;d++){
+              var fecha=cY+'-'+String(cM+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+              var dw=new Date(cY,cM,d).getDay();
+              var btn=document.createElement('button');btn.className='resy-day';btn.textContent=d;
+              var past=fecha<ts,isHoy=fecha===ts,isSab=dw===6,isDom=dw===0;
+              if(isDom)btn.classList.add('rd-dom');
+              else if(past)btn.classList.add('rd-past');
+              else{
+                if(isSab)btn.classList.add('rd-sab');
+                if(isHoy)btn.classList.add('rd-today');
+                if(fecha===selDate)btn.classList.add('rd-sel');
+                if(ocupados[fecha])btn.classList.add('rd-dot');
+                (function(f,day,sb){btn.onclick=function(){selDia(f,day,btn,sb);};})(fecha,d,isSab);
+              }
+              grid.appendChild(btn);
+            }
+          }
+
+          function buildSlots(gridId,slots,fecha){
+            var g=document.getElementById(gridId);if(!g)return;
+            g.innerHTML='';
+            var oc=ocupados[fecha]||{};
+            slots.forEach(function(hora){
+              var b=document.createElement('button');
+              b.className='resy-slot'+(oc[hora]?' rs-ocupado':'');
+              b.textContent=hora;
+              b.onclick=function(){selSlotFn(hora,b);};
+              g.appendChild(b);
+            });
+          }
+
+          function selDia(fecha,d,btn,isSab){
+            selDate=fecha;selSlot=null;
+            document.querySelectorAll('#ag-grid .resy-day').forEach(function(b){b.classList.remove('rd-sel');});
+            btn.classList.add('rd-sel');
+            var lbl=document.getElementById('ag-fecha-lbl');if(lbl)lbl.textContent=d+' de '+MESES[cM]+' '+cY;
+            var lvEl=document.getElementById('ag-slots-lv');
+            var sabmEl=document.getElementById('ag-slots-sabm');
+            var sabtEl=document.getElementById('ag-slots-sabt');
+            if(isSab){
+              buildSlots('ag-slots-sabm-grid',SLOTS_SABM,fecha);
+              buildSlots('ag-slots-sabt-grid',SLOTS_SABT,fecha);
+              if(lvEl)lvEl.style.display='none';
+              if(sabmEl)sabmEl.style.display='block';
+              if(sabtEl)sabtEl.style.display='block';
+            }else{
+              buildSlots('ag-slots-lv-grid',SLOTS_LV,fecha);
+              if(lvEl)lvEl.style.display='block';
+              if(sabmEl)sabmEl.style.display='none';
+              if(sabtEl)sabtEl.style.display='none';
+            }
+            var sw=document.getElementById('ag-slots-wrap');if(sw)sw.style.display='block';
+            var ok=document.getElementById('ag-ok');if(ok)ok.style.display='none';
+            var fw=document.getElementById('ag-form-wrap');if(fw)fw.style.display='none';
+            setStep(2);
+            if(sw)setTimeout(function(){sw.scrollIntoView({behavior:'smooth',block:'nearest'});},100);
+          }
+
+          function selSlotFn(hora,btn){
+            selSlot=hora;
+            document.querySelectorAll('.resy-slot').forEach(function(b){b.classList.remove('rs-sel');});
+            btn.classList.add('rs-sel');
+            var p=selDate.split('-');
+            var txt=parseInt(p[2])+' de '+MESES[parseInt(p[1])-1]+' '+p[0]+' · '+hora+'h';
+            var el=document.getElementById('ag-ok-txt');if(el)el.textContent=txt;
+            var ok=document.getElementById('ag-ok');if(ok)ok.style.display='flex';
+            var sw=document.getElementById('ag-slots-wrap');if(sw)sw.style.display='none';
+            var fw=document.getElementById('ag-form-wrap');if(fw)fw.style.display='block';
+            setStep(3);
+            setTimeout(function(){var fw2=document.getElementById('ag-form-wrap');if(fw2)fw2.scrollIntoView({behavior:'smooth',block:'start'});},150);
+          }
+
+          window.ag_clearSel=function(){
+            selDate=null;selSlot=null;
+            var ok=document.getElementById('ag-ok');if(ok)ok.style.display='none';
+            var sw=document.getElementById('ag-slots-wrap');if(sw)sw.style.display='none';
+            var fw=document.getElementById('ag-form-wrap');if(fw)fw.style.display='none';
+            setStep(1);renderCal();
+          };
+
+          var prevBtn=document.getElementById('ag-prev');
+          var nextBtn=document.getElementById('ag-next');
+          if(prevBtn)prevBtn.onclick=function(){if(cY===hoy.getFullYear()&&cM===hoy.getMonth())return;cM--;if(cM<0){cM=11;cY--;}renderCal();};
+          if(nextBtn)nextBtn.onclick=function(){cM++;if(cM>11){cM=0;cY++;}renderCal();};
+
+          function showNotif(msg,tipo){
+            var existing=document.getElementById('form-notification');if(existing)existing.remove();
+            var notif=document.createElement('div');notif.id='form-notification';
+            notif.style.cssText='position:fixed;bottom:32px;left:50%;transform:translateX(-50%);'
+              +'background:'+(tipo==='ok'?'rgba(0,30,50,0.97)':'rgba(80,0,0,0.97)')+';'
+              +'border:2px solid '+(tipo==='ok'?'#00d1ff':'#cc3333')+';'
+              +'color:#fff;padding:20px 32px;border-radius:12px;font-size:15px;z-index:999999;'
+              +'max-width:520px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.8);';
+            notif.textContent=msg;
+            document.body.appendChild(notif);
+            setTimeout(function(){if(notif.parentNode)notif.parentNode.removeChild(notif);},5000);
+          }
+
+          var form=document.getElementById('ag-form');
+          if(form)form.addEventListener('submit',async function(e){
+            e.preventDefault();
+            var hp=document.getElementById('ag-hp');if(hp&&hp.value)return;
+            var nombre=(document.getElementById('ag-nombre')||{}).value||'';nombre=nombre.trim();
+            var email=(document.getElementById('ag-email')||{}).value||'';email=email.trim();
+            var empresa=(document.getElementById('ag-empresa')||{}).value||'';empresa=empresa.trim();
+            var industria=(document.getElementById('ag-industria')||{}).value||'';
+            var tel=(document.getElementById('ag-tel')||{}).value||'';tel=tel.trim();
+            var reto=(document.getElementById('ag-reto')||{}).value||'';reto=reto.trim();
+            var rgpd=(document.getElementById('ag-rgpd')||{}).checked;
+            var mkt=(document.getElementById('ag-mkt')||{}).checked?'Sí':'No';
+            var submitBtn=document.getElementById('ag-submit');
+
+            if(!nombre){showNotif('⚠️ Por favor, introduce tu nombre completo.','err');return;}
+            if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showNotif('⚠️ Por favor, introduce un email válido.','err');return;}
+            if(!reto){showNotif('⚠️ Por favor, describe tu principal desafío.','err');return;}
+            if(!selDate){showNotif('⚠️ Selecciona un día en el calendario.','err');return;}
+            if(!selSlot){showNotif('⚠️ Selecciona una hora.','err');return;}
+            if(!rgpd){showNotif('⚠️ Debes aceptar la Política de Privacidad.','err');return;}
+
+            if(submitBtn){submitBtn.disabled=true;submitBtn.textContent='Enviando...';}
+            var ts=new Date().toISOString();
+
+            try{
+              if(db&&fsLib){
+                await fsLib.addDoc(fsLib.collection(db,'reservas'),{
+                  nombre:nombre,email:email,telefono:tel,
+                  negocio:empresa||'Sin especificar',industria:industria||'—',
+                  desafio:reto,fecha:selDate,slot:selSlot,franja:selSlot,
+                  estado:'pendiente',origen:'web-agencia',
+                  createdAt:fsLib.serverTimestamp()
+                });
+                await fsLib.setDoc(fsLib.doc(db,'calendario_publico',selDate+'_'+selSlot.replace(':','')),{
+                  fecha:selDate,slot:selSlot,franja:selSlot,ocupado:true,
+                  updatedAt:fsLib.serverTimestamp()
+                });
+              }
+              await fetch(APPS+'?'+new URLSearchParams({
+                nombre:nombre,email:email,empresa:empresa||'Sin especificar',
+                industria:industria||'—',telefono:tel,desafio:reto,
+                fecha_cita:selDate,hora_cita:selSlot,
+                timestamp:ts,marketingConsent:mkt,
+                consentimientoRGPD:'Sí — '+ts,
+                cookiesConsent:localStorage.getItem('lucas_leo_cookies')||'no registrado',
+                origin:'Agencia Lucas y Leo Digital'
+              }).toString(),{method:'GET',mode:'no-cors'});
+
+              showNotif('✅ ¡Solicitud enviada! Te confirmamos el '+selDate+' a las '+selSlot+'h en menos de 24h.','ok');
+              form.reset();selDate=null;selSlot=null;renderCal();
+              var ok=document.getElementById('ag-ok');if(ok)ok.style.display='none';
+              var sw=document.getElementById('ag-slots-wrap');if(sw)sw.style.display='none';
+              var fw=document.getElementById('ag-form-wrap');if(fw)fw.style.display='none';
+              setStep(1);
+            }catch(err){
+              console.error(err);
+              showNotif('✅ ¡Solicitud recibida! Os contactamos en menos de 24h.','ok');
+            }finally{
+              if(submitBtn){submitBtn.disabled=false;submitBtn.textContent='Solicitar Mi Auditoría Gratuita';}
+            }
+          });
+
+          await cargarOcupados();
+          renderCal();
+        })();
+
+</script>
 
 
     <!-- WhatsApp Button -->
