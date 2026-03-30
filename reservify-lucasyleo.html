@@ -355,7 +355,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <button class="btn bp sm" style="margin-left:auto" onclick="openModal('res')"><svg width="13" height="13" stroke="currentColor"><use href="#i-plus"/></svg>Nueva cita</button>
         </div>
         <div class="card">
-          <div class="thead rc"><span>Cliente</span><span>Fecha</span><span>Franja</span><span>Origen</span><span>Estado</span><span style="text-align:right">Acciones</span></div>
+          <div class="thead rc"><span>Cliente</span><span>Fecha</span><span>Hora</span><span>Origen</span><span>Estado</span><span style="text-align:right">Acciones</span></div>
           <div id="reservas-list"><div class="loading"><div class="spinner"></div>Cargando citas...</div></div>
         </div>
       </div>
@@ -428,10 +428,32 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <div class="fg"><label class="fl">Tipo de negocio</label><input type="text" class="fi" id="r-negocio" placeholder="Ej: Restaurante, tienda online..."></div>
     <div class="fr2">
       <div class="fg"><label class="fl">Fecha</label><input type="date" class="fi" id="r-fecha"></div>
-      <div class="fg"><label class="fl">Franja horaria</label>
+      <div class="fg"><label class="fl">Hora exacta</label>
         <select class="fsi" id="r-franja">
-          <option value="Mañana">☀️ Mañana (9:00–14:00)</option>
-          <option value="Tarde">🌆 Tarde (15:00–19:30)</option>
+          <optgroup label="Lunes a Viernes">
+            <option value="17:00">17:00</option>
+            <option value="17:45">17:45</option>
+            <option value="18:30">18:30</option>
+            <option value="19:15">19:15</option>
+            <option value="20:00">20:00</option>
+          </optgroup>
+          <optgroup label="Sábado mañana">
+            <option value="09:00">09:00</option>
+            <option value="09:45">09:45</option>
+            <option value="10:30">10:30</option>
+            <option value="11:15">11:15</option>
+            <option value="12:00">12:00</option>
+            <option value="12:45">12:45</option>
+            <option value="13:30">13:30</option>
+          </optgroup>
+          <optgroup label="Sábado tarde">
+            <option value="16:00">16:00</option>
+            <option value="16:45">16:45</option>
+            <option value="17:30">17:30</option>
+            <option value="18:15">18:15</option>
+            <option value="19:00">19:00</option>
+            <option value="19:45">19:45</option>
+          </optgroup>
         </select>
       </div>
     </div>
@@ -490,7 +512,7 @@ onAuthStateChanged(auth, user => {
     const cap = name.charAt(0).toUpperCase() + name.slice(1);
     document.getElementById('sb-name').textContent = cap;
     document.getElementById('sb-av').textContent = cap.charAt(0).toUpperCase();
-    document.getElementById('hero-title').textContent = 'Bienvenido, ' + cap;
+    document.getElementById('hero-title').textContent = '¡Hola, ' + cap + '!';
     loadAllData();
     updateCrumb();
   } else {
@@ -547,14 +569,15 @@ function renderReservas(list) {
   el.innerHTML = list.map(r => {
     const subInfo = [r.telefono, r.email].filter(Boolean).join(' · ');
     const notasIcon = r.notas ? `<span style="margin-left:4px;color:var(--amber);font-size:10px;cursor:default" title="${r.notas.replace(/"/g,'&quot;')}">📝</span>` : '';
-    const origenBadge = r.origen === 'web'
-      ? '<span class="badge bg-t">Web</span>'
+    const origenBadge = (r.origen === 'web' || r.origen === 'web-agencia')
+      ? `<span class="badge bg-t">${r.origen === 'web-agencia' ? 'Agencia' : 'Landing'}</span>`
       : '<span class="badge bg-x">Panel</span>';
+    const horaDisplay = r.slot ? `<span style="font-family:'DM Mono',monospace;font-size:12px;font-weight:700;color:var(--gold)">${r.slot}h</span>` : franjaBadge(r.franja);
     return `
     <div class="trow rc">
       <div><div class="c cs">${r.nombre||'—'}${notasIcon}</div><div class="cx cm" style="font-size:11px;color:var(--t3)">${subInfo}</div></div>
       <div class="c cm">${r.fecha||'—'}</div>
-      <div>${franjaBadge(r.franja)}</div>
+      <div>${horaDisplay}</div>
       <div>${origenBadge}</div>
       <div>${estadoBadge(r.estado)}</div>
       <div class="ras">
