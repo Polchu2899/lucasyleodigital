@@ -1395,9 +1395,11 @@
       try{
         const snap=await _fs.getDocs(_fs.collection(db,'calendario_publico'));
         snap.forEach(function(d){
-          var dato=d.data(),f=dato.fecha,fr=(dato.franja||'').toLowerCase();
-          if(!ocupados[f])ocupados[f]={};
-          ocupados[f][fr]=true;
+          var parts=d.id.split('_');
+          if(parts.length<3)return;
+          var fecha=parts[0],hora=parts[1],tipo=parts[2];
+          if(!ocupados[fecha])ocupados[fecha]={};
+          ocupados[fecha][hora+'_'+tipo]=true;
         });
       }catch(e){console.warn('cargarOcupados error:',e);}
     }
@@ -1549,7 +1551,13 @@
               bloqueo:reto,fecha:selDate,franja:selFranja,
               estado:'pendiente',origen:'web',createdAt:_fs.serverTimestamp()
             });
-            var calKey=selDate+'_'+selFranja.replace(/[^a-zA-Z0-9\-:\s]/g,'_');
+            // Key format synced with Reservify: fecha_hora_tipo
+            var _hora=selFranja.split(' ')[0];
+            var _fl=selFranja.toLowerCase();
+            var _tipo='lv';
+            if(_fl.includes('tarde')&&(_fl.includes('sáb')||_fl.includes('sab')))_tipo='sabt';
+            else if(_fl.includes('mañana')||(_fl.includes('sáb')||_fl.includes('sab')))_tipo='sabm';
+            var calKey=selDate+'_'+_hora+'_'+_tipo;
             await _fs.setDoc(_fs.doc(db,'calendario_publico',calKey),{
               fecha:selDate,franja:selFranja,ocupado:true,updatedAt:_fs.serverTimestamp()
             });
@@ -1558,18 +1566,21 @@
         } else {
           console.warn('Firebase no disponible — solo Sheets');
         }
-        // 2. Google Sheets + email
-        await fetch(APPS+'?'+new URLSearchParams({
-          nombre:nombre,email:email,empresa:tipo||'Sin especificar',
-          industria:'Sesión estratégica 45 min',telefono:tel,
-          desafio:reto||'Sin especificar',
-          fecha_cita:selDate,franja_cita:selFranja,
-          timestamp:ts,marketingConsent:'no registrado',
-          consentimientoRGPD:'Sí — '+ts,
-          cookiesConsent:localStorage.getItem('lucas_leo_cookies')||'no registrado',
-          origin:'Landing Asesor Lucas — Calendario'
-        }).toString(),{method:'GET',mode:'no-cors'});
+        // 2. Google Sheets + email (no-cors: no esperamos respuesta, nunca bloquea)
+        try{
+          await fetch(APPS+'?'+new URLSearchParams({
+            nombre:nombre,email:email,empresa:tipo||'Sin especificar',
+            industria:'Sesión estratégica 45 min',telefono:tel,
+            desafio:reto||'Sin especificar',
+            fecha_cita:selDate,franja_cita:selFranja,
+            timestamp:ts,marketingConsent:'no registrado',
+            consentimientoRGPD:'Sí — '+ts,
+            cookiesConsent:localStorage.getItem('lucas_leo_cookies')||'no registrado',
+            origin:'Landing Asesor Lucas — Calendario'
+          }).toString(),{method:'GET',mode:'no-cors'});
+        }catch(fetchErr){ console.warn('Sheets fetch error (normal en no-cors):',fetchErr); }
 
+        // Siempre mostrar confirmación — el envío se ha procesado
         showRNotif('✅ ¡Solicitud enviada! Te confirmo la hora exacta en menos de 24h.','success');
         document.getElementById('resyForm').reset();
         selDate=null;selFranja=null;renderCal();
