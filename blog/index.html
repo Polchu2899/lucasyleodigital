@@ -176,6 +176,8 @@ a{color:inherit;text-decoration:none;}
 
 <!-- Firebase + Blog Logic -->
 <script type="module">
+(async function(){
+try{
 const CATS = {
   'estrategia-digital':'Estrategia Digital','seo-local':'SEO Local',
   'redes-sociales':'Redes Sociales','publicidad-online':'Publicidad Online',
@@ -187,27 +189,43 @@ let allPosts = [];
 let currentFilter = '';
 
 // Firebase init
-const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js');
-const fs = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
-const fbApp = initializeApp({
-  apiKey: "AIzaSyAf5cYK5vRUtfZ2RikRSu5qjqUAJHMhLiM",
-  authDomain: "reservify-lucasyleo.firebaseapp.com",
-  projectId: "reservify-lucasyleo",
-  storageBucket: "reservify-lucasyleo.firebasestorage.app",
-  messagingSenderId: "464767738256",
-  appId: "1:464767738256:web:c0692dc6ba98d162101315"
-}, 'blog-page');
-const db = fs.getFirestore(fbApp);
+let initializeApp, fs, fbApp, db;
+try {
+  const appMod = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js');
+  initializeApp = appMod.initializeApp;
+  fs = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+} catch(importErr) {
+  console.error('Firebase import failed:', importErr);
+  document.getElementById('blog-grid').innerHTML = '<div class="blog-empty"><p>Error al conectar con el servidor.</p></div>';
+  return;
+}
+
+try {
+  fbApp = initializeApp({
+    apiKey: "AIzaSyAf5cYK5vRUtfZ2RikRSu5qjqUAJHMhLiM",
+    authDomain: "reservify-lucasyleo.firebaseapp.com",
+    projectId: "reservify-lucasyleo",
+    storageBucket: "reservify-lucasyleo.firebasestorage.app",
+    messagingSenderId: "464767738256",
+    appId: "1:464767738256:web:c0692dc6ba98d162101315"
+  }, 'blog-page');
+  db = fs.getFirestore(fbApp);
+} catch(initErr) {
+  console.error('Firebase init failed:', initErr);
+  document.getElementById('blog-grid').innerHTML = '<div class="blog-empty"><p>Error al inicializar la base de datos.</p></div>';
+  return;
+}
 
 // Load posts
 async function loadPosts() {
   try {
-    const snap = await fs.getDocs(fs.query(fs.collection(db, 'blog_posts'), fs.where('status', '==', 'published')));
+    const q = fs.query(fs.collection(db, 'blog_posts'), fs.where('status', '==', 'published'));
+    const snap = await fs.getDocs(q);
     allPosts = [];
-    snap.forEach(d => allPosts.push({ id: d.id, ...d.data() }));
-    allPosts.sort((a, b) => {
-      const da = a.publishedAt ? (a.publishedAt.toDate ? a.publishedAt.toDate() : new Date(a.publishedAt)) : new Date(0);
-      const db2 = b.publishedAt ? (b.publishedAt.toDate ? b.publishedAt.toDate() : new Date(b.publishedAt)) : new Date(0);
+    snap.forEach(function(d){ allPosts.push({ id: d.id, ...d.data() }); });
+    allPosts.sort(function(a, b){
+      var da = a.publishedAt ? (a.publishedAt.toDate ? a.publishedAt.toDate() : new Date(a.publishedAt)) : new Date(0);
+      var db2 = b.publishedAt ? (b.publishedAt.toDate ? b.publishedAt.toDate() : new Date(b.publishedAt)) : new Date(0);
       return db2 - da;
     });
     renderFilter();
@@ -221,16 +239,18 @@ async function loadPosts() {
 
 // Render category filter
 function renderFilter() {
-  const cats = [...new Set(allPosts.map(p => p.category).filter(Boolean))];
+  var cats = [];
+  var seen = {};
+  allPosts.forEach(function(p){ if(p.category && !seen[p.category]){ seen[p.category]=1; cats.push(p.category); }});
   if (cats.length < 2) { document.getElementById('blog-filter').innerHTML = ''; return; }
   document.getElementById('blog-filter').innerHTML =
     '<button class="blog-filter-btn active" onclick="window.blogFilterCat(\'\')">Todos</button>' +
-    cats.map(c => `<button class="blog-filter-btn" onclick="window.blogFilterCat('${c}')">${CATS[c]||c}</button>`).join('');
+    cats.map(function(c){ return '<button class="blog-filter-btn" onclick="window.blogFilterCat(\''+c+'\')">'+(CATS[c]||c)+'</button>'; }).join('');
 }
 
-window.blogFilterCat = (cat) => {
+window.blogFilterCat = function(cat) {
   currentFilter = cat;
-  document.querySelectorAll('.blog-filter-btn').forEach(b => {
+  document.querySelectorAll('.blog-filter-btn').forEach(function(b){
     b.classList.toggle('active', cat === '' ? b.textContent === 'Todos' : b.textContent === (CATS[cat]||cat));
   });
   renderGrid();
@@ -238,59 +258,64 @@ window.blogFilterCat = (cat) => {
 
 // Render grid
 function renderGrid() {
-  const filtered = currentFilter ? allPosts.filter(p => p.category === currentFilter) : allPosts;
-  const el = document.getElementById('blog-grid');
+  var filtered = currentFilter ? allPosts.filter(function(p){ return p.category === currentFilter; }) : allPosts;
+  var el = document.getElementById('blog-grid');
 
   if (!filtered.length) {
     el.innerHTML = '<div class="blog-empty" style="grid-column:1/-1"><svg width="48" height="48" stroke="rgba(255,255,255,0.15)" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><p style="margin-top:12px">No hay artículos publicados todavía.</p></div>';
     return;
   }
 
-  el.innerHTML = filtered.map(p => {
-    const date = p.publishedAt ? (p.publishedAt.toDate ? p.publishedAt.toDate() : new Date(p.publishedAt)) : new Date();
-    const dateStr = date.toLocaleDateString('es-ES', { day:'numeric', month:'long', year:'numeric' });
-    return `<div class="blog-card" onclick="window.blogShowPost('${p.slug}')">
-      ${p.coverImage ? `<img src="${p.coverImage}" alt="${(p.title||'').replace(/"/g,'&quot;')}" loading="lazy" decoding="async" width="400" height="200">` : '<div class="bc-noimg"><svg width="48" height="48" stroke="rgba(200,117,51,0.3)" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>'}
-      <div class="bc-body">
-        <div class="bc-cat">${CATS[p.category]||p.category||''}</div>
-        <div class="bc-title">${p.title||''}</div>
-        <div class="bc-excerpt">${p.excerpt||''}</div>
-        <div class="bc-meta">
-          <span>${dateStr}</span>
-          <span>${p.readTime||1} min de lectura</span>
-        </div>
-      </div>
-    </div>`;
+  el.innerHTML = filtered.map(function(p){
+    var date = p.publishedAt ? (p.publishedAt.toDate ? p.publishedAt.toDate() : new Date(p.publishedAt)) : new Date();
+    var dateStr = date.toLocaleDateString('es-ES', { day:'numeric', month:'long', year:'numeric' });
+    var safeTitle = (p.title||'').replace(/"/g,'&quot;');
+    return '<div class="blog-card" onclick="window.blogShowPost(\''+p.slug+'\')">' +
+      (p.coverImage ? '<img src="'+p.coverImage+'" alt="'+safeTitle+'" loading="lazy" decoding="async" width="400" height="200">' : '<div class="bc-noimg"><svg width="48" height="48" stroke="rgba(200,117,51,0.3)" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>') +
+      '<div class="bc-body">' +
+        '<div class="bc-cat">'+(CATS[p.category]||p.category||'')+'</div>' +
+        '<div class="bc-title">'+(p.title||'')+'</div>' +
+        '<div class="bc-excerpt">'+(p.excerpt||'')+'</div>' +
+        '<div class="bc-meta">' +
+          '<span>'+dateStr+'</span>' +
+          '<span>'+(p.readTime||1)+' min de lectura</span>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
   }).join('');
 }
 
 // Show single post
-window.blogShowPost = (slug) => {
-  const post = allPosts.find(p => p.slug === slug);
+window.blogShowPost = function(slug) {
+  var post = allPosts.find(function(p){ return p.slug === slug; });
   if (!post) return;
   window.location.hash = slug;
 
-  const date = post.publishedAt ? (post.publishedAt.toDate ? post.publishedAt.toDate() : new Date(post.publishedAt)) : new Date();
-  const dateStr = date.toLocaleDateString('es-ES', { day:'numeric', month:'long', year:'numeric' });
+  var date = post.publishedAt ? (post.publishedAt.toDate ? post.publishedAt.toDate() : new Date(post.publishedAt)) : new Date();
+  var dateStr = date.toLocaleDateString('es-ES', { day:'numeric', month:'long', year:'numeric' });
 
-  // Update page meta
   document.title = (post.seoTitle || post.title) + ' — Lucas y Leo Digital';
-  const metaDesc = document.querySelector('meta[name="description"]');
+  var metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) metaDesc.content = post.seoDescription || post.excerpt || '';
 
-  const el = document.getElementById('blog-single-content');
-  el.innerHTML = `
-    <div class="bs-cat">${CATS[post.category]||post.category||''}</div>
-    <h1 class="bs-title">${post.title||''}</h1>
-    <div class="bs-meta">
-      <span>Por ${post.author||'Lucas'}</span>
-      <span>${dateStr}</span>
-      <span>${post.readTime||1} min de lectura</span>
-    </div>
-    ${post.tags && post.tags.length ? '<div class="bs-tags">' + post.tags.map(t => `<span class="bs-tag">${t}</span>`).join('') + '</div>' : ''}
-    ${post.coverImage ? `<img class="bs-cover" src="${post.coverImage}" alt="${(post.title||'').replace(/"/g,'&quot;')}" width="1080" height="450">` : ''}
-    <div class="bs-content">${post.content||''}</div>
-  `;
+  var el = document.getElementById('blog-single-content');
+  var safeTitle = (post.title||'').replace(/"/g,'&quot;');
+  var tagsHtml = '';
+  if (post.tags && post.tags.length) {
+    tagsHtml = '<div class="bs-tags">' + post.tags.map(function(t){ return '<span class="bs-tag">'+t+'</span>'; }).join('') + '</div>';
+  }
+
+  el.innerHTML =
+    '<div class="bs-cat">'+(CATS[post.category]||post.category||'')+'</div>' +
+    '<h1 class="bs-title">'+(post.title||'')+'</h1>' +
+    '<div class="bs-meta">' +
+      '<span>Por '+(post.author||'Lucas')+'</span>' +
+      '<span>'+dateStr+'</span>' +
+      '<span>'+(post.readTime||1)+' min de lectura</span>' +
+    '</div>' +
+    tagsHtml +
+    (post.coverImage ? '<img class="bs-cover" src="'+post.coverImage+'" alt="'+safeTitle+'" width="1080" height="450">' : '') +
+    '<div class="bs-content">'+(post.content||'')+'</div>';
 
   document.getElementById('blog-list').classList.add('hidden');
   document.getElementById('blog-single').classList.add('active');
@@ -298,7 +323,7 @@ window.blogShowPost = (slug) => {
 };
 
 // Back to list
-window.blogShowList = () => {
+window.blogShowList = function() {
   window.location.hash = '';
   document.title = 'Blog — Lucas y Leo Digital | Estrategia digital para pymes';
   document.getElementById('blog-single').classList.remove('active');
@@ -307,16 +332,16 @@ window.blogShowList = () => {
 
 // Check hash on load
 function checkHash() {
-  const hash = window.location.hash.replace('#', '');
-  if (hash && allPosts.find(p => p.slug === hash)) {
+  var hash = window.location.hash.replace('#', '');
+  if (hash && allPosts.find(function(p){ return p.slug === hash; })) {
     window.blogShowPost(hash);
   }
 }
 
-window.addEventListener('hashchange', () => {
-  const hash = window.location.hash.replace('#', '');
+window.addEventListener('hashchange', function() {
+  var hash = window.location.hash.replace('#', '');
   if (hash) {
-    const post = allPosts.find(p => p.slug === hash);
+    var post = allPosts.find(function(p){ return p.slug === hash; });
     if (post) window.blogShowPost(hash);
   } else {
     window.blogShowList();
@@ -325,6 +350,13 @@ window.addEventListener('hashchange', () => {
 
 // Init
 await loadPosts();
+
+}catch(fatalErr){
+  console.error('Blog fatal error:', fatalErr);
+  var grid = document.getElementById('blog-grid');
+  if(grid) grid.innerHTML = '<div class="blog-empty"><p>Error al cargar el blog. Recarga la página.</p></div>';
+}
+})();
 </script>
 
 <!-- Google Analytics (deferred) -->
