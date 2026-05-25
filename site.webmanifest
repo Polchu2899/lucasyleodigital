@@ -1,0 +1,21 @@
+{
+  "name": "Lucas y Leo Digital",
+  "short_name": "Lucas y Leo",
+  "description": "Agencia de Marketing Digital con IA y Automatización en Barcelona",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#C87533",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/qMpJW9rj/7-removebg-preview.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.ibb.co/qMpJW9rj/7-removebg-preview.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

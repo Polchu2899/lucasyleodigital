@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Lucas y Leo Digital | Estrategia digital para pymes</title>
+<meta name="description" content="Artículos prácticos sobre estrategia digital, SEO local, automatización e IA para pequeños negocios. Consejos reales de un consultor de marketing digital en Barcelona.">
+<meta name="author" content="Lucas — Lucas y Leo Digital">
+<link rel="canonical" href="https://www.lucasyleodigital.com/blog/">
+<link rel="alternate" hreflang="es" href="https://www.lucasyleodigital.com/blog/">
+<link rel="alternate" hreflang="x-default" href="https://www.lucasyleodigital.com/blog/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog — Lucas y Leo Digital">
+<meta property="og:description" content="Artículos sobre estrategia digital, SEO local y automatización para pymes.">
+<meta property="og:url" content="https://www.lucasyleodigital.com/blog/">
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#050505">
+<link rel="icon" type="image/png" href="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Schema.org Blog -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Blog","name":"Blog de Lucas y Leo Digital","description":"Artículos sobre estrategia digital, SEO local y automatización para pymes","url":"https://www.lucasyleodigital.com/blog/","author":{"@type":"Person","name":"Lucas","url":"https://www.lucasyleodigital.com/"},"publisher":{"@type":"Organization","name":"Lucas y Leo Digital","url":"https://www.lucasyleodigital.com/"}}
+</script>
+
+<style>
+:root{
+  --bg:#050505;--soft-gray:#a0a0a0;--electric-blue:#00d1ff;
+  --copper-gold:#C87533;--warm-bronze:#d4893f;
+  --font-display:'Space Grotesk',sans-serif;--font-body:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:#F0F0F0;font-family:var(--font-body);line-height:1.6;min-height:100vh;}
+a{color:inherit;text-decoration:none;}
+.container{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+/* Header */
+.blog-header{padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;background:rgba(5,5,5,0.92);backdrop-filter:blur(12px);z-index:100;}
+.blog-header .container{display:flex;align-items:center;justify-content:space-between;}
+.blog-header-logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:16px;}
+.blog-header-logo img{width:32px;height:32px;}
+.blog-header-logo span{background:linear-gradient(90deg,var(--copper-gold),var(--warm-bronze));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.blog-header-nav{display:flex;gap:20px;align-items:center;}
+.blog-header-nav a{font-size:13px;color:var(--soft-gray);transition:color .2s;}
+.blog-header-nav a:hover{color:var(--electric-blue);}
+.blog-header-cta{padding:8px 18px;background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));color:#fff;border-radius:8px;font-size:12px;font-weight:600;transition:all .2s;}
+.blog-header-cta:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(200,117,51,0.35);}
+
+/* Blog list */
+.blog-hero{padding:70px 0 44px;text-align:center;}
+.blog-hero h1{font-family:var(--font-display);font-size:clamp(32px,6vw,52px);font-weight:800;margin-bottom:14px;letter-spacing:-.03em;line-height:1.1;}
+.blog-hero h1 span{background:linear-gradient(90deg,var(--copper-gold),#e09a50,var(--electric-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.blog-hero p{color:var(--soft-gray);font-size:16px;max-width:550px;margin:0 auto;line-height:1.7;}
+
+/* Filter */
+.blog-filter{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:40px;}
+.blog-filter-btn{padding:8px 18px;border-radius:30px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:var(--soft-gray);font-size:12.5px;font-weight:500;cursor:pointer;transition:all .18s;font-family:var(--font-body);}
+.blog-filter-btn:hover{border-color:rgba(200,117,51,0.3);color:#F0F0F0;}
+.blog-filter-btn.active{background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));border-color:transparent;color:#fff;font-weight:600;}
+
+/* Grid */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-bottom:60px;}
+.blog-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;transition:all .25s;cursor:pointer;}
+.blog-card:hover{border-color:rgba(0,209,255,0.3);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.3);}
+.blog-card img{width:100%;height:200px;object-fit:cover;display:block;}
+.blog-card .bc-noimg{height:200px;background:linear-gradient(135deg,rgba(200,117,51,0.08),rgba(0,209,255,0.05));display:flex;align-items:center;justify-content:center;}
+.blog-card .bc-body{padding:22px;}
+.blog-card .bc-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--copper-gold);margin-bottom:10px;display:inline-block;padding:4px 10px;border-radius:20px;background:rgba(200,117,51,0.08);border:1px solid rgba(200,117,51,0.12);}
+.blog-card .bc-title{font-size:clamp(18px,2.5vw,22px);font-weight:800;line-height:1.25;margin-bottom:10px;font-family:var(--font-display);letter-spacing:-.02em;transition:color .25s;}
+.blog-card:hover .bc-title{background:linear-gradient(90deg,var(--copper-gold),var(--electric-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.blog-card .bc-excerpt{font-size:14px;color:var(--soft-gray);line-height:1.65;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.blog-card .bc-meta{display:flex;align-items:center;gap:14px;font-size:11.5px;color:rgba(255,255,255,0.3);}
+
+/* Single post */
+.blog-single{display:none;padding:40px 0 60px;}
+.blog-single.active{display:block;}
+.blog-list{display:block;}
+.blog-list.hidden{display:none;}
+.bs-back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--soft-gray);margin-bottom:28px;transition:color .2s;cursor:pointer;}
+.bs-back:hover{color:var(--electric-blue);}
+.bs-cat{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--copper-gold);margin-bottom:12px;display:inline-block;padding:5px 14px;border-radius:20px;background:rgba(200,117,51,0.08);border:1px solid rgba(200,117,51,0.12);}
+.bs-title{font-family:var(--font-display);font-size:clamp(28px,5vw,46px);font-weight:800;line-height:1.15;margin-bottom:18px;letter-spacing:-.03em;}
+.bs-meta{display:flex;align-items:center;gap:16px;font-size:12.5px;color:var(--soft-gray);margin-bottom:28px;flex-wrap:wrap;}
+.bs-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;}
+.bs-tag{font-size:10.5px;padding:3px 10px;border-radius:20px;background:rgba(200,117,51,0.08);color:var(--copper-gold);border:1px solid rgba(200,117,51,0.15);}
+.bs-cover{width:100%;max-height:450px;object-fit:cover;border-radius:16px;margin-bottom:32px;display:block;}
+.bs-content{max-width:720px;margin:0 auto;font-size:16px;line-height:1.8;color:rgba(240,240,240,0.88);}
+.bs-content h2{font-family:var(--font-display);font-size:24px;font-weight:700;margin:36px 0 14px;color:#F0F0F0;}
+.bs-content h3{font-family:var(--font-display);font-size:19px;font-weight:600;margin:28px 0 10px;color:#F0F0F0;}
+.bs-content p{margin-bottom:16px;}
+.bs-content ul,.bs-content ol{margin:12px 0 18px 24px;}
+.bs-content li{margin-bottom:6px;}
+.bs-content blockquote{border-left:3px solid var(--copper-gold);padding:12px 20px;margin:20px 0;color:var(--soft-gray);font-style:italic;background:rgba(200,117,51,0.04);border-radius:0 8px 8px 0;}
+.bs-content img{max-width:100%;border-radius:12px;margin:20px 0;}
+.bs-content a{color:var(--electric-blue);text-decoration:underline;text-underline-offset:3px;}
+.bs-content strong{color:#F0F0F0;font-weight:600;}
+
+/* Footer */
+.blog-footer{padding:40px 0;border-top:1px solid rgba(255,255,255,0.06);text-align:center;}
+.blog-footer p{font-size:12px;color:rgba(255,255,255,0.25);}
+.blog-footer a{color:var(--copper-gold);text-decoration:none;}
+
+/* Loading */
+.blog-loading{text-align:center;padding:60px;color:rgba(255,255,255,0.3);font-size:14px;}
+@keyframes blogPulse{0%,100%{opacity:.3}50%{opacity:1}}
+.blog-loading::after{content:'';display:block;width:32px;height:32px;border:2px solid rgba(200,117,51,0.3);border-top-color:var(--copper-gold);border-radius:50%;margin:16px auto 0;animation:blogPulse 1s linear infinite;}
+
+/* Empty */
+.blog-empty{text-align:center;padding:80px 20px;color:rgba(255,255,255,0.3);}
+.blog-empty svg{margin-bottom:16px;}
+
+@media(max-width:768px){
+  .blog-grid{grid-template-columns:1fr!important;}
+  .blog-header-nav a:not(.blog-header-cta){display:none;}
+  .bs-cover{max-height:280px;border-radius:12px;}
+  .bs-content{font-size:15px;}
+  .blog-hero h1{font-size:28px;}
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="blog-header">
+  <div class="container">
+    <a href="/" class="blog-header-logo">
+      <img src="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a" alt="Lucas y Leo Digital" width="32" height="32">
+      Lucas y Leo <span>Digital</span>
+    </a>
+    <nav class="blog-header-nav">
+      <a href="/">Inicio</a>
+      <a href="/agencia/">Agencia</a>
+      <a href="/blog/">Blog</a>
+      <a href="/#sesion" class="blog-header-cta">Sesión gratuita</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Blog List View -->
+<div class="blog-list" id="blog-list">
+  <div class="blog-hero">
+    <div class="container">
+      <h1>Nuestro <span>blog</span></h1>
+      <p>Artículos prácticos sobre estrategia digital, SEO, automatización e IA para pequeños negocios que quieren crecer online.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="blog-filter" id="blog-filter"></div>
+    <div class="blog-grid" id="blog-grid">
+      <div class="blog-loading">Cargando artículos...</div>
+    </div>
+  </div>
+</div>
+
+<!-- Single Post View -->
+<div class="blog-single" id="blog-single">
+  <div class="container">
+    <a class="bs-back" onclick="blogShowList()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Volver al blog
+    </a>
+    <div id="blog-single-content"></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="blog-footer">
+  <div class="container">
+    <p>&copy; 2026 <a href="/">Lucas y Leo Digital</a> &middot; Barcelona</p>
+  </div>
+</footer>
+
+<!-- Firebase + Blog Logic -->
+<script type="module">
+const CATS = {
+  'estrategia-digital':'Estrategia Digital','seo-local':'SEO Local',
+  'redes-sociales':'Redes Sociales','publicidad-online':'Publicidad Online',
+  'automatizacion-ia':'Automatización e IA','casos-exito':'Casos de Éxito',
+  'consejos-pymes':'Consejos para Pymes'
+};
+
+let allPosts = [];
+let currentFilter = '';
+
+// Firebase init
+const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js');
+const fs = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+const fbApp = initializeApp({
+  apiKey: "AIzaSyAf5cYK5vRUtfZ2RikRSu5qjqUAJHMhLiM",
+  authDomain: "reservify-lucasyleo.firebaseapp.com",
+  projectId: "reservify-lucasyleo",
+  storageBucket: "reservify-lucasyleo.firebasestorage.app",
+  messagingSenderId: "464767738256",
+  appId: "1:464767738256:web:c0692dc6ba98d162101315"
+}, 'blog-page');
+const db = fs.getFirestore(fbApp);
+
+// Load posts
+async function loadPosts() {
+  try {
+    const snap = await fs.getDocs(fs.query(fs.collection(db, 'blog_posts'), fs.where('status', '==', 'published')));
+    allPosts = [];
+    snap.forEach(d => allPosts.push({ id: d.id, ...d.data() }));
+    allPosts.sort((a, b) => {
+      const da = a.publishedAt ? (a.publishedAt.toDate ? a.publishedAt.toDate() : new Date(a.publishedAt)) : new Date(0);
+      const db2 = b.publishedAt ? (b.publishedAt.toDate ? b.publishedAt.toDate() : new Date(b.publishedAt)) : new Date(0);
+      return db2 - da;
+    });
+    renderFilter();
+    renderGrid();
+    checkHash();
+  } catch(e) {
+    console.error('Blog load error:', e);
+    document.getElementById('blog-grid').innerHTML = '<div class="blog-empty"><svg width="48" height="48" stroke="rgba(255,255,255,0.15)" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><p>No se pudieron cargar los artículos.</p></div>';
+  }
+}
+
+// Render category filter
+function renderFilter() {
+  const cats = [...new Set(allPosts.map(p => p.category).filter(Boolean))];
+  if (cats.length < 2) { document.getElementById('blog-filter').innerHTML = ''; return; }
+  document.getElementById('blog-filter').innerHTML =
+    '<button class="blog-filter-btn active" onclick="window.blogFilterCat(\'\')">Todos</button>' +
+    cats.map(c => `<button class="blog-filter-btn" onclick="window.blogFilterCat('${c}')">${CATS[c]||c}</button>`).join('');
+}
+
+window.blogFilterCat = (cat) => {
+  currentFilter = cat;
+  document.querySelectorAll('.blog-filter-btn').forEach(b => {
+    b.classList.toggle('active', cat === '' ? b.textContent === 'Todos' : b.textContent === (CATS[cat]||cat));
+  });
+  renderGrid();
+};
+
+// Render grid
+function renderGrid() {
+  const filtered = currentFilter ? allPosts.filter(p => p.category === currentFilter) : allPosts;
+  const el = document.getElementById('blog-grid');
+
+  if (!filtered.length) {
+    el.innerHTML = '<div class="blog-empty" style="grid-column:1/-1"><svg width="48" height="48" stroke="rgba(255,255,255,0.15)" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><p style="margin-top:12px">No hay artículos publicados todavía.</p></div>';
+    return;
+  }
+
+  el.innerHTML = filtered.map(p => {
+    const date = p.publishedAt ? (p.publishedAt.toDate ? p.publishedAt.toDate() : new Date(p.publishedAt)) : new Date();
+    const dateStr = date.toLocaleDateString('es-ES', { day:'numeric', month:'long', year:'numeric' });
+    return `<div class="blog-card" onclick="window.blogShowPost('${p.slug}')">
+      ${p.coverImage ? `<img src="${p.coverImage}" alt="${(p.title||'').replace(/"/g,'&quot;')}" loading="lazy" decoding="async" width="400" height="200">` : '<div class="bc-noimg"><svg width="48" height="48" stroke="rgba(200,117,51,0.3)" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>'}
+      <div class="bc-body">
+        <div class="bc-cat">${CATS[p.category]||p.category||''}</div>
+        <div class="bc-title">${p.title||''}</div>
+        <div class="bc-excerpt">${p.excerpt||''}</div>
+        <div class="bc-meta">
+          <span>${dateStr}</span>
+          <span>${p.readTime||1} min de lectura</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Show single post
+window.blogShowPost = (slug) => {
+  const post = allPosts.find(p => p.slug === slug);
+  if (!post) return;
+  window.location.hash = slug;
+
+  const date = post.publishedAt ? (post.publishedAt.toDate ? post.publishedAt.toDate() : new Date(post.publishedAt)) : new Date();
+  const dateStr = date.toLocaleDateString('es-ES', { day:'numeric', month:'long', year:'numeric' });
+
+  // Update page meta
+  document.title = (post.seoTitle || post.title) + ' — Lucas y Leo Digital';
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.content = post.seoDescription || post.excerpt || '';
+
+  const el = document.getElementById('blog-single-content');
+  el.innerHTML = `
+    <div class="bs-cat">${CATS[post.category]||post.category||''}</div>
+    <h1 class="bs-title">${post.title||''}</h1>
+    <div class="bs-meta">
+      <span>Por ${post.author||'Lucas'}</span>
+      <span>${dateStr}</span>
+      <span>${post.readTime||1} min de lectura</span>
+    </div>
+    ${post.tags && post.tags.length ? '<div class="bs-tags">' + post.tags.map(t => `<span class="bs-tag">${t}</span>`).join('') + '</div>' : ''}
+    ${post.coverImage ? `<img class="bs-cover" src="${post.coverImage}" alt="${(post.title||'').replace(/"/g,'&quot;')}" width="1080" height="450">` : ''}
+    <div class="bs-content">${post.content||''}</div>
+  `;
+
+  document.getElementById('blog-list').classList.add('hidden');
+  document.getElementById('blog-single').classList.add('active');
+  window.scrollTo(0, 0);
+};
+
+// Back to list
+window.blogShowList = () => {
+  window.location.hash = '';
+  document.title = 'Blog — Lucas y Leo Digital | Estrategia digital para pymes';
+  document.getElementById('blog-single').classList.remove('active');
+  document.getElementById('blog-list').classList.remove('hidden');
+};
+
+// Check hash on load
+function checkHash() {
+  const hash = window.location.hash.replace('#', '');
+  if (hash && allPosts.find(p => p.slug === hash)) {
+    window.blogShowPost(hash);
+  }
+}
+
+window.addEventListener('hashchange', () => {
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    const post = allPosts.find(p => p.slug === hash);
+    if (post) window.blogShowPost(hash);
+  } else {
+    window.blogShowList();
+  }
+});
+
+// Init
+await loadPosts();
+</script>
+
+<!-- Google Analytics (deferred) -->
+<script>
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var s = document.createElement('script');
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-V5FVMTW270';
+    s.async = true;
+    document.head.appendChild(s);
+    s.onload = function() {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-V5FVMTW270');
+    };
+  }, 2000);
+});
+</script>
+</body>
+</html>
