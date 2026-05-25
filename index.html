@@ -145,6 +145,7 @@
 
         /* ── HEADER ── */
         header { padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.06); position: relative; z-index: 10; }
+        header .container{display:flex;align-items:center;justify-content:space-between;}
         .logo-wrap { display: flex; align-items: center; gap: 14px; text-decoration: none; }
         .logo-img { height: 38px; width: auto; filter: drop-shadow(0 0 4px rgba(200,117,51,0.25)); transition: all 0.3s; }
         .logo-img:hover { filter: drop-shadow(0 0 8px rgba(200,117,51,0.5)); transform: scale(1.04); }
@@ -152,6 +153,31 @@
         .logo-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--cyber-white); }
         .logo-name span { background: linear-gradient(90deg, var(--copper-gold), var(--warm-bronze)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .logo-sub { font-size: 12px; font-style: italic; color: rgba(255,255,255,0.5); letter-spacing: 0.3px; }
+        /* Header desktop nav */
+        .header-nav{display:flex;gap:20px;align-items:center;}
+        .header-nav a{font-size:13px;color:rgba(255,255,255,0.55);transition:color .2s;text-decoration:none;}
+        .header-nav a:hover{color:var(--electric-blue);}
+        .header-nav-cta{padding:8px 18px;background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));color:#fff!important;border-radius:8px;font-size:12px;font-weight:600;transition:all .2s;}
+        .header-nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(200,117,51,0.35);}
+        /* Mobile hamburger */
+        .landing-mobile-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:1001;}
+        .landing-hamburger{display:block;width:26px;height:2px;background:#F0F0F0;position:relative;transition:all .3s ease;}
+        .landing-hamburger::before,.landing-hamburger::after{content:'';position:absolute;width:26px;height:2px;background:#F0F0F0;transition:all .3s ease;}
+        .landing-hamburger::before{top:-7px;}
+        .landing-hamburger::after{bottom:-7px;}
+        .landing-mobile-btn.open .landing-hamburger{background:transparent;}
+        .landing-mobile-btn.open .landing-hamburger::before{transform:rotate(45deg);top:0;}
+        .landing-mobile-btn.open .landing-hamburger::after{transform:rotate(-45deg);bottom:0;}
+        /* Mobile fullscreen nav */
+        .landing-nav-mobile{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(5,5,5,0.97);backdrop-filter:blur(20px);z-index:1000;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:40px 24px;}
+        .landing-nav-mobile.open{display:flex;animation:landMenuIn .3s ease;}
+        @keyframes landMenuIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+        .landing-nav-mobile .lnm-link{font-family:var(--font-display);font-size:26px;font-weight:700;color:#F0F0F0;text-decoration:none;text-align:center;padding:14px 32px;border-radius:12px;width:100%;max-width:300px;transition:all .3s ease;border:1px solid transparent;}
+        .landing-nav-mobile .lnm-link:hover{color:var(--electric-blue);border-color:rgba(0,209,255,0.2);background:rgba(0,209,255,0.05);}
+        .landing-nav-mobile .lnm-cta{margin-top:16px;padding:14px 32px;background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));color:#fff;font-family:var(--font-display);font-size:18px;font-weight:700;border-radius:12px;text-decoration:none;text-align:center;width:100%;max-width:300px;transition:all .2s;}
+        .landing-nav-mobile .lnm-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(200,117,51,0.4);}
+        .landing-nav-mobile-close{position:absolute;top:20px;right:20px;background:none;border:none;color:#F0F0F0;font-size:32px;cursor:pointer;padding:8px;line-height:1;opacity:.7;transition:opacity .2s;}
+        .landing-nav-mobile-close:hover{opacity:1;}
 
         /* ── HERO ── */
         .hero { min-height: 92vh; display: flex; align-items: center; padding: 80px 0 60px; text-align: center; position: relative; }
@@ -570,6 +596,8 @@
   header{padding:14px 0;}
   .logo-name{font-size:15px!important;}
   .logo-sub{display:none;}
+  .header-nav{display:none!important;}
+  .landing-mobile-btn{display:block!important;}
   /* Hero */
   .hero{min-height:auto!important;padding:80px 0 48px!important;}
   .hero h1{font-size:clamp(26px,7vw,38px)!important;line-height:1.15!important;}
@@ -698,8 +726,25 @@
         <span class="logo-sub">Menos redes / más sistema</span>
       </div>
     </a>
+    <nav class="header-nav">
+      <a href="/agencia/">Agencia</a>
+      <a href="/blog/">Blog</a>
+      <a href="#sesion" class="header-nav-cta">Sesión gratuita</a>
+    </nav>
+    <button class="landing-mobile-btn" id="landingMobileBtn" aria-label="Abrir menú">
+      <span class="landing-hamburger"></span>
+    </button>
   </div>
 </header>
+
+<!-- Menú Móvil Landing -->
+<nav class="landing-nav-mobile" id="landingNavMobile" aria-label="Menú móvil">
+  <button class="landing-nav-mobile-close" id="landingNavClose" aria-label="Cerrar menú">&#10005;</button>
+  <a href="/" class="lnm-link">Inicio</a>
+  <a href="/agencia/" class="lnm-link">Agencia</a>
+  <a href="/blog/" class="lnm-link">Blog</a>
+  <a href="#sesion" class="lnm-cta">Sesión gratuita</a>
+</nav>
 
 <main>
 <!-- ══ 1. HERO ══════════════════════════════════════════════════════════ -->
@@ -1762,6 +1807,22 @@
     </button>
   </div>
 </div>
+
+<!-- Menú Móvil JS -->
+<script>
+(function(){
+  var btn=document.getElementById('landingMobileBtn');
+  var nav=document.getElementById('landingNavMobile');
+  var close=document.getElementById('landingNavClose');
+  if(!btn||!nav)return;
+  function openMenu(){nav.classList.add('open');btn.classList.add('open');document.body.style.overflow='hidden';}
+  function closeMenu(){nav.classList.remove('open');btn.classList.remove('open');document.body.style.overflow='';}
+  btn.addEventListener('click',function(){nav.classList.contains('open')?closeMenu():openMenu();});
+  close.addEventListener('click',closeMenu);
+  nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+})();
+</script>
 
 <!-- Blog: cargar posts publicados desde Firestore -->
 <script type="module">
