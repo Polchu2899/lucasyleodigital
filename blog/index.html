@@ -20,7 +20,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Optimized fonts: load only required weights, use fallback during load -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=Inter:wght@400;500;600&display=fallback" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=Inter:wght@400;500;600&display=fallback" rel="stylesheet"></noscript>
 
 <!-- Schema.org Blog -->
 <script type="application/ld+json">
@@ -31,7 +33,7 @@
 :root{
   --bg:#050505;--soft-gray:#a0a0a0;--electric-blue:#00d1ff;
   --copper-gold:#C87533;--warm-bronze:#d4893f;
-  --font-display:'Space Grotesk',sans-serif;--font-body:'Inter',sans-serif;
+  --font-display:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;--font-body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:#F0F0F0;font-family:var(--font-body);line-height:1.6;min-height:100vh;}
@@ -64,7 +66,7 @@ a{color:inherit;text-decoration:none;}
 
 /* Grid */
 .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-bottom:60px;}
-.blog-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;transition:all .25s;cursor:pointer;}
+.blog-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;transition:all .25s;cursor:pointer;contain:layout paint;will-change:transform,box-shadow;}
 .blog-card:hover{border-color:rgba(0,209,255,0.3);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.3);}
 .blog-card img{width:100%;height:200px;object-fit:cover;display:block;}
 .blog-card .bc-noimg{height:200px;background:linear-gradient(135deg,rgba(200,117,51,0.08),rgba(0,209,255,0.05));display:flex;align-items:center;justify-content:center;}
@@ -331,6 +333,37 @@ window.blogShowPost = function(slug) {
   document.title = (post.seoTitle || post.title) + ' — Lucas y Leo Digital';
   var metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) metaDesc.content = post.seoDescription || post.excerpt || '';
+
+  // Update Open Graph tags
+  var ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.content = post.title || '';
+  var ogDesc = document.querySelector('meta[property="og:description"]');
+  if (ogDesc) ogDesc.content = post.seoDescription || post.excerpt || '';
+  var ogImage = document.querySelector('meta[property="og:image"]');
+  if (ogImage && post.coverImage) ogImage.content = post.coverImage;
+  var ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) ogUrl.content = 'https://www.lucasyleodigital.com/blog/#'+post.slug;
+
+  // Inject BlogPosting schema
+  var existingSchema = document.getElementById('blog-post-schema');
+  if (existingSchema) existingSchema.remove();
+  var pubDate = post.publishedAt ? (post.publishedAt.toDate ? post.publishedAt.toDate().toISOString() : new Date(post.publishedAt).toISOString()) : new Date().toISOString();
+  var blogSchema = {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":post.title||'',
+    "description":post.seoDescription||post.excerpt||'',
+    "image":post.coverImage||'https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a',
+    "datePublished":pubDate,
+    "author":{"@type":"Person","name":post.author||'Lucas','url":"https://www.lucasyleodigital.com/"},
+    "publisher":{"@type":"Organization","name":"Lucas y Leo Digital","url":"https://www.lucasyleodigital.com/"},
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://www.lucasyleodigital.com/blog/#"+post.slug}
+  };
+  var schemaScript = document.createElement('script');
+  schemaScript.id = 'blog-post-schema';
+  schemaScript.type = 'application/ld+json';
+  schemaScript.textContent = JSON.stringify(blogSchema);
+  document.head.appendChild(schemaScript);
 
   var el = document.getElementById('blog-single-content');
   var safeTitle = (post.title||'').replace(/"/g,'&quot;');

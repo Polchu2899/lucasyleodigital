@@ -84,7 +84,8 @@
     {"@context":"https://schema.org","@type":"Service","provider":{"@type":"LocalBusiness","name":"Lucas y Leo Digital","@id":"https://www.lucasyleodigital.com/#business"},"serviceType":"Acompañamiento Digital Continuo","name":"Acompañamiento Continuo","description":"Revisión mensual de métricas, ajuste de estrategia y toma de decisiones. Como tener un director digital sin el coste fijo.","areaServed":{"@type":"Country","name":"España"}}
     </script>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-<link rel="preload" as="image" href="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a" fetchpriority="high">
+<!-- Preload logo with optional sizes for responsive images -->
+<link rel="preload" as="image" href="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a" fetchpriority="high" imagesrcset="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a&w=64 64w, https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a&w=128 128w, https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a&w=256 256w"
 <link rel="dns-prefetch" href="//fonts.googleapis.com">
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
 <link rel="dns-prefetch" href="//firebasestorage.googleapis.com">
@@ -92,7 +93,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Optimized fonts: load only required weights, use fallback during load -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=Inter:wght@400;500;600&display=fallback" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=Inter:wght@400;500;600&display=fallback" rel="stylesheet"></noscript>
 <style>
 
 
@@ -102,8 +105,8 @@
             --cyber-white: #F0F0F0;
             --copper-gold: #C87533;
             --warm-bronze: #8B4513;
-            --font-display: 'Space Grotesk', sans-serif;
-            --font-body: 'Inter', sans-serif;
+            --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -114,7 +117,7 @@
 
         /* ── FONDO ── */
         .animated-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
-        .particle { position: absolute; width: 2px; height: 2px; background: var(--electric-blue); box-shadow: 0 0 10px var(--electric-blue); animation: float-particle linear infinite; border-radius: 50%; }
+        .particle { position: absolute; width: 2px; height: 2px; background: var(--electric-blue); box-shadow: 0 0 10px var(--electric-blue); animation: float-particle linear infinite; border-radius: 50%; contain: layout paint; will-change: transform; }
         @keyframes float-particle {
             0% { transform: translateY(100vh) translateX(0); opacity: 0; }
             10% { opacity: 1; } 90% { opacity: 1; }
@@ -126,7 +129,7 @@
             height: 1px; opacity: 0.2; animation: circuit-move 8s linear infinite;
         }
         @keyframes circuit-move { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
-        .glow-orb { position: absolute; filter: blur(80px); animation: float-orb 20s ease-in-out infinite; }
+        .glow-orb { position: absolute; filter: blur(80px); animation: float-orb 20s ease-in-out infinite; contain: layout paint; will-change: transform; }
         @keyframes float-orb {
             0%, 100% { transform: translate(0, 0); }
             33% { transform: translate(100px, -100px); }
@@ -169,7 +172,7 @@
         .landing-mobile-btn.open .landing-hamburger::before{transform:rotate(45deg);top:0;}
         .landing-mobile-btn.open .landing-hamburger::after{transform:rotate(-45deg);bottom:0;}
         /* Mobile fullscreen nav */
-        .landing-nav-mobile{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(5,5,5,0.97);backdrop-filter:blur(20px);z-index:1000;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:40px 24px;}
+        .landing-nav-mobile{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(5,5,5,0.97);backdrop-filter:blur(20px);z-index:1000;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:40px 24px;contain:layout paint;will-change:opacity,transform;}
         .landing-nav-mobile.open{display:flex;animation:landMenuIn .3s ease;}
         @keyframes landMenuIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
         .landing-nav-mobile .lnm-link{font-family:var(--font-display);font-size:26px;font-weight:700;color:#F0F0F0;text-decoration:none;text-align:center;padding:14px 32px;border-radius:12px;width:100%;max-width:300px;transition:all .3s ease;border:1px solid transparent;}
