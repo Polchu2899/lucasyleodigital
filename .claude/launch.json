@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "lucas-landing",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "3457"],
+      "port": 3457,
+      "cwd": "C:\\Users\\polch\\Desktop\\PROYECTOS\\Lucas y leo\\lucasyleodigital-main"
+    }
+  ]
+}
