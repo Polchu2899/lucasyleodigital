@@ -8,6 +8,10 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#C87533">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Performance optimizations -->
+<link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+<link rel="dns-prefetch" href="//firestore.googleapis.com">
+<link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -73,8 +77,8 @@
     {"@context":"https://schema.org","@type":"Service","provider":{"@type":"LocalBusiness","name":"Lucas y Leo Digital","@id":"https://www.lucasyleodigital.com/#business"},"serviceType":"Acompañamiento Digital Continuo","name":"Acompañamiento Continuo","description":"Revisión mensual de métricas, ajuste de estrategia y toma de decisiones. Como tener un director digital sin el coste fijo.","areaServed":{"@type":"Country","name":"España"}}
     </script>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-<!-- Preload logo with optional sizes for responsive images -->
-<link rel="preload" as="image" href="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a" fetchpriority="high" imagesrcset="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a&w=64 64w, https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a&w=128 128w, https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a&w=256 256w"
+<!-- Preload logo with responsive sizes -->
+<link rel="preload" as="image" href="images/logo_sin_fondo-md.webp" type="image/webp" fetchpriority="high" imagesrcset="images/logo_sin_fondo-sm.webp 64w, images/logo_sin_fondo-md.webp 128w, images/logo_sin_fondo-lg.webp 256w">
 <link rel="dns-prefetch" href="//fonts.googleapis.com">
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
 <link rel="dns-prefetch" href="//firebasestorage.googleapis.com">
@@ -96,7 +100,7 @@
 <header>
   <div class="container">
     <a href="/" class="logo-wrap" aria-label="Lucas y Leo Digital">
-      <img src="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a&w=38" alt="Lucas y Leo Digital" class="logo-img" width="38" height="38" fetchpriority="high" loading="eager" decoding="async">
+      <picture><source srcset="images/logo_sin_fondo-sm.webp" type="image/webp"><img src="images/logo_sin_fondo.png" alt="Lucas y Leo Digital" class="logo-img" width="38" height="38" fetchpriority="high" loading="eager" decoding="async"></picture>
       <div class="logo-text">
         <span class="logo-name">Lucas y Leo <span>Digital</span></span>
         <span class="logo-sub">Menos redes / más sistema</span>
@@ -128,7 +132,7 @@
   <img src="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a&w=260" alt="" class="hero-logo-bg" aria-hidden="true" width="480" height="480" loading="eager" fetchpriority="high" decoding="async" srcset="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a&w=260 260w, https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a&w=480 480w" sizes="(max-width: 640px) 260px, 480px">
   <div class="container">
     <div class="hero-logo-badge hero-anim" style="animation-delay:0s">
-      <img src="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a&w=64" alt="Lucas y Leo Digital — Asesor digital para pequeños negocios en Barcelona" class="hero-badge-logo" width="64" height="64" fetchpriority="high" loading="eager" decoding="async">
+      <picture><source srcset="images/logo_sin_fondo-md.webp" type="image/webp"><img src="images/logo_sin_fondo.png" alt="Lucas y Leo Digital — Asesor digital para pequeños negocios en Barcelona" class="hero-badge-logo" width="64" height="64" fetchpriority="high" loading="eager" decoding="async"></picture>
     </div>
     <h1 class="hero-anim" style="animation-delay:.15s">
       Tu negocio ya funciona.<br>
