@@ -25,6 +25,8 @@
 <link rel="alternate" hreflang="es" href="https://www.lucasyleodigital.com/">
 <link rel="alternate" hreflang="x-default" href="https://www.lucasyleodigital.com/">
 <meta name="author" content="Lucas · Lucas y Leo Digital">
+<link rel="author" href="https://www.lucasyleodigital.com/agencia/">
+<link rel="me" href="https://www.lucasyleodigital.com/agencia/">
 <!-- Google Search Console -->
 <meta name="google-site-verification" content="kPOnM4Y_zNaSF2ZocEM06tABF32xfdPVFhLZUXmF78Q">
 <!-- Google Analytics — se activa SOLO tras consentimiento de cookies (RGPD) -->
@@ -48,16 +50,22 @@
 {
   "@context":"https://schema.org",
   "@type":"Person",
+  "@id":"https://www.lucasyleodigital.com/#lucas",
   "name":"Lucas",
+  "givenName":"Lucas",
   "jobTitle":"Asesor Digital",
-  "worksFor":{"@type":"Organization","name":"Lucas y Leo Digital"},
+  "email":"info@lucasyleodigital.com",
+  "telephone":"+34624029617",
+  "worksFor":{"@type":"Organization","@id":"https://www.lucasyleodigital.com/#business","name":"Lucas y Leo Digital","url":"https://www.lucasyleodigital.com/agencia/"},
   "url":"https://www.lucasyleodigital.com/",
-  "address":{"@type":"PostalAddress","addressLocality":"Barcelona","addressCountry":"ES"},
-  "description":"Asesor digital especializado en pequeños y medianos negocios. Organizo y optimizo la presencia digital para generar clientes reales."
+  "sameAs":["https://www.lucasyleodigital.com/agencia/"],
+  "address":{"@type":"PostalAddress","addressLocality":"Barcelona","addressRegion":"Cataluña","addressCountry":"ES"},
+  "knowsAbout":["Marketing Digital","Publicidad Digital","SEO","Automatización con IA","Asesoría Digital para Pymes"],
+  "description":"Asesor digital especializado en pequeños y medianos negocios. Diseña sistemas digitales que generan clientes reales sin complejidad técnica para el cliente."
 }
 </script>
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"WebSite","name":"Lucas · Asesor Digital","url":"https://www.lucasyleodigital.com/","description":"Asesor digital para pequeños negocios en Barcelona. Sistema digital que genera clientes reales.","potentialAction":{"@type":"SearchAction","target":"https://www.lucasyleodigital.com/?q={search_term_string}","query-input":"required name=search_term_string"}}
+    {"@context":"https://schema.org","@type":"WebSite","name":"Lucas · Asesor Digital","url":"https://www.lucasyleodigital.com/","description":"Asesor digital para pequeños negocios en Barcelona. Sistema digital que genera clientes reales.","author":{"@type":"Person","@id":"https://www.lucasyleodigital.com/#lucas","name":"Lucas"},"publisher":{"@type":"Organization","@id":"https://www.lucasyleodigital.com/#business","name":"Lucas y Leo Digital"},"potentialAction":{"@type":"SearchAction","target":"https://www.lucasyleodigital.com/?q={search_term_string}","query-input":"required name=search_term_string"}}
     </script>
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"LocalBusiness","name":"Lucas y Leo Digital","@id":"https://www.lucasyleodigital.com/#business","url":"https://www.lucasyleodigital.com/","telephone":"+34624029617","priceRange":"€€","logo":{"@type":"ImageObject","url":"https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a","width":1024,"height":1024},"image":"https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a","address":{"@type":"PostalAddress","addressLocality":"Barcelona","addressRegion":"Cataluña","addressCountry":"ES"},"geo":{"@type":"GeoCoordinates","latitude":41.3851,"longitude":2.1734},"areaServed":{"@type":"Country","name":"España"},"serviceType":["Asesoría Digital","Marketing Digital","Automatización IA","Publicidad Digital"]}
@@ -724,6 +732,67 @@ document.body.classList.add('js-loaded');
 
 <!-- Menú Móvil JS -->
 <!-- Mobile menu initialization deferred to landing-deferred.js -->
+
+<!-- WebMCP: expone herramientas para agentes IA -->
+<script>
+(function() {
+  if (typeof navigator === 'undefined' || !navigator.modelContext || !navigator.modelContext.provideContext) return;
+  navigator.modelContext.provideContext({
+    tools: [
+      {
+        name: "get_agency_info",
+        description: "Returns information about Lucas y Leo Digital digital marketing agency: services, founders, location and contact.",
+        inputSchema: { type: "object", properties: {}, required: [] },
+        execute: async function() {
+          return {
+            agency: "Lucas y Leo Digital",
+            founded: 2024,
+            location: "Barcelona, España",
+            area_served: "España (100% online)",
+            founders: [
+              { name: "Lucas", role: "Asesor Digital para pymes" },
+              { name: "Leo", role: "Especialista en automatización IA y publicidad digital" }
+            ],
+            services: ["Publicidad digital Google/Meta/LinkedIn", "Automatización con IA", "Desarrollo web estratégico", "Asesoría digital para pymes", "SEO local"],
+            contact: { phone: "+34624029617", email: "info@lucasyleodigital.com", website: "https://www.lucasyleodigital.com" },
+            llms_txt: "https://www.lucasyleodigital.com/llms.txt"
+          };
+        }
+      },
+      {
+        name: "book_free_session",
+        description: "Returns booking information for a free 45-minute strategic digital session with Lucas. No commitment required.",
+        inputSchema: { type: "object", properties: {}, required: [] },
+        execute: async function() {
+          return {
+            session_type: "Sesión Estratégica Gratuita",
+            duration: "45 minutos",
+            price: "Gratuito",
+            booking_url: "https://www.lucasyleodigital.com/#sesion",
+            description: "Análisis de situación digital, identificación de oportunidades y recomendaciones personalizadas. Sin compromiso ni coste."
+          };
+        }
+      },
+      {
+        name: "get_services",
+        description: "Returns detailed information about available digital marketing services offered by Lucas y Leo Digital.",
+        inputSchema: { type: "object", properties: {}, required: [] },
+        execute: async function() {
+          return {
+            services: [
+              { name: "Diagnóstico Estratégico", price: "Gratuito", description: "Sesión de 45 min para analizar tu situación digital" },
+              { name: "Creación del Sistema Digital", description: "Web de conversión, publicidad, automatizaciones integradas" },
+              { name: "Acompañamiento Continuo", description: "Revisión mensual de métricas y ajuste de estrategia continuo" },
+              { name: "Auditoría Digital Gratuita", description: "Análisis completo de presencia digital con recomendaciones priorizadas" }
+            ],
+            more_info: "https://www.lucasyleodigital.com/agencia/"
+          };
+        }
+      }
+    ]
+  });
+})();
+</script>
 
 <!-- Blog: cargar posts publicados desde Firestore -->
 <script type="module">

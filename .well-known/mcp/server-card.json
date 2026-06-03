@@ -1,0 +1,47 @@
+{
+  "serverInfo": {
+    "name": "Lucas y Leo Digital",
+    "version": "1.0.0",
+    "description": "Agencia de marketing digital con IA en Barcelona. Publicidad digital, automatización, desarrollo web y asesoría para pequeños negocios en España."
+  },
+  "transport": {
+    "type": "http",
+    "endpoint": "https://www.lucasyleodigital.com/.well-known/mcp"
+  },
+  "capabilities": {
+    "resources": true,
+    "tools": false,
+    "prompts": false
+  },
+  "resources": [
+    {
+      "uri": "https://www.lucasyleodigital.com/llms.txt",
+      "name": "Agency Overview (llms.txt)",
+      "mimeType": "text/plain",
+      "description": "Complete overview of Lucas y Leo Digital: services, founders, differentiators, target clients, FAQ and contact."
+    },
+    {
+      "uri": "https://www.lucasyleodigital.com/llms-full.txt",
+      "name": "Full Agency Content (llms-full.txt)",
+      "mimeType": "text/plain",
+      "description": "Extended content including full service descriptions, case studies context, pricing philosophy and detailed FAQ."
+    },
+    {
+      "uri": "https://www.lucasyleodigital.com/agencia/",
+      "name": "Servicios — Lucas y Leo Digital",
+      "mimeType": "text/html",
+      "description": "Detailed agency services page: Google Ads, Meta Ads, automation, web development and digital consultancy."
+    },
+    {
+      "uri": "https://www.lucasyleodigital.com/",
+      "name": "Lucas — Asesor Digital para Pequeños Negocios",
+      "mimeType": "text/html",
+      "description": "Personal page of Lucas, digital advisor for SMEs in Barcelona. Includes free strategic session booking."
+    }
+  ],
+  "contact": {
+    "email": "info@lucasyleodigital.com",
+    "phone": "+34624029617",
+    "url": "https://www.lucasyleodigital.com"
+  }
+}

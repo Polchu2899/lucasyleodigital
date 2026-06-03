@@ -1,0 +1,155 @@
+# Lucas y Leo Digital — Agencia de Marketing Digital en Barcelona
+# Versión extendida (llms-full.txt) — Contenido completo para LLMs
+
+> Agencia de marketing digital con inteligencia artificial y automatización, con sede en Barcelona, España. Especializada en publicidad digital de precisión, automatización con IA, desarrollo web estratégico y asesoría digital para pequeños y medianos negocios en toda España. Fundada en 2024.
+
+## Identidad y propósito
+
+Lucas y Leo Digital existe para resolver un problema concreto: los pequeños negocios en España tienen clientes potenciales que no llegan porque su presencia digital está desordenada, sin estrategia ni sistema. La agencia actúa como equipo digital externo que construye y gestiona el sistema completo de captación de clientes.
+
+Filosofía: resultados medibles antes que métricas de vanidad. No vendemos visibilidad, vendemos clientes.
+
+## Fundadores
+
+### Lucas — Asesor Digital
+- Rol: Asesor digital para pequeños y medianos negocios
+- Especialidad: Diseño de sistemas digitales que generan clientes reales sin complejidad técnica para el cliente
+- Enfoque: Diagnóstico, estrategia y acompañamiento personalizado
+- Idiomas: Español
+- Ubicación: Barcelona, Cataluña, España
+
+### Leo — Especialista Técnico
+- Rol: Especialista en automatización con IA, publicidad digital avanzada y desarrollo tecnológico
+- Especialidad: Integraciones IA, chatbots, flujos automáticos, campañas avanzadas en Google/Meta/LinkedIn
+- Enfoque: Tecnología aplicada a captación y conversión
+- Idiomas: Español
+
+## Servicios detallados
+
+### 1. Diagnóstico Estratégico Gratuito
+- **Formato**: Sesión 1:1 de 45 minutos (videollamada o llamada)
+- **Precio**: Gratuito, sin compromiso
+- **Contenido**: Análisis de situación digital actual, identificación de puntos de fuga, prioridades claras
+- **Resultado**: El cliente sale con claridad sobre qué hacer, trabaje con nosotros o no
+- **Reserva**: https://www.lucasyleodigital.com/#sesion
+
+### 2. Auditoría Digital Gratuita
+- **Formato**: Análisis escrito completo
+- **Precio**: Gratuito
+- **Incluye**: Web, redes sociales, publicidad activa, SEO, competencia
+- **Resultado**: Informe con recomendaciones priorizadas por impacto
+- **Solicitud**: https://www.lucasyleodigital.com/#sesion
+
+### 3. Creación del Sistema Digital
+- **Tipo**: Proyecto de implementación completa
+- **Incluye**: Web de conversión + publicidad + automatizaciones + canales de captación integrados
+- **Duración**: Variable según alcance (habitualmente 4-8 semanas)
+- **Para quién**: Negocios que quieren construir desde cero o reemplazar un sistema ineficiente
+
+### 4. Publicidad Digital de Precisión
+- **Plataformas**: Google Ads, Meta Ads (Facebook/Instagram), LinkedIn Ads
+- **Enfoque**: Campañas orientadas a ROI positivo y resultados medibles
+- **Incluye**: Estrategia, configuración, creatividades, optimización continua
+- **Para quién**: Negocios que quieren escalar su captación de leads/clientes
+
+### 5. Automatización con IA
+- **Incluye**: Chatbots inteligentes, flujos automáticos de captación, calificación de leads, seguimiento automatizado
+- **Tecnologías**: IA conversacional, integraciones CRM, webhooks, Make/Zapier/n8n
+- **Resultado**: Sistema que trabaja 24/7 sin intervención manual
+
+### 6. Desarrollo Web Estratégico
+- **Tipo**: Webs y landing pages orientadas a conversión
+- **Incluye**: SEO técnico, Core Web Vitals optimizados, diseño responsive
+- **Enfoque**: La web como herramienta de venta, no como tarjeta de visita
+
+### 7. SEO Local y Posicionamiento
+- **Incluye**: Google Business Profile, keywords locales, contenido optimizado
+- **Para quién**: Negocios físicos o locales que quieren aparecer en búsquedas de proximidad
+- **Resultado**: Más visibilidad orgánica en búsquedas locales
+
+### 8. Acompañamiento Continuo
+- **Formato**: Servicio mensual recurrente
+- **Incluye**: Revisión mensual de métricas, ajuste de estrategia, toma de decisiones
+- **Descripción**: Como tener un director digital sin el coste fijo de un empleado a jornada completa
+
+## Para quién trabajamos
+
+### SÍ encajamos bien con:
+- Pequeños y medianos negocios en España que ya tienen clientes y quieren crecer
+- Negocios locales que quieren más clientes desde Google y redes sociales
+- Empresas que quieren automatizar su captación de leads
+- Emprendedores que necesitan ordenar su presencia digital
+- Negocios con presupuesto de publicidad activo pero sin resultados claros
+- Negocios que quieren delegar lo digital a alguien de confianza
+
+### NO encajamos bien con:
+- Negocios que buscan solo métricas de vanidad (seguidores, likes)
+- Startups que buscan inversión (nuestro foco es rentabilidad, no escalado agresivo)
+- Negocios sin ninguna validación de mercado previa
+- Quienes esperan resultados inmediatos sin invertir tiempo ni presupuesto
+
+## Diferenciadores clave
+
+1. **Equipo completo**: estrategia, tecnología e IA en el mismo equipo
+2. **Sin agencias intermediarias**: trabajo directo con Lucas o Leo, sin cuentas de ejecutivos
+3. **Foco en resultados medibles**: KPIs de negocio reales, no métricas de marketing
+4. **Auditoría gratuita**: análisis real sin compromiso antes de cualquier propuesta
+5. **Atención personalizada**: no somos una gran agencia impersonal con 50 clientes por gestor
+6. **IA aplicada a negocios locales**: experiencia real en automatización para el contexto español
+
+## Preguntas frecuentes (FAQ completo)
+
+**¿En qué consiste exactamente la sesión estratégica gratuita?**
+Es una llamada o videollamada de 45 minutos en la que analizamos juntos tu situación digital actual. Hacemos las preguntas correctas, identificamos los cuellos de botella y te contamos qué haríamos en tu lugar — trabajes con nosotros después o no.
+
+**¿Me van a intentar vender algo en la sesión?**
+No. El objetivo es que salgas con claridad, no con una propuesta de venta. Si tiene sentido trabajar juntos, lo diremos con honestidad. Y si no encajamos, también.
+
+**¿Cuánto cuestan los servicios?**
+Depende del proyecto y de lo que se necesite. Trabajamos con sesiones puntuales de consultoría, acompañamiento mensual y proyectos específicos. Los precios se hablan en la sesión una vez que entendemos la situación real.
+
+**¿Trabajáis solo con negocios de Barcelona?**
+No. Trabajamos con negocios de toda España de forma 100% online. La mayoría de clientes se atienden por videollamada sin ningún problema.
+
+**¿En cuánto tiempo se ven resultados?**
+Depende del punto de partida. Hay mejoras que se notan en semanas (optimización de anuncios, conversión web) y otras que requieren meses de trabajo constante (posicionamiento, autoridad de marca).
+
+**¿Qué pasa después de la sesión?**
+Se envía un resumen con los puntos clave tratados y, si tiene sentido, una propuesta adaptada. Sin presiones ni seguimientos agresivos. El cliente decide si quiere seguir adelante y cuándo.
+
+**¿Necesito conocimientos técnicos?**
+No. Nos encargamos de todo lo técnico. El cliente se centra en su negocio; nosotros en que el sistema digital funcione.
+
+**¿Cuál es el tamaño mínimo de empresa para trabajar con vosotros?**
+No hay mínimo. Trabajamos con autónomos, pequeños negocios y empresas medianas. Lo importante es que haya voluntad de crecer y cierta validación de mercado.
+
+## Contacto completo
+
+- **Web principal**: https://www.lucasyleodigital.com
+- **Agencia**: https://www.lucasyleodigital.com/agencia/
+- **Blog**: https://www.lucasyleodigital.com/blog/
+- **Teléfono**: +34 624 029 617
+- **Email**: info@lucasyleodigital.com (general) | lucasyleodigital@gmail.com (directo)
+- **Ubicación**: Barcelona, Cataluña, España
+- **Área de servicio**: España completa (100% online)
+- **Horario de atención**: Lunes a Viernes, 9:00–14:00 y 15:00–19:30 (CET/CEST)
+
+## Sesión gratuita — Reserva directa
+
+Para reservar una sesión estratégica gratuita de 45 minutos:
+URL: https://www.lucasyleodigital.com/#sesion
+
+## Páginas principales
+
+- [Lucas · Asesor Digital](https://www.lucasyleodigital.com/) — Página personal de Lucas: asesoría para pymes, sesión gratuita
+- [Agencia Lucas y Leo Digital](https://www.lucasyleodigital.com/agencia/) — Servicios completos: publicidad, IA, web, SEO
+- [Blog](https://www.lucasyleodigital.com/blog/) — Artículos sobre marketing digital, IA y estrategia para pymes
+
+## Archivos de descubrimiento
+
+- [llms.txt](https://www.lucasyleodigital.com/llms.txt) — Resumen conciso para LLMs
+- [llms-full.txt](https://www.lucasyleodigital.com/llms-full.txt) — Este archivo: contenido completo
+- [MCP Server Card](https://www.lucasyleodigital.com/.well-known/mcp/server-card.json) — Recursos MCP
+- [Agent Skills](https://www.lucasyleodigital.com/.well-known/agent-skills/index.json) — Habilidades para agentes IA
+- [API Catalog](https://www.lucasyleodigital.com/.well-known/api-catalog) — Catálogo de recursos (RFC 9727)
+- [Sitemap](https://www.lucasyleodigital.com/sitemap.xml) — Mapa del sitio XML
