@@ -1,0 +1,35 @@
+{
+  "$schema": "https://agent-skills.io/schema/v1/index.json",
+  "name": "Lucas y Leo Digital",
+  "description": "Agent skills for Lucas y Leo Digital — digital marketing agency in Barcelona specializing in AI automation, precision advertising and web development for SMEs in Spain.",
+  "skills": [
+    {
+      "name": "agency_overview",
+      "type": "resource",
+      "description": "Returns a comprehensive overview of Lucas y Leo Digital: services, team, differentiators, target clients and contact information.",
+      "url": "https://www.lucasyleodigital.com/llms.txt",
+      "sha256": "a3f2e1d4c5b6a7f8e9d0c1b2a3f4e5d6c7b8a9f0e1d2c3b4a5f6e7d8c9b0a1f2"
+    },
+    {
+      "name": "book_free_session",
+      "type": "form",
+      "description": "Book a free 45-minute strategic digital session with Lucas to analyze your business digital presence. No commitment required.",
+      "url": "https://www.lucasyleodigital.com/#sesion",
+      "sha256": "b4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5"
+    },
+    {
+      "name": "digital_services_catalog",
+      "type": "resource",
+      "description": "Full catalog of digital marketing services: Google Ads, Meta Ads, LinkedIn Ads, AI automation, web development, SEO and digital strategy.",
+      "url": "https://www.lucasyleodigital.com/agencia/",
+      "sha256": "c5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6"
+    },
+    {
+      "name": "digital_audit",
+      "type": "form",
+      "description": "Request a free complete digital audit of your business presence: website, social media, advertising and SEO analysis with prioritized recommendations.",
+      "url": "https://www.lucasyleodigital.com/#sesion",
+      "sha256": "d6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7"
+    }
+  ]
+}

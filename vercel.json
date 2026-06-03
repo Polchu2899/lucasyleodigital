@@ -1,39 +1,17 @@
 {
+  "functions": {
+    "api/home-markdown.js": {
+      "includeFiles": "llms-full.txt"
+    }
+  },
   "headers": [
-    {
-      "source": "/",
-      "headers": [
-        {
-          "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/mcp/server-card.json>; rel=\"mcp-server-card\""
-        }
-      ]
-    },
-    {
-      "source": "/.well-known/api-catalog",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/linkset+json; charset=utf-8"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    },
-    {
-      "source": "/.well-known/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    },
     {
       "source": "/(.*)",
       "headers": [
+        {
+          "key": "Link",
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\""
+        },
         {
           "key": "Content-Security-Policy",
           "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.gstatic.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://firestore.googleapis.com https://firebasestorage.googleapis.com https://www.googletagmanager.com; frame-ancestors 'none'; upgrade-insecure-requests;"
@@ -61,6 +39,50 @@
         {
           "key": "Permissions-Policy",
           "value": "geolocation=(), microphone=(), camera=()"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/api-catalog",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/linkset+json; charset=utf-8"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/wk/api-catalog",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/linkset+json; charset=utf-8"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/wk/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
     },
@@ -93,6 +115,29 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "(?:.*text/markdown.*)"
+        }
+      ],
+      "destination": "/api/home-markdown"
+    },
+    {
+      "source": "/.well-known/mcp/server-card.json",
+      "destination": "/wk/mcp/server-card.json"
+    },
+    {
+      "source": "/.well-known/agent-skills/index.json",
+      "destination": "/wk/agent-skills/index.json"
+    },
+    {
+      "source": "/.well-known/api-catalog",
+      "destination": "/wk/api-catalog"
+    },
     {
       "source": "/",
       "destination": "/index.html"
