@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reservify — Sistema de Reservas para tu Negocio | Lucas y Leo Digital</title>
+<meta name="description" content="Sistema de reservas online completo para tu negocio. Calendario, franjas horarias, bloqueo automático, emails y panel de gestión. Desde 29€/mes.">
+<link rel="icon" type="image/png" href="https://i.ibb.co/qMpJW9rj/7-removebg-preview.png">
+<link rel="canonical" href="https://www.lucasyleodigital.com/reservify/">
+<meta property="og:title" content="Reservify — Sistema de Reservas Inteligente">
+<meta property="og:description" content="Tu negocio necesita un sistema de reservas que funcione solo. Calendario, bloqueos automáticos, emails y panel de gestión. Desde 29€/mes.">
+<meta property="og:url" content="https://www.lucasyleodigital.com/reservify/">
+<meta property="og:type" content="product">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050505;--blue:#00D1FF;--copper:#C87533;--bronze:#8B4513;--white:#F0F0F0;--gray:#888;--card:rgba(255,255,255,.02);--border:rgba(255,255,255,.07);--font-d:'Space Grotesk',sans-serif;--font-b:'Inter',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;background:var(--bg);}
+body{font-family:var(--font-b);color:var(--white);background:var(--bg);line-height:1.6;overflow-x:hidden;}
+
+/* NAV */
+.nav{padding:18px 0;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(5,5,5,.92);backdrop-filter:blur(16px);}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:var(--font-d);font-size:18px;font-weight:800;text-decoration:none;color:var(--white);}
+.nav-logo span{background:linear-gradient(90deg,var(--copper),var(--bronze));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:24px;align-items:center;}
+.nav-links a{font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--blue);}
+.nav-cta{padding:8px 18px;background:linear-gradient(135deg,var(--copper),var(--bronze));color:#fff!important;border-radius:8px;font-weight:600;font-size:12px;transition:all .2s;}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(200,117,51,.35);}
+
+/* CONTAINER */
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+/* HERO */
+.hero{padding:100px 0 80px;text-align:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(200,117,51,.08);border:1px solid rgba(200,117,51,.25);padding:7px 18px;border-radius:50px;font-size:12px;font-weight:600;color:var(--copper);margin-bottom:28px;font-family:var(--font-d);}
+.hero h1{font-family:var(--font-d);font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.1;margin-bottom:20px;letter-spacing:-.02em;}
+.hero h1 .grad{background:linear-gradient(90deg,var(--blue),#0099CC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:clamp(15px,2vw,18px);opacity:.65;max-width:600px;margin:0 auto 40px;line-height:1.7;}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-p{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--blue),#0088BB);color:#050505;font-family:var(--font-d);font-size:14px;font-weight:700;padding:16px 32px;border-radius:50px;text-decoration:none;transition:all .2s;box-shadow:0 8px 28px rgba(0,209,255,.25);text-transform:uppercase;letter-spacing:.05em;}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(0,209,255,.4);}
+.btn-s{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--copper);background:rgba(200,117,51,.06);color:var(--copper);font-family:var(--font-d);font-size:14px;font-weight:700;padding:14px 28px;border-radius:50px;text-decoration:none;transition:all .2s;letter-spacing:.04em;}
+.btn-s:hover{background:var(--copper);color:#050505;box-shadow:0 8px 24px rgba(200,117,51,.3);}
+
+/* DIVIDER */
+.div{height:1px;background:linear-gradient(90deg,transparent,rgba(0,209,255,.15),rgba(200,117,51,.15),transparent);}
+
+/* FEATURES */
+.features{padding:80px 0;}
+.sec-title{font-family:var(--font-d);font-size:clamp(24px,3.5vw,38px);font-weight:800;text-align:center;margin-bottom:14px;}
+.sec-sub{text-align:center;opacity:.55;font-size:15px;max-width:520px;margin:0 auto 48px;}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.feat-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px 24px;transition:all .3s;position:relative;overflow:hidden;}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:0;transition:opacity .3s;}
+.feat-card:hover{border-color:rgba(0,209,255,.2);transform:translateY(-4px);}
+.feat-card:hover::before{opacity:1;}
+.feat-ico{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(0,30,50,.9),rgba(0,15,30,.95));border:1px solid rgba(0,209,255,.12);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.feat-ico svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.feat-card h3{font-family:var(--font-d);font-size:16px;font-weight:700;margin-bottom:8px;}
+.feat-card p{font-size:13px;line-height:1.65;opacity:.6;}
+
+/* PRICING */
+.pricing{padding:80px 0;background:linear-gradient(180deg,transparent,rgba(200,117,51,.02),transparent);}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start;}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 28px;text-align:center;transition:all .3s;}
+.price-card.pop{border-color:rgba(200,117,51,.4);background:linear-gradient(160deg,rgba(200,117,51,.06),rgba(5,5,5,1) 60%);transform:scale(1.04);}
+.price-card.pop .price-badge{display:inline-block;}
+.price-badge{display:none;font-size:11px;font-weight:700;background:linear-gradient(135deg,var(--copper),var(--bronze));color:#fff;padding:4px 14px;border-radius:20px;margin-bottom:12px;font-family:var(--font-d);letter-spacing:.04em;}
+.price-name{font-family:var(--font-d);font-size:20px;font-weight:800;margin-bottom:4px;}
+.price-val{font-family:var(--font-d);font-size:48px;font-weight:800;margin:16px 0 4px;letter-spacing:-.02em;}
+.price-val sup{font-size:22px;vertical-align:super;}
+.price-val span{font-size:16px;font-weight:500;opacity:.5;}
+.price-desc{font-size:13px;opacity:.5;margin-bottom:24px;}
+.price-list{list-style:none;text-align:left;margin-bottom:28px;display:flex;flex-direction:column;gap:10px;}
+.price-list li{font-size:13px;display:flex;align-items:flex-start;gap:8px;line-height:1.5;opacity:.75;}
+.price-list li::before{content:'✓';color:var(--blue);font-weight:700;flex-shrink:0;margin-top:1px;}
+.price-btn{display:block;width:100%;padding:14px;border-radius:12px;font-family:var(--font-d);font-size:14px;font-weight:700;text-decoration:none;text-align:center;transition:all .2s;}
+.price-btn-fill{background:linear-gradient(135deg,var(--copper),var(--bronze));color:#fff;box-shadow:0 4px 16px rgba(200,117,51,.3);}
+.price-btn-fill:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,117,51,.45);}
+.price-btn-out{border:2px solid rgba(255,255,255,.15);color:var(--white);background:transparent;}
+.price-btn-out:hover{border-color:var(--blue);color:var(--blue);}
+
+/* TESTIMONIAL */
+.testi{padding:60px 0;}
+.testi-card{max-width:640px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 32px;text-align:center;}
+.testi-quote{font-size:16px;line-height:1.8;font-style:italic;opacity:.8;margin-bottom:20px;}
+.testi-name{font-family:var(--font-d);font-weight:700;font-size:14px;}
+.testi-role{font-size:12px;opacity:.5;}
+
+/* FAQ */
+.faq{padding:80px 0;}
+.faq-list{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:10px;}
+.faq-item{border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .3s;}
+.faq-item:hover{border-color:rgba(0,209,255,.15);}
+.faq-q{padding:18px 22px;font-family:var(--font-d);font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:transparent;border:none;color:var(--white);width:100%;text-align:left;}
+.faq-q::after{content:'+';font-size:20px;opacity:.4;transition:transform .3s;}
+.faq-item.open .faq-q::after{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-item.open .faq-a{max-height:200px;}
+.faq-a p{padding:0 22px 18px;font-size:14px;opacity:.6;line-height:1.7;}
+
+/* CTA FINAL */
+.final-cta{padding:80px 0;text-align:center;}
+.final-cta h2{font-family:var(--font-d);font-size:clamp(24px,3.5vw,36px);font-weight:800;margin-bottom:16px;}
+.final-cta p{opacity:.55;font-size:15px;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto;}
+
+/* FOOTER */
+.foot{padding:40px 0;border-top:1px solid var(--border);text-align:center;}
+.foot-brand{font-family:var(--font-d);font-size:15px;font-weight:700;margin-bottom:6px;}
+.foot-brand span{background:linear-gradient(90deg,var(--copper),var(--bronze));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.foot-copy{font-size:11px;opacity:.3;}
+
+@media(max-width:768px){
+  .hero{padding:60px 0 50px;}
+  .feat-grid,.price-grid{grid-template-columns:1fr;}
+  .price-card.pop{transform:none;}
+  .hero-ctas{flex-direction:column;align-items:center;}
+  .btn-p,.btn-s{width:100%;max-width:320px;justify-content:center;text-align:center;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Lucas y <span>Leo</span> Digital</a>
+    <div class="nav-links">
+      <a href="#features">Funcionalidades</a>
+      <a href="#pricing">Precios</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contacto" class="nav-cta">Solicitar demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-badge">Sistema de reservas inteligente</div>
+    <h1>Tu negocio necesita un<br>sistema de reservas<br>que <span class="grad">funcione solo</span></h1>
+    <p class="hero-sub">Calendario online, franjas horarias, bloqueo automático, emails al cliente y panel de gestión. Todo integrado en tu web. Sin plugins. Sin cuotas ocultas.</p>
+    <div class="hero-ctas">
+      <a href="#contacto" class="btn-p">Solicitar demo gratuita</a>
+      <a href="#pricing" class="btn-s">Ver precios</a>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="wrap">
+    <h2 class="sec-title">Todo lo que necesitas</h2>
+    <p class="sec-sub">Un sistema completo que se adapta a tu negocio, no al revés</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <h3>Calendario inteligente</h3>
+        <p>Tus clientes ven en tiempo real qué días y horarios están disponibles. Sin llamadas, sin esperas.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Bloqueo automático</h3>
+        <p>Cuando un cliente reserva, el horario se bloquea al instante para todos. Cero solapamientos.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <h3>Emails automáticos</h3>
+        <p>El cliente recibe confirmación y tú un resumen completo. Todo sin mover un dedo.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3>Panel de gestión</h3>
+        <p>Reservify: tu panel privado para gestionar reservas, tarifas, extras, bloqueos y clientes.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h3>Web bilingüe</h3>
+        <p>Soporte nativo para dos idiomas. Perfecto para negocios en Cataluña, Baleares o cualquier zona bilingüe.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
+        <h3>Tarifas flexibles</h3>
+        <p>Precios por día, turnos estándar y ampliados, días especiales, extras de catering. Todo configurable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <h2 class="sec-title">Planes transparentes</h2>
+    <p class="sec-sub">Sin permanencia. Sin sorpresas. Cancela cuando quieras.</p>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-name">Básico</div>
+        <div class="price-val"><sup>€</sup>29<span>/mes</span></div>
+        <div class="price-desc">Para negocios que empiezan</div>
+        <ul class="price-list">
+          <li>Calendario online en tu web</li>
+          <li>Franjas horarias configurables</li>
+          <li>Bloqueo automático de horarios</li>
+          <li>Emails de confirmación</li>
+          <li>Panel Reservify básico</li>
+          <li>1 idioma</li>
+        </ul>
+        <a href="#contacto" class="price-btn price-btn-out">Empezar</a>
+      </div>
+      <div class="price-card pop">
+        <div class="price-badge">MÁS POPULAR</div>
+        <div class="price-name">Pro</div>
+        <div class="price-val"><sup>€</sup>49<span>/mes</span></div>
+        <div class="price-desc">Para negocios en crecimiento</div>
+        <ul class="price-list">
+          <li>Todo del plan Básico</li>
+          <li>Bilingüe (CA/ES o cualquier combo)</li>
+          <li>Extras y catering configurable</li>
+          <li>Días especiales y fechas concretas</li>
+          <li>Turnos ampliados</li>
+          <li>Códigos promocionales</li>
+          <li>WhatsApp automático</li>
+        </ul>
+        <a href="#contacto" class="price-btn price-btn-fill">Empezar</a>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Premium</div>
+        <div class="price-val"><sup>€</sup>79<span>/mes</span></div>
+        <div class="price-desc">Setup completo + soporte</div>
+        <ul class="price-list">
+          <li>Todo del plan Pro</li>
+          <li>Setup e integración personalizada</li>
+          <li>Diseño adaptado a tu marca</li>
+          <li>Soporte prioritario por WhatsApp</li>
+          <li>Actualizaciones y mejoras incluidas</li>
+          <li>Formación 1:1 para gestionar</li>
+        </ul>
+        <a href="#contacto" class="price-btn price-btn-out">Contactar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- TESTIMONIAL -->
+<section class="testi">
+  <div class="wrap">
+    <div class="testi-card">
+      <p class="testi-quote">"Desde que tenemos Reservify, los clientes reservan solos y yo solo tengo que confirmar. Me ha quitado horas de WhatsApp y llamadas. El sistema funciona perfecto."</p>
+      <div class="testi-name">Laura</div>
+      <div class="testi-role">EspaiFest — Sala de eventos, Menorca</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <h2 class="sec-title">Preguntas frecuentes</h2>
+    <p class="sec-sub">Todo lo que necesitas saber antes de empezar</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Necesito conocimientos técnicos?</button>
+        <div class="faq-a"><p>No. Nosotros nos encargamos de la instalación y configuración. Tú solo tienes que usar el panel de Reservify, que es tan fácil como usar WhatsApp.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Se integra con mi web actual?</button>
+        <div class="faq-a"><p>Sí. Reservify se integra directamente en tu web existente. Si no tienes web, también podemos crearla con el sistema incluido.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Puedo cambiar las tarifas y horarios yo misma?</button>
+        <div class="faq-a"><p>Por supuesto. Desde el panel de Reservify puedes cambiar precios, añadir turnos, crear días especiales y gestionar todo sin necesidad de contactarnos.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Hay permanencia?</button>
+        <div class="faq-a"><p>No. Puedes cancelar cuando quieras. Sin penalizaciones, sin letra pequeña.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Qué tipo de negocios pueden usarlo?</button>
+        <div class="faq-a"><p>Cualquier negocio que trabaje con reservas: salas de eventos, restaurantes, centros deportivos, clínicas, estudios de belleza, escape rooms, espacios de coworking...</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- CTA FINAL -->
+<section class="final-cta" id="contacto">
+  <div class="wrap">
+    <h2>Deja de perder reservas</h2>
+    <p>Solicita una demo gratuita y te mostramos cómo Reservify puede transformar la gestión de tu negocio.</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/34624029617?text=Hola!%20Me%20interesa%20Reservify%20para%20mi%20negocio.%20¿Podemos%20hablar?" class="btn-p" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#050505"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Solicitar demo por WhatsApp
+      </a>
+      <a href="mailto:info@lucasyleodigital.com?subject=Reservify%20-%20Demo&body=Hola,%20me%20interesa%20Reservify%20para%20mi%20negocio." class="btn-s">Enviar email</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-brand">Lucas y <span>Leo</span> Digital</div>
+    <div class="foot-copy">© 2026 Lucas y Leo Digital. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+</body>
+</html>
