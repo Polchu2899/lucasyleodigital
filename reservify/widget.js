@@ -212,6 +212,14 @@
 
     // ══ 7. CARGAR DATOS ═══════════════════════════════════════════
     async function loadTarifas() {
+      // Si el JSON de config tiene tarifas estaticas, usarlas directamente
+      if (cfg.tarifas_estaticas) {
+        Object.keys(cfg.tarifas_estaticas).forEach(function(k) {
+          tarifas[k] = cfg.tarifas_estaticas[k];
+        });
+        return;
+      }
+      // Si no, cargar desde Firebase
       try {
         var snap = await getDocs(collection(db, 'tarifas'));
         snap.forEach(function(d) {

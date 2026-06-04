@@ -190,10 +190,10 @@ body.js-loaded .fade-in.visible{opacity:1;transform:translateY(0)}
     </a>
     <nav class="header-nav">
       <a href="/">Inicio</a>
-      <a href="#features">Funcionalidades</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#demo">Demo en vivo</a>
       <a href="#pricing">Precios</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contacto" class="header-nav-cta">Solicitar demo</a>
+      <a href="#contacto" class="header-nav-cta">Quiero empezar</a>
     </nav>
     <button class="landing-mobile-btn" id="landingMobileBtn" aria-label="Abrir menu">
       <span class="landing-hamburger"></span>
@@ -205,10 +205,10 @@ body.js-loaded .fade-in.visible{opacity:1;transform:translateY(0)}
 <nav class="landing-nav-mobile" id="landingNavMobile" aria-label="Menu movil">
   <button class="landing-nav-mobile-close" id="landingNavClose" aria-label="Cerrar menu">&#10005;</button>
   <a href="/" class="lnm-link">Inicio</a>
-  <a href="#features" class="lnm-link" onclick="closeMobileMenu()">Funcionalidades</a>
+  <a href="#como-funciona" class="lnm-link" onclick="closeMobileMenu()">Como funciona</a>
+  <a href="#demo" class="lnm-link" onclick="closeMobileMenu()">Demo en vivo</a>
   <a href="#pricing" class="lnm-link" onclick="closeMobileMenu()">Precios</a>
-  <a href="#faq" class="lnm-link" onclick="closeMobileMenu()">FAQ</a>
-  <a href="#contacto" class="lnm-cta" onclick="closeMobileMenu()">Solicitar demo</a>
+  <a href="#contacto" class="lnm-cta" onclick="closeMobileMenu()">Quiero empezar</a>
 </nav>
 
 <main>
@@ -268,6 +268,56 @@ body.js-loaded .fade-in.visible{opacity:1;transform:translateY(0)}
     </div>
   </div>
 </section>
+
+<div class="divider"></div>
+
+<!-- ══ COMO FUNCIONA ══ -->
+<section class="section" id="como-funciona">
+  <div class="wrap">
+    <h2 class="sec-title fade-in">Como funciona</h2>
+    <p class="sec-sub fade-in">En 4 pasos tu negocio tiene un sistema de reservas profesional</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;" class="rfy-steps-grid">
+      <div class="fade-in" style="text-align:center;padding:28px 16px;background:rgba(0,209,255,.03);border:1px solid rgba(0,209,255,.1);border-radius:16px;position:relative;">
+        <div style="font-family:var(--font-display);font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:10px;">1</div>
+        <div style="font-family:var(--font-display);font-size:14px;font-weight:700;margin-bottom:6px;">Nos contactas</div>
+        <div style="font-size:12px;opacity:.55;line-height:1.5;">Nos cuentas tu negocio y elegimos el plan que mejor encaja.</div>
+      </div>
+      <div class="fade-in fade-in-delay-1" style="text-align:center;padding:28px 16px;background:rgba(200,117,51,.04);border:1px solid rgba(200,117,51,.12);border-radius:16px;">
+        <div style="font-family:var(--font-display);font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:10px;">2</div>
+        <div style="font-family:var(--font-display);font-size:14px;font-weight:700;margin-bottom:6px;">Lo configuramos</div>
+        <div style="font-size:12px;opacity:.55;line-height:1.5;">Creamos tu sistema con tus horarios, precios, extras e idiomas.</div>
+      </div>
+      <div class="fade-in fade-in-delay-2" style="text-align:center;padding:28px 16px;background:rgba(0,209,255,.03);border:1px solid rgba(0,209,255,.1);border-radius:16px;">
+        <div style="font-family:var(--font-display);font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:10px;">3</div>
+        <div style="font-family:var(--font-display);font-size:14px;font-weight:700;margin-bottom:6px;">Lo instalamos</div>
+        <div style="font-size:12px;opacity:.55;line-height:1.5;">Integramos Reservify en tu web (WordPress, Wix o cualquier otra). Tu no tocas nada.</div>
+      </div>
+      <div class="fade-in fade-in-delay-3" style="text-align:center;padding:28px 16px;background:rgba(200,117,51,.04);border:1px solid rgba(200,117,51,.12);border-radius:16px;">
+        <div style="font-family:var(--font-display);font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:10px;">4</div>
+        <div style="font-family:var(--font-display);font-size:14px;font-weight:700;margin-bottom:6px;">Listo para reservar</div>
+        <div style="font-size:12px;opacity:.55;line-height:1.5;">Tus clientes reservan solos. Tu gestionas todo desde el panel Reservify.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ DEMO EN VIVO ══ -->
+<section class="section" id="demo">
+  <div class="wrap">
+    <h2 class="sec-title fade-in">Pruebalo tu mismo</h2>
+    <p class="sec-sub fade-in">Esta es una demo real de Reservify. Toca el calendario, selecciona un horario y mira como funciona.</p>
+    <div class="fade-in" style="background:rgba(255,255,255,.02);border:1.5px solid rgba(200,117,51,.2);border-radius:20px;padding:32px;max-width:760px;margin:0 auto;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
+        <span style="background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;">Demo en vivo</span>
+        <span style="font-size:12px;opacity:.45;">Clinica Dental Sonrisa (datos ficticios)</span>
+      </div>
+      <div id="reservify-widget"></div>
+    </div>
+  </div>
+</section>
+<script src="/reservify/widget.js" data-client="clinica-demo"></script>
 
 <div class="divider"></div>
 
@@ -357,7 +407,76 @@ body.js-loaded .fade-in.visible{opacity:1;transform:translateY(0)}
 
 <div class="divider"></div>
 
-<!-- ══ CTA FINAL ══ -->
+<!-- ══ FORMULARIO ONBOARDING ══ -->
+<section class="section" id="contacto">
+  <div class="wrap">
+    <h2 class="sec-title fade-in">Empieza hoy</h2>
+    <p class="sec-sub fade-in">Cuentanos tu negocio y te preparamos una demo personalizada. Sin compromiso, sin permanencia.</p>
+    <div class="fade-in" style="max-width:560px;margin:0 auto;background:rgba(255,255,255,.02);border:1px solid rgba(200,117,51,.2);border-radius:20px;padding:36px 32px;">
+      <form id="rfy-onboarding" onsubmit="rfyOnboardSubmit(event)" novalidate>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;" class="rfy-ob-grid">
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.5;">Nombre *</label>
+            <input id="ob-name" type="text" placeholder="Tu nombre" required style="border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 14px;background:rgba(255,255,255,.04);color:#F0F0F0;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--copper-gold)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.5;">Nombre del negocio *</label>
+            <input id="ob-biz" type="text" placeholder="Ej: Clinica Dental Sonrisa" required style="border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 14px;background:rgba(255,255,255,.04);color:#F0F0F0;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--copper-gold)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.5;">Email *</label>
+            <input id="ob-email" type="email" placeholder="tu@negocio.com" required style="border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 14px;background:rgba(255,255,255,.04);color:#F0F0F0;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--copper-gold)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.5;">Telefono</label>
+            <input id="ob-phone" type="tel" placeholder="+34 600 000 000" style="border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 14px;background:rgba(255,255,255,.04);color:#F0F0F0;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--copper-gold)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.5;">Tipo de negocio</label>
+            <select id="ob-type" style="border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 14px;background:#0a0f1e;color:#F0F0F0;font-size:14px;font-family:inherit;outline:none;cursor:pointer;">
+              <option value="">Seleccionar...</option>
+              <option>Clinica / Centro medico</option>
+              <option>Sala de eventos</option>
+              <option>Restaurante / Bar</option>
+              <option>Centro deportivo / Gym</option>
+              <option>Estudio de belleza</option>
+              <option>Escape room</option>
+              <option>Coworking</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.5;">Web actual (si tiene)</label>
+            <input id="ob-web" type="url" placeholder="www.minegocio.com" style="border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 14px;background:rgba(255,255,255,.04);color:#F0F0F0;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--copper-gold)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;grid-column:1/-1;">
+            <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.5;">Cuentanos tu situacion</label>
+            <textarea id="ob-notes" rows="3" placeholder="Ej: Tenemos una clinica dental, queremos que los pacientes reserven online. Ahora lo hacen por telefono y perdemos muchas citas..." style="border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 14px;background:rgba(255,255,255,.04);color:#F0F0F0;font-size:14px;font-family:inherit;outline:none;resize:vertical;transition:border-color .2s;" onfocus="this.style.borderColor='var(--copper-gold)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"></textarea>
+          </div>
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;opacity:.55;cursor:pointer;line-height:1.5;">
+            <input type="checkbox" id="ob-legal" required style="margin-top:2px;flex-shrink:0;accent-color:var(--copper-gold);">
+            Acepto que Lucas y Leo Digital contacte conmigo sobre Reservify. No spam, solo lo que me interesa.
+          </label>
+        </div>
+        <button type="submit" style="width:100%;background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));color:#fff;border:none;border-radius:12px;padding:14px;font-family:var(--font-display);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.03em;">
+          Quiero mi demo personalizada →
+        </button>
+        <div id="ob-success" style="display:none;margin-top:14px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:14px;text-align:center;font-size:14px;color:#34d399;">
+          ✓ Recibido. Te contactamos en menos de 24h.
+        </div>
+        <div id="ob-error" style="display:none;margin-top:14px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px;text-align:center;font-size:14px;color:#f87171;">
+          Error al enviar. Escríbenos directamente a info@lucasyleodigital.com
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ CTA FINAL (WhatsApp backup) ══ -->
 <section class="section final-cta" id="contacto">
   <div class="wrap">
     <h2 class="fade-in">Deja de perder reservas</h2>
@@ -402,7 +521,56 @@ var btn=document.getElementById('landingMobileBtn'),nav=document.getElementById(
 if(btn)btn.onclick=function(){nav.classList.add('open');btn.classList.add('open');};
 if(cls)cls.onclick=function(){nav.classList.remove('open');btn.classList.remove('open');};
 function closeMobileMenu(){nav.classList.remove('open');btn.classList.remove('open');}
+
+// Formulario onboarding → envía a WhatsApp con los datos
+function rfyOnboardSubmit(e) {
+  e.preventDefault();
+  var name   = document.getElementById('ob-name').value.trim();
+  var biz    = document.getElementById('ob-biz').value.trim();
+  var email  = document.getElementById('ob-email').value.trim();
+  var phone  = document.getElementById('ob-phone').value.trim();
+  var type   = document.getElementById('ob-type').value;
+  var web    = document.getElementById('ob-web').value.trim();
+  var notes  = document.getElementById('ob-notes').value.trim();
+  var legal  = document.getElementById('ob-legal').checked;
+
+  if (!name || !biz || !email || !legal) {
+    document.getElementById('ob-error').style.display = 'block';
+    document.getElementById('ob-error').textContent = 'Rellena los campos obligatorios (nombre, negocio, email y acepta las condiciones).';
+    return;
+  }
+
+  var msg = '🚀 *Nueva solicitud Reservify*\n\n' +
+    '👤 Nombre: ' + name + '\n' +
+    '🏢 Negocio: ' + biz + '\n' +
+    '📧 Email: ' + email + '\n' +
+    (phone ? '📞 Telefono: ' + phone + '\n' : '') +
+    (type ? '🏷️ Tipo: ' + type + '\n' : '') +
+    (web ? '🌐 Web: ' + web + '\n' : '') +
+    (notes ? '\n📝 ' + notes : '');
+
+  // Mostrar éxito y abrir WhatsApp
+  document.getElementById('ob-success').style.display = 'block';
+  document.getElementById('ob-error').style.display = 'none';
+  document.getElementById('rfy-onboarding').style.opacity = '.5';
+
+  setTimeout(function() {
+    window.open('https://wa.me/34624029617?text=' + encodeURIComponent(msg), '_blank');
+  }, 500);
+}
 </script>
+
+<!-- Responsive para pasos y grid onboarding -->
+<style>
+@media(max-width:768px){
+  .rfy-steps-grid{grid-template-columns:1fr 1fr!important;}
+  .rfy-ob-grid{grid-template-columns:1fr!important;}
+  .rfy-ob-grid > div[style*="grid-column"]{grid-column:span 1!important;}
+}
+@media(max-width:480px){
+  .rfy-steps-grid{grid-template-columns:1fr!important;}
+}
+</style>
 
 </body>
 </html>
