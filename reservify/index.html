@@ -11,235 +11,313 @@
 <meta property="og:description" content="Tu negocio necesita un sistema de reservas que funcione solo. Calendario, bloqueos automáticos, emails y panel de gestión. Desde 29€/mes.">
 <meta property="og:url" content="https://www.lucasyleodigital.com/reservify/">
 <meta property="og:type" content="product">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#050505;--blue:#00D1FF;--copper:#C87533;--bronze:#8B4513;--white:#F0F0F0;--gray:#888;--card:rgba(255,255,255,.02);--border:rgba(255,255,255,.07);--font-d:'Space Grotesk',sans-serif;--font-b:'Inter',sans-serif;}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;background:var(--bg);}
-body{font-family:var(--font-b);color:var(--white);background:var(--bg);line-height:1.6;overflow-x:hidden;}
+:root{--deep-space:#050505;--electric-blue:#00D1FF;--cyber-white:#F0F0F0;--copper-gold:#C87533;--warm-bronze:#8B4513;--font-display:'Space Grotesk',-apple-system,sans-serif;--font-body:'Inter',-apple-system,sans-serif;--ease-out-expo:cubic-bezier(0.16,1,0.3,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;background:var(--deep-space)}
+body{font-family:var(--font-body);background:transparent;color:var(--cyber-white);overflow-x:hidden;line-height:1.6}
 
-/* NAV */
-.nav{padding:18px 0;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(5,5,5,.92);backdrop-filter:blur(16px);}
-.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;}
-.nav-logo{font-family:var(--font-d);font-size:18px;font-weight:800;text-decoration:none;color:var(--white);}
-.nav-logo span{background:linear-gradient(90deg,var(--copper),var(--bronze));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.nav-links{display:flex;gap:24px;align-items:center;}
-.nav-links a{font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;}
-.nav-links a:hover{color:var(--blue);}
-.nav-cta{padding:8px 18px;background:linear-gradient(135deg,var(--copper),var(--bronze));color:#fff!important;border-radius:8px;font-weight:600;font-size:12px;transition:all .2s;}
-.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(200,117,51,.35);}
+/* ══ ANIMATED BACKGROUND ══ */
+.animated-background{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden}
+.particle{position:absolute;width:2px;height:2px;background:var(--electric-blue);box-shadow:0 0 10px var(--electric-blue);animation:float-particle linear infinite;border-radius:50%;contain:layout paint;will-change:transform}
+@keyframes float-particle{0%{transform:translateY(100vh) translateX(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-100vh) translateX(100px);opacity:0}}
+.circuit-line{position:absolute;background:linear-gradient(90deg,transparent 0%,var(--electric-blue) 50%,transparent 100%);height:1px;opacity:0.2;animation:circuit-move 8s linear infinite}
+@keyframes circuit-move{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
+.glow-orb{position:absolute;filter:blur(80px);animation:float-orb 20s ease-in-out infinite;contain:layout paint;will-change:transform}
+@keyframes float-orb{0%,100%{transform:translate(0,0)}33%{transform:translate(100px,-100px)}66%{transform:translate(-100px,100px)}}
+.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,209,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,209,255,0.04) 1px,transparent 1px);background-size:40px 40px;z-index:0;pointer-events:none}
 
-/* CONTAINER */
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+/* ══ HEADER ══ */
+header{padding:22px 0;border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:100;background:rgba(5,5,5,.92);backdrop-filter:blur(16px)}
+header .container{display:flex;align-items:center;justify-content:space-between}
+.logo-wrap{display:flex;align-items:center;gap:14px;text-decoration:none}
+.logo-img{height:38px;width:auto;filter:drop-shadow(0 0 4px rgba(200,117,51,0.25));transition:all 0.3s}
+.logo-img:hover{filter:drop-shadow(0 0 8px rgba(200,117,51,0.5));transform:scale(1.04)}
+.logo-text{display:flex;flex-direction:column;gap:2px}
+.logo-name{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--cyber-white)}
+.logo-name span{background:linear-gradient(90deg,var(--copper-gold),var(--warm-bronze));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo-sub{font-size:12px;font-style:italic;color:rgba(255,255,255,0.5);letter-spacing:0.3px}
+.header-nav{display:flex;gap:20px;align-items:center}
+.header-nav a{font-size:13px;color:rgba(255,255,255,0.55);transition:color .2s;text-decoration:none}
+.header-nav a:hover{color:var(--electric-blue)}
+.header-nav-cta{padding:8px 18px;background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));color:#fff!important;border-radius:8px;font-size:12px;font-weight:600;transition:all .2s}
+.header-nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(200,117,51,0.35)}
 
-/* HERO */
-.hero{padding:100px 0 80px;text-align:center;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(200,117,51,.08);border:1px solid rgba(200,117,51,.25);padding:7px 18px;border-radius:50px;font-size:12px;font-weight:600;color:var(--copper);margin-bottom:28px;font-family:var(--font-d);}
-.hero h1{font-family:var(--font-d);font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.1;margin-bottom:20px;letter-spacing:-.02em;}
-.hero h1 .grad{background:linear-gradient(90deg,var(--blue),#0099CC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hero-sub{font-size:clamp(15px,2vw,18px);opacity:.65;max-width:600px;margin:0 auto 40px;line-height:1.7;}
-.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-.btn-p{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--blue),#0088BB);color:#050505;font-family:var(--font-d);font-size:14px;font-weight:700;padding:16px 32px;border-radius:50px;text-decoration:none;transition:all .2s;box-shadow:0 8px 28px rgba(0,209,255,.25);text-transform:uppercase;letter-spacing:.05em;}
-.btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(0,209,255,.4);}
-.btn-s{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--copper);background:rgba(200,117,51,.06);color:var(--copper);font-family:var(--font-d);font-size:14px;font-weight:700;padding:14px 28px;border-radius:50px;text-decoration:none;transition:all .2s;letter-spacing:.04em;}
-.btn-s:hover{background:var(--copper);color:#050505;box-shadow:0 8px 24px rgba(200,117,51,.3);}
+/* Mobile menu */
+.landing-mobile-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:1001}
+.landing-hamburger{display:block;width:26px;height:2px;background:#F0F0F0;position:relative;transition:all .3s}
+.landing-hamburger::before,.landing-hamburger::after{content:'';position:absolute;width:26px;height:2px;background:#F0F0F0;transition:all .3s}
+.landing-hamburger::before{top:-7px}
+.landing-hamburger::after{bottom:-7px}
+.landing-mobile-btn.open .landing-hamburger{background:transparent}
+.landing-mobile-btn.open .landing-hamburger::before{transform:rotate(45deg);top:0}
+.landing-mobile-btn.open .landing-hamburger::after{transform:rotate(-45deg);bottom:0}
+.landing-nav-mobile{display:none;position:fixed;inset:0;background:rgba(5,5,5,0.97);backdrop-filter:blur(20px);z-index:1000;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:40px 24px}
+.landing-nav-mobile.open{display:flex;animation:landMenuIn .3s ease}
+@keyframes landMenuIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.landing-nav-mobile .lnm-link{font-family:var(--font-display);font-size:26px;font-weight:700;color:#F0F0F0;text-decoration:none;padding:14px 32px;border-radius:12px;width:100%;max-width:300px;text-align:center;transition:all .3s;border:1px solid transparent}
+.landing-nav-mobile .lnm-link:hover{color:var(--electric-blue);border-color:rgba(0,209,255,0.2);background:rgba(0,209,255,0.05)}
+.landing-nav-mobile .lnm-cta{margin-top:16px;padding:14px 32px;background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));color:#fff;font-family:var(--font-display);font-size:18px;font-weight:700;border-radius:12px;text-decoration:none;text-align:center;width:100%;max-width:300px}
+.landing-nav-mobile-close{position:absolute;top:20px;right:20px;background:none;border:none;color:#F0F0F0;font-size:32px;cursor:pointer;padding:8px;line-height:1;opacity:.7;transition:opacity .2s}
+.landing-nav-mobile-close:hover{opacity:1}
 
-/* DIVIDER */
-.div{height:1px;background:linear-gradient(90deg,transparent,rgba(0,209,255,.15),rgba(200,117,51,.15),transparent);}
+/* ══ LAYOUT ══ */
+.container,.wrap{max-width:1080px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.section{padding:96px 0;position:relative;z-index:1}
 
-/* FEATURES */
-.features{padding:80px 0;}
-.sec-title{font-family:var(--font-d);font-size:clamp(24px,3.5vw,38px);font-weight:800;text-align:center;margin-bottom:14px;}
-.sec-sub{text-align:center;opacity:.55;font-size:15px;max-width:520px;margin:0 auto 48px;}
-.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.feat-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px 24px;transition:all .3s;position:relative;overflow:hidden;}
-.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:0;transition:opacity .3s;}
-.feat-card:hover{border-color:rgba(0,209,255,.2);transform:translateY(-4px);}
-.feat-card:hover::before{opacity:1;}
-.feat-ico{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(0,30,50,.9),rgba(0,15,30,.95));border:1px solid rgba(0,209,255,.12);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
-.feat-ico svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
-.feat-card h3{font-family:var(--font-d);font-size:16px;font-weight:700;margin-bottom:8px;}
-.feat-card p{font-size:13px;line-height:1.65;opacity:.6;}
+/* ══ HERO ══ */
+.hero{min-height:80vh;display:flex;align-items:center;padding:80px 0 60px;text-align:center;position:relative}
+.hero-logo-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:420px;height:420px;opacity:0.06;filter:blur(8px) saturate(0.3);pointer-events:none;z-index:0;animation:heroFloat 6s ease-in-out infinite}
+@keyframes heroFloat{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-16px)}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(200,117,51,.08);border:1px solid rgba(200,117,51,.25);padding:7px 18px;border-radius:50px;font-size:12px;font-weight:600;color:var(--copper-gold);margin-bottom:28px;font-family:var(--font-display)}
+.hero h1{font-family:var(--font-display);font-size:clamp(30px,5.5vw,56px);font-weight:800;line-height:1.1;margin-bottom:24px;letter-spacing:-.02em;position:relative;z-index:1}
+.hero h1 .grad{background:linear-gradient(90deg,var(--electric-blue),#0099CC);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:clamp(15px,2vw,18px);opacity:.65;max-width:620px;margin:0 auto 44px;line-height:1.75;position:relative;z-index:1}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.btn-p{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--electric-blue),#0088BB);color:#050505;font-family:var(--font-display);font-size:14px;font-weight:700;padding:16px 32px;border-radius:50px;text-decoration:none;transition:all .2s;box-shadow:0 8px 28px rgba(0,209,255,.25);text-transform:uppercase;letter-spacing:.05em}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(0,209,255,.4)}
+.btn-s{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--copper-gold);background:rgba(200,117,51,.06);color:var(--copper-gold);font-family:var(--font-display);font-size:14px;font-weight:700;padding:14px 28px;border-radius:50px;text-decoration:none;transition:all .2s;letter-spacing:.04em}
+.btn-s:hover{background:var(--copper-gold);color:#050505;box-shadow:0 8px 24px rgba(200,117,51,.3);transform:translateY(-2px)}
+.btn-wa{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:white;font-family:var(--font-display);font-size:14px;font-weight:700;padding:16px 30px;border-radius:50px;text-decoration:none;transition:all .2s;box-shadow:0 8px 28px rgba(37,211,102,.3);text-transform:uppercase;letter-spacing:.05em}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(37,211,102,.5)}
+.btn-wa svg{width:20px;height:20px;fill:white;flex-shrink:0}
 
-/* PRICING */
-.pricing{padding:80px 0;background:linear-gradient(180deg,transparent,rgba(200,117,51,.02),transparent);}
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start;}
-.price-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 28px;text-align:center;transition:all .3s;}
-.price-card.pop{border-color:rgba(200,117,51,.4);background:linear-gradient(160deg,rgba(200,117,51,.06),rgba(5,5,5,1) 60%);transform:scale(1.04);}
-.price-card.pop .price-badge{display:inline-block;}
-.price-badge{display:none;font-size:11px;font-weight:700;background:linear-gradient(135deg,var(--copper),var(--bronze));color:#fff;padding:4px 14px;border-radius:20px;margin-bottom:12px;font-family:var(--font-d);letter-spacing:.04em;}
-.price-name{font-family:var(--font-d);font-size:20px;font-weight:800;margin-bottom:4px;}
-.price-val{font-family:var(--font-d);font-size:48px;font-weight:800;margin:16px 0 4px;letter-spacing:-.02em;}
-.price-val sup{font-size:22px;vertical-align:super;}
-.price-val span{font-size:16px;font-weight:500;opacity:.5;}
-.price-desc{font-size:13px;opacity:.5;margin-bottom:24px;}
-.price-list{list-style:none;text-align:left;margin-bottom:28px;display:flex;flex-direction:column;gap:10px;}
-.price-list li{font-size:13px;display:flex;align-items:flex-start;gap:8px;line-height:1.5;opacity:.75;}
-.price-list li::before{content:'✓';color:var(--blue);font-weight:700;flex-shrink:0;margin-top:1px;}
-.price-btn{display:block;width:100%;padding:14px;border-radius:12px;font-family:var(--font-d);font-size:14px;font-weight:700;text-decoration:none;text-align:center;transition:all .2s;}
-.price-btn-fill{background:linear-gradient(135deg,var(--copper),var(--bronze));color:#fff;box-shadow:0 4px 16px rgba(200,117,51,.3);}
-.price-btn-fill:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,117,51,.45);}
-.price-btn-out{border:2px solid rgba(255,255,255,.15);color:var(--white);background:transparent;}
-.price-btn-out:hover{border-color:var(--blue);color:var(--blue);}
+/* ══ DIVIDER ══ */
+.divider{height:1px;margin:0;background:linear-gradient(90deg,transparent,rgba(0,209,255,0.2),rgba(200,117,51,0.2),transparent);position:relative;z-index:1}
 
-/* TESTIMONIAL */
-.testi{padding:60px 0;}
-.testi-card{max-width:640px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 32px;text-align:center;}
-.testi-quote{font-size:16px;line-height:1.8;font-style:italic;opacity:.8;margin-bottom:20px;}
-.testi-name{font-family:var(--font-d);font-weight:700;font-size:14px;}
-.testi-role{font-size:12px;opacity:.5;}
+/* ══ FEATURES ══ */
+.sec-title{font-family:var(--font-display);font-size:clamp(24px,3.5vw,38px);font-weight:800;text-align:center;margin-bottom:14px;letter-spacing:-.02em}
+.sec-sub{text-align:center;opacity:.55;font-size:15px;max-width:520px;margin:0 auto 48px;line-height:1.7}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:32px 24px;transition:all .3s;position:relative;overflow:hidden}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--electric-blue),transparent);opacity:0;transition:opacity .3s}
+.feat-card:hover{border-color:rgba(0,209,255,.2);transform:translateY(-4px)}
+.feat-card:hover::before{opacity:1}
+.feat-ico{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(0,30,50,.9),rgba(0,15,30,.95));border:1px solid rgba(0,209,255,0.12);display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.feat-ico svg{width:24px;height:24px;stroke:var(--electric-blue);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(0,209,255,.4))}
+.feat-card h3{font-family:var(--font-display);font-size:16px;font-weight:700;margin-bottom:8px}
+.feat-card p{font-size:13px;line-height:1.65;opacity:.6}
 
-/* FAQ */
-.faq{padding:80px 0;}
-.faq-list{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:10px;}
-.faq-item{border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .3s;}
-.faq-item:hover{border-color:rgba(0,209,255,.15);}
-.faq-q{padding:18px 22px;font-family:var(--font-d);font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:transparent;border:none;color:var(--white);width:100%;text-align:left;}
-.faq-q::after{content:'+';font-size:20px;opacity:.4;transition:transform .3s;}
-.faq-item.open .faq-q::after{transform:rotate(45deg);}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
-.faq-item.open .faq-a{max-height:200px;}
-.faq-a p{padding:0 22px 18px;font-size:14px;opacity:.6;line-height:1.7;}
+/* ══ PRICING ══ */
+.pricing{background:linear-gradient(180deg,transparent,rgba(200,117,51,.02),transparent)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+.price-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:36px 28px;text-align:center;transition:all .3s}
+.price-card.pop{border-color:rgba(200,117,51,.4);background:linear-gradient(160deg,rgba(200,117,51,.06),rgba(5,5,5,1) 60%);transform:scale(1.04)}
+.price-card.pop .price-badge{display:inline-block}
+.price-badge{display:none;font-size:11px;font-weight:700;background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));color:#fff;padding:4px 14px;border-radius:20px;margin-bottom:12px;font-family:var(--font-display);letter-spacing:.04em}
+.price-name{font-family:var(--font-display);font-size:20px;font-weight:800;margin-bottom:4px}
+.price-val{font-family:var(--font-display);font-size:48px;font-weight:800;margin:16px 0 4px;letter-spacing:-.02em}
+.price-val sup{font-size:22px;vertical-align:super}
+.price-val span{font-size:16px;font-weight:500;opacity:.5}
+.price-desc{font-size:13px;opacity:.5;margin-bottom:24px}
+.price-list{list-style:none;text-align:left;margin-bottom:28px;display:flex;flex-direction:column;gap:10px}
+.price-list li{font-size:13px;display:flex;align-items:flex-start;gap:8px;line-height:1.5;opacity:.75}
+.price-list li::before{content:'\2713';color:var(--electric-blue);font-weight:700;flex-shrink:0;margin-top:1px}
+.price-btn{display:block;width:100%;padding:14px;border-radius:12px;font-family:var(--font-display);font-size:14px;font-weight:700;text-decoration:none;text-align:center;transition:all .2s}
+.price-btn-fill{background:linear-gradient(135deg,var(--copper-gold),var(--warm-bronze));color:#fff;box-shadow:0 4px 16px rgba(200,117,51,.3)}
+.price-btn-fill:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,117,51,.45)}
+.price-btn-out{border:2px solid rgba(255,255,255,.15);color:var(--cyber-white);background:transparent}
+.price-btn-out:hover{border-color:var(--electric-blue);color:var(--electric-blue)}
 
-/* CTA FINAL */
-.final-cta{padding:80px 0;text-align:center;}
-.final-cta h2{font-family:var(--font-d);font-size:clamp(24px,3.5vw,36px);font-weight:800;margin-bottom:16px;}
-.final-cta p{opacity:.55;font-size:15px;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto;}
+/* ══ TESTIMONIAL ══ */
+.testi-card{max-width:640px;margin:0 auto;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:36px 32px;text-align:center}
+.testi-quote{font-size:16px;line-height:1.8;font-style:italic;opacity:.8;margin-bottom:20px}
+.testi-name{font-family:var(--font-display);font-weight:700;font-size:14px}
+.testi-role{font-size:12px;opacity:.5}
 
-/* FOOTER */
-.foot{padding:40px 0;border-top:1px solid var(--border);text-align:center;}
-.foot-brand{font-family:var(--font-d);font-size:15px;font-weight:700;margin-bottom:6px;}
-.foot-brand span{background:linear-gradient(90deg,var(--copper),var(--bronze));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.foot-copy{font-size:11px;opacity:.3;}
+/* ══ FAQ ══ */
+.faq-list{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.faq-item{border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;transition:border-color .3s}
+.faq-item:hover{border-color:rgba(0,209,255,.15)}
+.faq-q{padding:18px 22px;font-family:var(--font-display);font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:transparent;border:none;color:var(--cyber-white);width:100%;text-align:left}
+.faq-q::after{content:'+';font-size:20px;opacity:.4;transition:transform .3s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-item.open .faq-a{max-height:200px}
+.faq-a p{padding:0 22px 18px;font-size:14px;opacity:.6;line-height:1.7}
 
+/* ══ CTA FINAL ══ */
+.final-cta{text-align:center}
+.final-cta h2{font-family:var(--font-display);font-size:clamp(24px,3.5vw,36px);font-weight:800;margin-bottom:16px}
+.final-cta p{opacity:.55;font-size:15px;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+
+/* ══ FOOTER ══ */
+footer{padding:48px 0 32px;border-top:1px solid rgba(255,255,255,0.06);position:relative;z-index:1;text-align:center}
+.footer-logo{font-family:var(--font-display);font-size:17px;font-weight:700;margin-bottom:6px}
+.footer-logo span{background:linear-gradient(90deg,var(--copper-gold),var(--warm-bronze));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.footer-copy{font-size:12px;opacity:.25}
+
+/* ══ FADE IN ══ */
+body.js-loaded .fade-in{opacity:0;transform:translateY(20px);transition:opacity .65s var(--ease-out-expo),transform .65s var(--ease-out-expo);will-change:opacity,transform}
+body.js-loaded .fade-in.visible{opacity:1;transform:translateY(0)}
+.fade-in-delay-1{transition-delay:.1s}.fade-in-delay-2{transition-delay:.2s}.fade-in-delay-3{transition-delay:.3s}
+
+/* ══ RESPONSIVE ══ */
 @media(max-width:768px){
-  .hero{padding:60px 0 50px;}
-  .feat-grid,.price-grid{grid-template-columns:1fr;}
-  .price-card.pop{transform:none;}
-  .hero-ctas{flex-direction:column;align-items:center;}
-  .btn-p,.btn-s{width:100%;max-width:320px;justify-content:center;text-align:center;}
-  .nav-links{display:none;}
+  .section{padding:64px 0!important}
+  header{padding:14px 0}.logo-name{font-size:15px}.logo-sub{display:none}
+  .header-nav{display:none!important}
+  .landing-mobile-btn{display:block!important}
+  .hero{min-height:auto!important;padding:60px 0 48px!important}
+  .hero h1{font-size:clamp(26px,7vw,38px)!important}
+  .hero-logo-bg{width:240px!important;height:240px!important}
+  .feat-grid,.price-grid{grid-template-columns:1fr!important}
+  .price-card.pop{transform:none}
+  .hero-ctas{flex-direction:column;align-items:center}
+  .btn-p,.btn-s,.btn-wa{width:100%;max-width:320px;justify-content:center;text-align:center}
+  .sec-title{font-size:clamp(22px,6vw,32px)!important}
 }
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="/" class="nav-logo">Lucas y <span>Leo</span> Digital</a>
-    <div class="nav-links">
+<!-- Animated Background -->
+<div class="animated-background" id="animatedBg"></div>
+<div class="grid-overlay"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <a href="/" class="logo-wrap" aria-label="Lucas y Leo Digital">
+      <picture><source srcset="/images/logo_sin_fondo-sm.webp" type="image/webp"><img src="/images/logo_sin_fondo.png" alt="Lucas y Leo Digital" class="logo-img" width="38" height="38" loading="eager"></picture>
+      <div class="logo-text">
+        <span class="logo-name">Lucas y Leo <span>Digital</span></span>
+        <span class="logo-sub">Menos redes / mas sistema</span>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <a href="/">Inicio</a>
       <a href="#features">Funcionalidades</a>
       <a href="#pricing">Precios</a>
       <a href="#faq">FAQ</a>
-      <a href="#contacto" class="nav-cta">Solicitar demo</a>
-    </div>
+      <a href="#contacto" class="header-nav-cta">Solicitar demo</a>
+    </nav>
+    <button class="landing-mobile-btn" id="landingMobileBtn" aria-label="Abrir menu">
+      <span class="landing-hamburger"></span>
+    </button>
   </div>
+</header>
+
+<!-- Menu Movil -->
+<nav class="landing-nav-mobile" id="landingNavMobile" aria-label="Menu movil">
+  <button class="landing-nav-mobile-close" id="landingNavClose" aria-label="Cerrar menu">&#10005;</button>
+  <a href="/" class="lnm-link">Inicio</a>
+  <a href="#features" class="lnm-link" onclick="closeMobileMenu()">Funcionalidades</a>
+  <a href="#pricing" class="lnm-link" onclick="closeMobileMenu()">Precios</a>
+  <a href="#faq" class="lnm-link" onclick="closeMobileMenu()">FAQ</a>
+  <a href="#contacto" class="lnm-cta" onclick="closeMobileMenu()">Solicitar demo</a>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
+<main>
+
+<!-- ══ HERO ══ -->
+<section class="hero section">
+  <img src="https://firebasestorage.googleapis.com/v0/b/blink-451505.firebasestorage.app/o/user-uploads%2FKOP4qekO2PcHMvwDZsL7FS5fK5f1%2Flogo_sin_fondo__1e540d5a.png?alt=media&token=b832e7f3-ed17-49d7-995f-d8e9ce77d53a" alt="" class="hero-logo-bg" aria-hidden="true" width="420" height="420" loading="eager">
   <div class="wrap">
-    <div class="hero-badge">Sistema de reservas inteligente</div>
-    <h1>Tu negocio necesita un<br>sistema de reservas<br>que <span class="grad">funcione solo</span></h1>
-    <p class="hero-sub">Calendario online, franjas horarias, bloqueo automático, emails al cliente y panel de gestión. Todo integrado en tu web. Sin plugins. Sin cuotas ocultas.</p>
-    <div class="hero-ctas">
+    <div class="hero-badge fade-in">Sistema de reservas inteligente</div>
+    <h1 class="fade-in">Tu negocio necesita un<br>sistema de reservas<br>que <span class="grad">funcione solo</span></h1>
+    <p class="hero-sub fade-in">Calendario online, franjas horarias, bloqueo automatico, emails al cliente y panel de gestion. Todo integrado en tu web. Sin plugins. Sin cuotas ocultas.</p>
+    <div class="hero-ctas fade-in">
       <a href="#contacto" class="btn-p">Solicitar demo gratuita</a>
       <a href="#pricing" class="btn-s">Ver precios</a>
     </div>
   </div>
 </section>
 
-<div class="div"></div>
+<div class="divider"></div>
 
-<!-- FEATURES -->
-<section class="features" id="features">
+<!-- ══ FEATURES ══ -->
+<section class="section" id="features">
   <div class="wrap">
-    <h2 class="sec-title">Todo lo que necesitas</h2>
-    <p class="sec-sub">Un sistema completo que se adapta a tu negocio, no al revés</p>
+    <h2 class="sec-title fade-in">Todo lo que necesitas</h2>
+    <p class="sec-sub fade-in">Un sistema completo que se adapta a tu negocio, no al reves</p>
     <div class="feat-grid">
-      <div class="feat-card">
+      <div class="feat-card fade-in">
         <div class="feat-ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
         <h3>Calendario inteligente</h3>
-        <p>Tus clientes ven en tiempo real qué días y horarios están disponibles. Sin llamadas, sin esperas.</p>
+        <p>Tus clientes ven en tiempo real que dias y horarios estan disponibles. Sin llamadas, sin esperas.</p>
       </div>
-      <div class="feat-card">
+      <div class="feat-card fade-in fade-in-delay-1">
         <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>Bloqueo automático</h3>
+        <h3>Bloqueo automatico</h3>
         <p>Cuando un cliente reserva, el horario se bloquea al instante para todos. Cero solapamientos.</p>
       </div>
-      <div class="feat-card">
+      <div class="feat-card fade-in fade-in-delay-2">
         <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-        <h3>Emails automáticos</h3>
-        <p>El cliente recibe confirmación y tú un resumen completo. Todo sin mover un dedo.</p>
+        <h3>Emails automaticos</h3>
+        <p>El cliente recibe confirmacion y tu un resumen completo. Todo sin mover un dedo.</p>
       </div>
-      <div class="feat-card">
+      <div class="feat-card fade-in">
         <div class="feat-ico"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-        <h3>Panel de gestión</h3>
+        <h3>Panel de gestion</h3>
         <p>Reservify: tu panel privado para gestionar reservas, tarifas, extras, bloqueos y clientes.</p>
       </div>
-      <div class="feat-card">
+      <div class="feat-card fade-in fade-in-delay-1">
         <div class="feat-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        <h3>Web bilingüe</h3>
-        <p>Soporte nativo para dos idiomas. Perfecto para negocios en Cataluña, Baleares o cualquier zona bilingüe.</p>
+        <h3>Web bilingue</h3>
+        <p>Soporte nativo para dos idiomas. Perfecto para negocios en cualquier zona bilingue.</p>
       </div>
-      <div class="feat-card">
+      <div class="feat-card fade-in fade-in-delay-2">
         <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
         <h3>Tarifas flexibles</h3>
-        <p>Precios por día, turnos estándar y ampliados, días especiales, extras de catering. Todo configurable.</p>
+        <p>Precios por dia, turnos estandar y ampliados, dias especiales, extras de catering. Todo configurable.</p>
       </div>
     </div>
   </div>
 </section>
 
-<div class="div"></div>
+<div class="divider"></div>
 
-<!-- PRICING -->
-<section class="pricing" id="pricing">
+<!-- ══ PRICING ══ -->
+<section class="section pricing" id="pricing">
   <div class="wrap">
-    <h2 class="sec-title">Planes transparentes</h2>
-    <p class="sec-sub">Sin permanencia. Sin sorpresas. Cancela cuando quieras.</p>
+    <h2 class="sec-title fade-in">Planes transparentes</h2>
+    <p class="sec-sub fade-in">Sin permanencia. Sin sorpresas. Cancela cuando quieras.</p>
     <div class="price-grid">
-      <div class="price-card">
-        <div class="price-name">Básico</div>
-        <div class="price-val"><sup>€</sup>29<span>/mes</span></div>
+      <div class="price-card fade-in">
+        <div class="price-name">Basico</div>
+        <div class="price-val"><sup>&euro;</sup>29<span>/mes</span></div>
         <div class="price-desc">Para negocios que empiezan</div>
         <ul class="price-list">
           <li>Calendario online en tu web</li>
           <li>Franjas horarias configurables</li>
-          <li>Bloqueo automático de horarios</li>
-          <li>Emails de confirmación</li>
-          <li>Panel Reservify básico</li>
+          <li>Bloqueo automatico de horarios</li>
+          <li>Emails de confirmacion</li>
+          <li>Panel Reservify basico</li>
           <li>1 idioma</li>
         </ul>
         <a href="#contacto" class="price-btn price-btn-out">Empezar</a>
       </div>
-      <div class="price-card pop">
-        <div class="price-badge">MÁS POPULAR</div>
+      <div class="price-card pop fade-in fade-in-delay-1">
+        <div class="price-badge">MAS POPULAR</div>
         <div class="price-name">Pro</div>
-        <div class="price-val"><sup>€</sup>49<span>/mes</span></div>
+        <div class="price-val"><sup>&euro;</sup>49<span>/mes</span></div>
         <div class="price-desc">Para negocios en crecimiento</div>
         <ul class="price-list">
-          <li>Todo del plan Básico</li>
-          <li>Bilingüe (CA/ES o cualquier combo)</li>
+          <li>Todo del plan Basico</li>
+          <li>Bilingue (CA/ES o cualquier combo)</li>
           <li>Extras y catering configurable</li>
-          <li>Días especiales y fechas concretas</li>
+          <li>Dias especiales y fechas concretas</li>
           <li>Turnos ampliados</li>
-          <li>Códigos promocionales</li>
-          <li>WhatsApp automático</li>
+          <li>Codigos promocionales</li>
+          <li>WhatsApp automatico</li>
         </ul>
         <a href="#contacto" class="price-btn price-btn-fill">Empezar</a>
       </div>
-      <div class="price-card">
+      <div class="price-card fade-in fade-in-delay-2">
         <div class="price-name">Premium</div>
-        <div class="price-val"><sup>€</sup>79<span>/mes</span></div>
+        <div class="price-val"><sup>&euro;</sup>79<span>/mes</span></div>
         <div class="price-desc">Setup completo + soporte</div>
         <ul class="price-list">
           <li>Todo del plan Pro</li>
-          <li>Setup e integración personalizada</li>
-          <li>Diseño adaptado a tu marca</li>
+          <li>Setup e integracion personalizada</li>
+          <li>Diseno adaptado a tu marca</li>
           <li>Soporte prioritario por WhatsApp</li>
           <li>Actualizaciones y mejoras incluidas</li>
-          <li>Formación 1:1 para gestionar</li>
+          <li>Formacion 1:1 para gestionar</li>
         </ul>
         <a href="#contacto" class="price-btn price-btn-out">Contactar</a>
       </div>
@@ -247,12 +325,12 @@ body{font-family:var(--font-b);color:var(--white);background:var(--bg);line-heig
   </div>
 </section>
 
-<div class="div"></div>
+<div class="divider"></div>
 
-<!-- TESTIMONIAL -->
-<section class="testi">
+<!-- ══ TESTIMONIAL ══ -->
+<section class="section">
   <div class="wrap">
-    <div class="testi-card">
+    <div class="testi-card fade-in">
       <p class="testi-quote">"Desde que tenemos Reservify, los clientes reservan solos y yo solo tengo que confirmar. Me ha quitado horas de WhatsApp y llamadas. El sistema funciona perfecto."</p>
       <div class="testi-name">Laura</div>
       <div class="testi-role">EspaiFest — Sala de eventos, Menorca</div>
@@ -260,48 +338,33 @@ body{font-family:var(--font-b);color:var(--white);background:var(--bg);line-heig
   </div>
 </section>
 
-<div class="div"></div>
+<div class="divider"></div>
 
-<!-- FAQ -->
-<section class="faq" id="faq">
+<!-- ══ FAQ ══ -->
+<section class="section" id="faq">
   <div class="wrap">
-    <h2 class="sec-title">Preguntas frecuentes</h2>
-    <p class="sec-sub">Todo lo que necesitas saber antes de empezar</p>
+    <h2 class="sec-title fade-in">Preguntas frecuentes</h2>
+    <p class="sec-sub fade-in">Todo lo que necesitas saber antes de empezar</p>
     <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Necesito conocimientos técnicos?</button>
-        <div class="faq-a"><p>No. Nosotros nos encargamos de la instalación y configuración. Tú solo tienes que usar el panel de Reservify, que es tan fácil como usar WhatsApp.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Se integra con mi web actual?</button>
-        <div class="faq-a"><p>Sí. Reservify se integra directamente en tu web existente. Si no tienes web, también podemos crearla con el sistema incluido.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Puedo cambiar las tarifas y horarios yo misma?</button>
-        <div class="faq-a"><p>Por supuesto. Desde el panel de Reservify puedes cambiar precios, añadir turnos, crear días especiales y gestionar todo sin necesidad de contactarnos.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Hay permanencia?</button>
-        <div class="faq-a"><p>No. Puedes cancelar cuando quieras. Sin penalizaciones, sin letra pequeña.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">¿Qué tipo de negocios pueden usarlo?</button>
-        <div class="faq-a"><p>Cualquier negocio que trabaje con reservas: salas de eventos, restaurantes, centros deportivos, clínicas, estudios de belleza, escape rooms, espacios de coworking...</p></div>
-      </div>
+      <div class="faq-item fade-in"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Necesito conocimientos tecnicos?</button><div class="faq-a"><p>No. Nosotros nos encargamos de la instalacion y configuracion. Tu solo tienes que usar el panel de Reservify, que es tan facil como usar WhatsApp.</p></div></div>
+      <div class="faq-item fade-in"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Se integra con mi web actual?</button><div class="faq-a"><p>Si. Reservify se integra directamente en tu web existente. Si no tienes web, tambien podemos crearla con el sistema incluido.</p></div></div>
+      <div class="faq-item fade-in"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Puedo cambiar las tarifas y horarios yo misma?</button><div class="faq-a"><p>Por supuesto. Desde el panel de Reservify puedes cambiar precios, anadir turnos, crear dias especiales y gestionar todo sin necesidad de contactarnos.</p></div></div>
+      <div class="faq-item fade-in"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Hay permanencia?</button><div class="faq-a"><p>No. Puedes cancelar cuando quieras. Sin penalizaciones, sin letra pequena.</p></div></div>
+      <div class="faq-item fade-in"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Que tipo de negocios pueden usarlo?</button><div class="faq-a"><p>Cualquier negocio que trabaje con reservas: salas de eventos, restaurantes, centros deportivos, clinicas, estudios de belleza, escape rooms, espacios de coworking...</p></div></div>
     </div>
   </div>
 </section>
 
-<div class="div"></div>
+<div class="divider"></div>
 
-<!-- CTA FINAL -->
-<section class="final-cta" id="contacto">
+<!-- ══ CTA FINAL ══ -->
+<section class="section final-cta" id="contacto">
   <div class="wrap">
-    <h2>Deja de perder reservas</h2>
-    <p>Solicita una demo gratuita y te mostramos cómo Reservify puede transformar la gestión de tu negocio.</p>
-    <div class="hero-ctas">
-      <a href="https://wa.me/34624029617?text=Hola!%20Me%20interesa%20Reservify%20para%20mi%20negocio.%20¿Podemos%20hablar?" class="btn-p" target="_blank" rel="noopener">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#050505"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <h2 class="fade-in">Deja de perder reservas</h2>
+    <p class="fade-in">Solicita una demo gratuita y te mostramos como Reservify puede transformar la gestion de tu negocio.</p>
+    <div class="hero-ctas fade-in">
+      <a href="https://wa.me/34624029617?text=Hola!%20Me%20interesa%20Reservify%20para%20mi%20negocio.%20Podemos%20hablar?" class="btn-wa" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Solicitar demo por WhatsApp
       </a>
       <a href="mailto:info@lucasyleodigital.com?subject=Reservify%20-%20Demo&body=Hola,%20me%20interesa%20Reservify%20para%20mi%20negocio." class="btn-s">Enviar email</a>
@@ -309,13 +372,37 @@ body{font-family:var(--font-b);color:var(--white);background:var(--bg);line-heig
   </div>
 </section>
 
+</main>
+
 <!-- FOOTER -->
-<footer class="foot">
-  <div class="wrap">
-    <div class="foot-brand">Lucas y <span>Leo</span> Digital</div>
-    <div class="foot-copy">© 2026 Lucas y Leo Digital. Todos los derechos reservados.</div>
+<footer>
+  <div class="container">
+    <div class="footer-logo">Lucas y Leo <span>Digital</span></div>
+    <div class="footer-copy">&copy; 2026 Lucas y Leo Digital. Todos los derechos reservados.</div>
   </div>
 </footer>
+
+<script>
+// Animated Background
+(function(){
+  var bg=document.getElementById('animatedBg');if(!bg)return;
+  for(var i=0;i<30;i++){var p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*20+15)+'s';p.style.animationDelay=Math.random()*10+'s';bg.appendChild(p);}
+  for(var j=0;j<10;j++){var l=document.createElement('div');l.className='circuit-line';l.style.top=Math.random()*100+'%';l.style.width=(Math.random()*50+30)+'%';l.style.animationDuration=(Math.random()*4+6)+'s';l.style.animationDelay=Math.random()*5+'s';bg.appendChild(l);}
+  var colors=['rgba(0,209,255,0.1)','rgba(200,117,51,0.1)'];
+  for(var k=0;k<3;k++){var o=document.createElement('div');o.className='glow-orb';o.style.left=Math.random()*100+'%';o.style.top=Math.random()*100+'%';var sz=(Math.random()*300+200)+'px';o.style.width=sz;o.style.height=sz;o.style.background=colors[k%2];o.style.animationDuration=(Math.random()*10+15)+'s';o.style.animationDelay=(k*3)+'s';bg.appendChild(o);}
+})();
+
+// Fade-in on scroll
+document.body.classList.add('js-loaded');
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
+
+// Mobile menu
+var btn=document.getElementById('landingMobileBtn'),nav=document.getElementById('landingNavMobile'),cls=document.getElementById('landingNavClose');
+if(btn)btn.onclick=function(){nav.classList.add('open');btn.classList.add('open');};
+if(cls)cls.onclick=function(){nav.classList.remove('open');btn.classList.remove('open');};
+function closeMobileMenu(){nav.classList.remove('open');btn.classList.remove('open');}
+</script>
 
 </body>
 </html>
