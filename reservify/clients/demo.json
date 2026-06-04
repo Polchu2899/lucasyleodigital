@@ -1,0 +1,32 @@
+{
+  "business": "Demo Business",
+  "firebase": {
+    "apiKey": "YOUR_API_KEY",
+    "authDomain": "reservify-demo.firebaseapp.com",
+    "projectId": "reservify-demo",
+    "storageBucket": "reservify-demo.firebasestorage.app",
+    "messagingSenderId": "000000000000",
+    "appId": "1:000000000000:web:0000000000000000"
+  },
+  "phone": "34600000000",
+  "email": "demo@negocio.com",
+  "lang": "es",
+  "currency": "EUR",
+  "theme": "light",
+  "colors": {
+    "primary": "#2563eb",
+    "accent": "#f97316",
+    "available": "#10b981",
+    "occupied": "#ef4444",
+    "partial": "#f59e0b"
+  },
+  "texts": {
+    "title": "Reserva tu cita",
+    "subtitle": "Selecciona fecha y horario",
+    "btnSubmit": "Enviar reserva",
+    "btnWhatsapp": "Consultar por WhatsApp",
+    "success": "Reserva enviada correctamente",
+    "occupied": "Ocupado",
+    "available": "Disponible"
+  }
+}
