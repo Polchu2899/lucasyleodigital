@@ -377,7 +377,7 @@ function initCalendar() {
 
   (async function() {
     const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-    const APPS = 'https://docs.google.com/forms/d/e/1FAIpQLScqPvn_r8shjVBxKLvxPswX1qk8xJaZ6nWgLTsOOb5CEIvzQw/formResponse';
+    const APPS = 'https://script.google.com/macros/s/AKfycbxMowit4KbOOgZtB5MIYrv33zUaPcJJsQ7rW5-zQn0-FwPfkm3nt4VZDEtMF3eo8hsgqA/exec';
 
     var db = null, _fs = null;
 
