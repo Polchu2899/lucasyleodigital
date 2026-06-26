@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "api/home-markdown.js": {
-      "includeFiles": "llms-full.txt"
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",
@@ -43,50 +38,6 @@
       ]
     },
     {
-      "source": "/.well-known/api-catalog",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/linkset+json; charset=utf-8"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    },
-    {
-      "source": "/wk/api-catalog",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/linkset+json; charset=utf-8"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    },
-    {
-      "source": "/.well-known/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    },
-    {
-      "source": "/wk/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    },
-    {
       "source": "/images/(.*)\\.webp$",
       "headers": [
         {
@@ -116,27 +67,27 @@
   ],
   "rewrites": [
     {
+      "source": "/.well-known/mcp/server-card.json",
+      "destination": "/api/wk-mcp"
+    },
+    {
+      "source": "/.well-known/agent-skills/index.json",
+      "destination": "/api/wk-skills"
+    },
+    {
+      "source": "/.well-known/api-catalog",
+      "destination": "/api/wk-catalog"
+    },
+    {
       "source": "/",
       "has": [
         {
           "type": "header",
           "key": "accept",
-          "value": "(?:.*text/markdown.*)"
+          "value": "text/markdown"
         }
       ],
       "destination": "/api/home-markdown"
-    },
-    {
-      "source": "/.well-known/mcp/server-card.json",
-      "destination": "/wk/mcp/server-card.json"
-    },
-    {
-      "source": "/.well-known/agent-skills/index.json",
-      "destination": "/wk/agent-skills/index.json"
-    },
-    {
-      "source": "/.well-known/api-catalog",
-      "destination": "/wk/api-catalog"
     },
     {
       "source": "/",

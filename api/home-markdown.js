@@ -1,41 +1,81 @@
 // Vercel Serverless Function — Markdown content negotiation
-// Serves the homepage as Markdown when Accept: text/markdown is requested
-// Triggered by vercel.json rewrite with has[header:accept=text/markdown]
+// Returns homepage content as text/markdown when Accept: text/markdown is requested
+// Triggered by vercel.json rewrite with has[header:accept contains text/markdown]
 
-const fs = require('fs');
-const path = require('path');
+module.exports = function(req, res) {
+  var content = [
+    '# Lucas y Leo Digital — Agencia de Marketing Digital en Barcelona',
+    '',
+    '> Agencia de marketing digital con inteligencia artificial y automatización, con sede en Barcelona, España.',
+    '> Especializada en publicidad digital de precisión, automatización con IA, desarrollo web estratégico y asesoría digital',
+    '> para pequeños y medianos negocios en toda España. Fundada en 2024.',
+    '',
+    '## Servicios principales',
+    '',
+    '- **Publicidad digital de precisión**: Google Ads, Meta Ads (Facebook/Instagram), LinkedIn Ads — ROI positivo',
+    '- **Automatización con IA**: chatbots inteligentes, flujos automáticos de captación, calificación de leads',
+    '- **Desarrollo web estratégico**: webs y landing pages orientadas a conversión, SEO técnico, Core Web Vitals',
+    '- **Asesoría digital para pymes**: diagnóstico completo, estrategia digital personalizada',
+    '- **SEO local**: Google Business Profile, keywords locales, contenido optimizado',
+    '- **Auditoría digital gratuita**: análisis completo con recomendaciones priorizadas',
+    '',
+    '## Quiénes somos',
+    '',
+    'Lucas y Leo Digital es una agencia de marketing digital fundada en 2024 en Barcelona por Lucas y Leo.',
+    'Combinan publicidad de precisión con automatización inteligente para generar crecimiento en empresas españolas.',
+    'Trabajan con negocios de toda España en formato 100% online.',
+    '',
+    '## Fundadores',
+    '',
+    '- **Lucas**: Asesor digital especializado en pequeños y medianos negocios. Diseña sistemas digitales que generan clientes reales.',
+    '- **Leo**: Especialista en automatización con IA, publicidad digital avanzada y desarrollo tecnológico.',
+    '',
+    '## Sesión estratégica gratuita',
+    '',
+    'Sesión 1:1 de 45 minutos para analizar tu situación digital, identificar oportunidades y definir prioridades.',
+    'Sin compromiso ni coste.',
+    '',
+    'Reserva en: https://www.lucasyleodigital.com/#sesion',
+    '',
+    '## Contacto',
+    '',
+    '- Web: https://www.lucasyleodigital.com',
+    '- Agencia: https://www.lucasyleodigital.com/agencia/',
+    '- Teléfono: +34 624 029 617',
+    '- Email: info@lucasyleodigital.com',
+    '- Ubicación: Barcelona, Cataluña, España',
+    '- Área de servicio: España (100% online)',
+    '- Horario: Lunes a Viernes, 9:00–14:00 y 15:00–19:30',
+    '',
+    '## Para quién trabajamos',
+    '',
+    '- Pequeños y medianos negocios en España que ya tienen clientes y quieren crecer',
+    '- Negocios locales que quieren más clientes desde Google y redes sociales',
+    '- Empresas que quieren automatizar su captación de leads',
+    '- Emprendedores que necesitan ordenar su presencia digital',
+    '',
+    '## Preguntas frecuentes',
+    '',
+    '**¿Qué es la sesión estratégica gratuita?**',
+    'Una reunión de 45 minutos para analizar tu situación digital. Sin compromiso ni coste.',
+    '',
+    '**¿Trabajáis solo en Barcelona?**',
+    'No, trabajamos con negocios de toda España de forma 100% online.',
+    '',
+    '**¿Cuánto cuesta trabajar con vosotros?**',
+    'Depende del proyecto. La primera sesión de diagnóstico es gratuita.',
+    '',
+    '## Páginas principales',
+    '',
+    '- [Lucas · Asesor Digital](https://www.lucasyleodigital.com/)',
+    '- [Agencia Lucas y Leo Digital](https://www.lucasyleodigital.com/agencia/)',
+    '- [Blog](https://www.lucasyleodigital.com/blog/)',
+    '- [llms.txt](https://www.lucasyleodigital.com/llms.txt)',
+    '- [llms-full.txt](https://www.lucasyleodigital.com/llms-full.txt)',
+  ].join('\n');
 
-module.exports = async (req, res) => {
-  try {
-    const filePath = path.join(process.cwd(), 'llms-full.txt');
-    const content = fs.readFileSync(filePath, 'utf-8');
-    res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
-    res.setHeader('Vary', 'Accept');
-    res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
-    res.status(200).send(content);
-  } catch (err) {
-    // Fallback: return inline minimal markdown
-    res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
-    res.setHeader('Vary', 'Accept');
-    res.status(200).send([
-      '# Lucas y Leo Digital',
-      '',
-      '> Agencia de marketing digital con IA en Barcelona. Publicidad digital, automatización, desarrollo web y asesoría para pymes en España.',
-      '',
-      '## Servicios',
-      '- Publicidad digital (Google Ads, Meta Ads, LinkedIn Ads)',
-      '- Automatización con IA',
-      '- Desarrollo web estratégico',
-      '- SEO local',
-      '- Asesoría digital para pymes',
-      '',
-      '## Contacto',
-      '- Web: https://www.lucasyleodigital.com',
-      '- Teléfono: +34 624 029 617',
-      '- Email: info@lucasyleodigital.com',
-      '',
-      '## Sesión estratégica gratuita',
-      'Reserva en: https://www.lucasyleodigital.com/#sesion',
-    ].join('\n'));
-  }
+  res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
+  res.setHeader('Vary', 'Accept');
+  res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+  res.status(200).send(content);
 };
