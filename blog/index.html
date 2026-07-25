@@ -137,6 +137,30 @@ try {
   return;
 }
 
+// Track post read — increments viewCount on the post doc and logs to blog_reads
+async function trackRead(postId, postSlug) {
+  var sessionKey = 'blog_read_' + postId;
+  if (sessionStorage.getItem(sessionKey)) return;
+  sessionStorage.setItem(sessionKey, '1');
+  try {
+    var postRef = fs.doc(db, 'blog_posts', postId);
+    await fs.updateDoc(postRef, { viewCount: fs.increment(1) });
+    await fs.addDoc(fs.collection(db, 'blog_reads'), {
+      postId: postId,
+      postSlug: postSlug,
+      timestamp: fs.serverTimestamp()
+    });
+    var post = allPosts.find(function(p){ return p.id === postId; });
+    if (post) {
+      post.viewCount = (post.viewCount || 0) + 1;
+      var countEl = document.getElementById('bs-view-count');
+      if (countEl) countEl.textContent = post.viewCount + (post.viewCount === 1 ? ' lectura' : ' lecturas');
+    }
+  } catch(e) {
+    console.warn('View tracking failed:', e);
+  }
+}
+
 // Load posts
 async function loadPosts() {
   try {
@@ -200,6 +224,7 @@ function renderGrid() {
         '<div class="bc-meta">' +
           '<span>'+dateStr+'</span>' +
           '<span>'+(p.readTime||1)+' min de lectura</span>' +
+          (p.viewCount ? '<span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'+p.viewCount+'</span>' : '') +
         '</div>' +
       '</div>' +
     '</div>';
@@ -264,6 +289,7 @@ window.blogShowPost = function(slug) {
       '<span>Por '+(post.author||'Lucas')+'</span>' +
       '<span>'+dateStr+'</span>' +
       '<span>'+(post.readTime||1)+' min de lectura</span>' +
+      '<span id="bs-view-count" style="display:flex;align-items:center;gap:4px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'+(post.viewCount||0)+' '+(post.viewCount===1?'lectura':'lecturas')+'</span>' +
     '</div>' +
     tagsHtml +
     (post.coverImage ? '<img class="bs-cover" src="'+post.coverImage+'" alt="'+safeTitle+'" width="1080" height="450">' : '') +
@@ -272,6 +298,7 @@ window.blogShowPost = function(slug) {
   document.getElementById('blog-list').classList.add('hidden');
   document.getElementById('blog-single').classList.add('active');
   window.scrollTo(0, 0);
+  trackRead(post.id, post.slug);
 };
 
 // Back to list
