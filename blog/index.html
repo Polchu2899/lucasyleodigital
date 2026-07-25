@@ -224,7 +224,6 @@ function renderGrid() {
         '<div class="bc-meta">' +
           '<span>'+dateStr+'</span>' +
           '<span>'+(p.readTime||1)+' min de lectura</span>' +
-          (p.viewCount ? '<span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'+p.viewCount+'</span>' : '') +
         '</div>' +
       '</div>' +
     '</div>';
@@ -289,7 +288,6 @@ window.blogShowPost = function(slug) {
       '<span>Por '+(post.author||'Lucas')+'</span>' +
       '<span>'+dateStr+'</span>' +
       '<span>'+(post.readTime||1)+' min de lectura</span>' +
-      '<span id="bs-view-count" style="display:flex;align-items:center;gap:4px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'+(post.viewCount||0)+' '+(post.viewCount===1?'lectura':'lecturas')+'</span>' +
     '</div>' +
     tagsHtml +
     (post.coverImage ? '<img class="bs-cover" src="'+post.coverImage+'" alt="'+safeTitle+'" width="1080" height="450">' : '') +

@@ -514,6 +514,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <div class="hero">
             <div><h2>Blog</h2><p>Crea y gestiona los artículos de tu web.</p></div>
             <div class="hero-acts">
+              <button class="btn bg sm" onclick="blogShowStats()"><svg width="13" height="13" stroke="currentColor"><use href="#i-eye"/></svg>Lecturas</button>
               <button class="btn bp sm" onclick="blogNewPost()"><svg width="13" height="13" stroke="currentColor"><use href="#i-plus"/></svg>Nuevo artículo</button>
             </div>
           </div>
@@ -527,6 +528,22 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           </div>
           <div class="blog-grid" id="blog-grid">
             <div class="loading"><div class="spinner"></div>Cargando artículos...</div>
+          </div>
+        </div>
+
+        <!-- STATS VIEW -->
+        <div class="blog-stats-view" id="blog-stats-view" style="display:none">
+          <div class="hero">
+            <div><h2>Estadísticas de lecturas</h2><p>Visitas registradas por artículo con fecha y hora exacta</p></div>
+            <button class="btn bg sm" onclick="blogHideStats()">Volver al blog</button>
+          </div>
+          <div class="card" style="margin-bottom:16px">
+            <div class="chead"><div><div class="ctitle">Lecturas por artículo</div><div class="csub">Total acumulado desde que se activó el contador</div></div></div>
+            <div id="blog-stats-posts"><div class="loading"><div class="spinner"></div>Cargando...</div></div>
+          </div>
+          <div class="card">
+            <div class="chead"><div><div class="ctitle">Últimas 50 lecturas</div><div class="csub">Con fecha y hora exacta de cada visita</div></div></div>
+            <div id="blog-reads-list"><div class="loading"><div class="spinner"></div>Cargando...</div></div>
           </div>
         </div>
 
@@ -709,7 +726,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, setDoc, query, orderBy, where, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, setDoc, query, orderBy, where, serverTimestamp, limit } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAf5cYK5vRUtfZ2RikRSu5qjqUAJHMhLiM",
@@ -1318,11 +1335,73 @@ function renderBlogGrid(posts) {
         <div class="blog-card-meta">
           <span class="blog-card-status ${p.status==='published'?'pub':'draft'}">${p.status==='published'?'Publicado':'Borrador'}</span>
           <span>${dateStr}</span>
-          <span>${p.readTime||1} min lectura</span>
+          <span>${p.readTime||1} min</span>
+          ${p.viewCount ? `<span style="display:flex;align-items:center;gap:3px;color:var(--gold)"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-eye"/></svg>${p.viewCount}</span>` : ''}
         </div>
       </div>
     </div>`;
   }).join('');
+}
+
+window.blogShowStats = async () => {
+  document.getElementById('blog-list-view').classList.add('hidden');
+  document.getElementById('blog-stats-view').style.display = 'block';
+  await loadBlogStats();
+};
+
+window.blogHideStats = () => {
+  document.getElementById('blog-stats-view').style.display = 'none';
+  document.getElementById('blog-list-view').classList.remove('hidden');
+};
+
+async function loadBlogStats() {
+  const postsEl = document.getElementById('blog-stats-posts');
+  const readsEl = document.getElementById('blog-reads-list');
+  const tableStyle = 'width:100%;border-collapse:collapse;';
+  const thStyle = 'text-align:left;padding:10px 16px;font-size:11px;color:var(--t2);font-weight:600;border-bottom:1px solid var(--b2);';
+  const tdStyle = 'padding:10px 16px;font-size:13px;border-bottom:1px solid var(--b1);';
+
+  // Per-post stats
+  const published = [...allBlogPosts].filter(p => p.status === 'published').sort((a, b) => (b.viewCount||0) - (a.viewCount||0));
+  if (!published.length) {
+    postsEl.innerHTML = '<div class="empty" style="padding:20px">No hay artículos publicados todavía.</div>';
+  } else {
+    postsEl.innerHTML = `<table style="${tableStyle}">
+      <thead><tr><th style="${thStyle}">Artículo</th><th style="${thStyle}text-align:right">Lecturas</th></tr></thead>
+      <tbody>${published.map(p => `<tr>
+        <td style="${tdStyle}">${p.title||'Sin título'}</td>
+        <td style="${tdStyle}text-align:right;font-weight:700;color:var(--gold)">${p.viewCount||0}</td>
+      </tr>`).join('')}</tbody>
+    </table>`;
+  }
+
+  // Recent reads timeline
+  try {
+    const q = query(collection(db, 'blog_reads'), orderBy('timestamp', 'desc'), limit(50));
+    const snap = await getDocs(q);
+    if (snap.empty) {
+      readsEl.innerHTML = '<div class="empty" style="padding:20px">Aún no hay lecturas registradas. Se registrarán cuando alguien abra un artículo.</div>';
+      return;
+    }
+    const slugMap = {};
+    allBlogPosts.forEach(p => { if (p.slug) slugMap[p.slug] = p.title; });
+    readsEl.innerHTML = `<table style="${tableStyle}">
+      <thead><tr><th style="${thStyle}">Artículo</th><th style="${thStyle}text-align:right">Fecha y hora</th></tr></thead>
+      <tbody>${snap.docs.map(d => {
+        const r = d.data();
+        const ts = r.timestamp ? (r.timestamp.toDate ? r.timestamp.toDate() : new Date(r.timestamp)) : new Date();
+        const dateStr = ts.toLocaleDateString('es-ES', { day:'numeric', month:'short', year:'numeric' });
+        const timeStr = ts.toLocaleTimeString('es-ES', { hour:'2-digit', minute:'2-digit' });
+        const title = slugMap[r.postSlug] || r.postSlug || 'Artículo';
+        return `<tr>
+          <td style="${tdStyle}">${title}</td>
+          <td style="${tdStyle}text-align:right;font-family:'DM Mono',monospace;font-size:12px;color:var(--t2)">${dateStr} · ${timeStr}</td>
+        </tr>`;
+      }).join('')}</tbody>
+    </table>`;
+  } catch(e) {
+    readsEl.innerHTML = `<div class="empty" style="padding:20px;color:var(--red)">Error al cargar lecturas: ${e.message}</div>`;
+  }
 }
 
 window.filterBlogPosts = () => {
