@@ -293,6 +293,12 @@ window.blogShowPost = function(slug) {
     (post.coverImage ? '<img class="bs-cover" src="'+post.coverImage+'" alt="'+safeTitle+'" width="1080" height="450">' : '') +
     '<div class="bs-content">'+(post.content||'')+'</div>';
 
+  // Salvaguarda SEO/accesibilidad: si el contenido del post (Firestore) trae
+  // imágenes pegadas sin atributo alt, se les asigna uno de forma automática.
+  el.querySelectorAll('.bs-content img:not([alt])').forEach(function(img){
+    img.setAttribute('alt', post.title || 'Imagen del artículo');
+  });
+
   document.getElementById('blog-list').classList.add('hidden');
   document.getElementById('blog-single').classList.add('active');
   window.scrollTo(0, 0);
