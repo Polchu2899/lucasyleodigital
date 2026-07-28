@@ -157,8 +157,8 @@ function initChat(){
       return 'Sí, YouWhole está pensado también para autónomos españoles 🇪🇸. Calcula automáticamente el IRPF en tus facturas y genera el Modelo 130 trimestral con las deducciones previas ya aplicadas.';
     }else if(msg.includes('alta')||msg.includes('registr')||msg.includes('empezar')||msg.includes('probar')){
       return 'Darte de alta es gratis y tarda menos de 2 minutos 🚀. Pulsa en "Probar Gratis" o "Empezar Gratis Ahora" en esta misma página y crea tu cuenta directamente.';
-    }else if(msg.includes('holded')||msg.includes('billin')||msg.includes('competenc')||msg.includes('diferencia')){
-      return 'A diferencia de Holded o Billin, YouWhole nace con VeriFactu integrado desde el primer día, e incluye control horario con GPS y portal de cliente sin módulos de pago adicionales 💡.';
+    }else if(msg.includes('diferencia')||msg.includes('por qué youwhole')||msg.includes('por que youwhole')){
+      return 'YouWhole nace con VeriFactu integrado desde el primer día, e incluye control horario con GPS y portal de cliente sin módulos de pago adicionales 💡. Todo pensado para que gestiones tu negocio sin fricción.';
     }else if(msg.includes('idioma')||msg.includes('divisa')||msg.includes('internacional')){
       return 'YouWhole funciona en 5 idiomas (español, catalán, euskera, gallego e inglés) y soporta más de 20 divisas con tipo de cambio del BCE 🌍. Ideal si facturas también fuera de España.';
     }else if(msg.includes('horario')||msg.includes('fichaje')||msg.includes('emplead')){
