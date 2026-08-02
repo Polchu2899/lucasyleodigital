@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Cookies — Lucas y Leo Digital</title>
+<meta name="description" content="Política de cookies de Lucas y Leo Digital. Información sobre las cookies que utilizamos y cómo gestionarlas.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.lucasyleodigital.com/cookies/">
+<link rel="icon" type="image/png" href="https://i.ibb.co/qMpJW9rj/7-removebg-preview.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050505;--s1:#0c1220;--b1:rgba(255,255,255,0.06);--tx:#F0F0F0;--t2:#a0a0a0;--gold:#C87533;--gold2:#d4893f;--grad:linear-gradient(135deg,#C87533,#d4893f);--green:#10b981;--amber:#f59e0b;--red:#f43f5e;--font-display:'Space Grotesk',sans-serif;--font-body:'Inter',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg);color:var(--tx);line-height:1.7;min-height:100vh;font-size:15px}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+.lh{padding:18px 0;border-bottom:1px solid var(--b1);position:sticky;top:0;background:rgba(5,5,5,0.94);backdrop-filter:blur(12px);z-index:100}
+.lh-inner{max-width:780px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.lh-logo{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--tx);text-decoration:none}
+.lh-logo span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.lh-back{font-size:12px;color:var(--t2);display:flex;align-items:center;gap:6px;text-decoration:none;transition:color .2s}
+.lh-back:hover{color:var(--tx);text-decoration:none}
+.lc{max-width:780px;margin:0 auto;padding:48px 24px 80px}
+.lc-badge{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);border:1px solid rgba(200,117,51,0.25);background:rgba(200,117,51,0.07);padding:4px 12px;border-radius:20px;margin-bottom:20px}
+.lc h1{font-family:var(--font-display);font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px;line-height:1.2}
+.lc-date{font-size:12.5px;color:var(--t2);margin-bottom:40px}
+.lc-section{margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--b1)}
+.lc-section:last-child{border-bottom:none;margin-bottom:0}
+.lc-section h2{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em}
+.lc-section p{color:rgba(240,240,240,0.82);margin-bottom:10px}
+.lc-section p:last-child{margin-bottom:0}
+.lc-section ul{color:rgba(240,240,240,0.82);padding-left:20px;margin-bottom:10px}
+.lc-section ul li{margin-bottom:6px}
+
+/* Cookie type cards */
+.cookie-card{border:1px solid var(--b1);border-radius:12px;padding:18px 20px;margin-bottom:14px;background:rgba(255,255,255,0.02)}
+.cookie-card-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.cookie-badge{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:20px}
+.badge-green{background:rgba(16,185,129,0.1);color:var(--green);border:1px solid rgba(16,185,129,0.2)}
+.badge-amber{background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2)}
+.badge-red{background:rgba(244,63,94,0.1);color:var(--red);border:1px solid rgba(244,63,94,0.2)}
+.cookie-card h3{font-family:var(--font-display);font-size:14px;font-weight:700}
+.cookie-card p{font-size:13.5px;color:rgba(240,240,240,0.75);margin:0}
+.cookie-card table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12.5px}
+.cookie-card table th{text-align:left;padding:6px 10px;color:var(--t2);font-weight:600;border-bottom:1px solid var(--b1)}
+.cookie-card table td{padding:6px 10px;color:rgba(240,240,240,0.75);border-bottom:1px solid rgba(255,255,255,0.03)}
+.cookie-card table tr:last-child td{border-bottom:none}
+
+.btn-cookies{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:var(--font-body);transition:all .2s;text-decoration:none}
+.btn-cookies-accept{background:var(--grad);color:#080c14}
+.btn-cookies-reject{background:rgba(255,255,255,0.06);color:var(--t2);border:1px solid var(--b1)}
+.btn-cookies-accept:hover,.btn-cookies-reject:hover{text-decoration:none;transform:translateY(-1px)}
+.cookie-btn-group{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+
+.lf{border-top:1px solid var(--b1);padding:28px 24px;text-align:center}
+.lf-inner{max-width:780px;margin:0 auto}
+.lf-links{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-bottom:12px}
+.lf-links a{font-size:12px;color:var(--t2);text-decoration:none;transition:color .2s}
+.lf-links a:hover{color:var(--gold);text-decoration:none}
+.lf-links a.active{color:var(--gold)}
+.lf-copy{font-size:11px;color:rgba(255,255,255,0.2)}
+</style>
+</head>
+<body>
+
+<header class="lh">
+  <div class="lh-inner">
+    <a href="/" class="lh-logo">Lucas y Leo <span>Digital</span></a>
+    <a href="/" class="lh-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Volver al inicio
+    </a>
+  </div>
+</header>
+
+<main class="lc">
+  <div class="lc-badge">Cookies</div>
+  <h1>Política de Cookies</h1>
+  <p class="lc-date">Última actualización: agosto de 2026 &nbsp;·&nbsp; Art. 22 LSSI-CE · RGPD (UE) 2016/679</p>
+
+  <div class="lc-section">
+    <h2>¿Qué son las cookies?</h2>
+    <p>Las cookies son pequeños archivos de texto que un sitio web almacena en tu dispositivo cuando lo visitas. Sirven para recordar tus preferencias, analizar el uso de la web y, en algunos casos, mostrarte publicidad relevante.</p>
+    <p>Conforme al artículo 22 de la LSSI-CE y el RGPD, solo instalamos cookies no esenciales tras obtener tu consentimiento expreso e informado.</p>
+  </div>
+
+  <div class="lc-section">
+    <h2>Cookies que utilizamos</h2>
+
+    <div class="cookie-card">
+      <div class="cookie-card-head">
+        <span class="cookie-badge badge-green">Necesarias</span>
+        <h3>Cookies técnicas</h3>
+      </div>
+      <p>Imprescindibles para el funcionamiento del sitio. No requieren consentimiento y no pueden desactivarse.</p>
+      <table>
+        <tr><th>Cookie</th><th>Proveedor</th><th>Finalidad</th><th>Duración</th></tr>
+        <tr><td>cookie_consent</td><td>lucasyleodigital.com</td><td>Guarda tu elección sobre cookies</td><td>1 año</td></tr>
+      </table>
+    </div>
+
+    <div class="cookie-card">
+      <div class="cookie-card-head">
+        <span class="cookie-badge badge-amber">Analíticas</span>
+        <h3>Google Analytics (GA4)</h3>
+      </div>
+      <p>Nos ayudan a entender cómo interactúan los visitantes con la web. Todos los datos son anónimos y agregados. Solo se activan con tu consentimiento.</p>
+      <table>
+        <tr><th>Cookie</th><th>Proveedor</th><th>Finalidad</th><th>Duración</th></tr>
+        <tr><td>_ga</td><td>Google LLC</td><td>Distingue usuarios únicos</td><td>2 años</td></tr>
+        <tr><td>_ga_*</td><td>Google LLC</td><td>Mantiene el estado de sesión</td><td>2 años</td></tr>
+      </table>
+    </div>
+
+    <div class="cookie-card">
+      <div class="cookie-card-head">
+        <span class="cookie-badge badge-red">Marketing</span>
+        <h3>Meta Pixel (Facebook/Instagram)</h3>
+      </div>
+      <p>Permiten medir la efectividad de nuestros anuncios en Facebook e Instagram y mostrar publicidad relevante. Solo se activan con tu consentimiento expreso.</p>
+      <table>
+        <tr><th>Cookie</th><th>Proveedor</th><th>Finalidad</th><th>Duración</th></tr>
+        <tr><td>_fbp</td><td>Meta Platforms</td><td>Seguimiento de conversiones de anuncios</td><td>90 días</td></tr>
+        <tr><td>_fbc</td><td>Meta Platforms</td><td>Atribución de clics en anuncios</td><td>90 días</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="lc-section">
+    <h2>Cómo gestionar tu consentimiento</h2>
+    <p>Puedes cambiar tus preferencias de cookies en cualquier momento desde el banner de cookies que aparece al visitar nuestra web, o directamente pulsando los botones siguientes:</p>
+    <div class="cookie-btn-group">
+      <button class="btn-cookies btn-cookies-accept" onclick="if(window.gestionarCookies){gestionarCookies('aceptar')}else{alert('Accede a la web principal para gestionar las cookies.')}">Aceptar todas</button>
+      <button class="btn-cookies btn-cookies-reject" onclick="if(window.gestionarCookies){gestionarCookies('rechazar')}else{alert('Accede a la web principal para gestionar las cookies.')}">Solo necesarias</button>
+    </div>
+    <p style="margin-top:14px">También puedes configurar tu navegador para bloquear o eliminar cookies. Ten en cuenta que desactivar todas las cookies puede afectar al funcionamiento de algunos sitios web.</p>
+    <ul>
+      <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Cómo gestionar cookies en Chrome</a></li>
+      <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank" rel="noopener">Cómo gestionar cookies en Firefox</a></li>
+      <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Cómo gestionar cookies en Safari</a></li>
+    </ul>
+  </div>
+
+  <div class="lc-section">
+    <h2>Transferencias internacionales</h2>
+    <p>Google LLC y Meta Platforms Ireland Ltd. pueden transferir datos a Estados Unidos y otros países. Ambas empresas están acogidas a las Cláusulas Contractuales Tipo (SCCs) aprobadas por la Comisión Europea como garantía adecuada.</p>
+  </div>
+
+  <div class="lc-section">
+    <h2>Contacto</h2>
+    <p>Para cualquier consulta sobre nuestra política de cookies, puedes contactarnos en <a href="mailto:lucasyleodigital@gmail.com">lucasyleodigital@gmail.com</a>.</p>
+    <p>Consulta también nuestra <a href="/privacidad/">Política de Privacidad</a> para información completa sobre el tratamiento de tus datos personales.</p>
+  </div>
+</main>
+
+<footer class="lf">
+  <div class="lf-inner">
+    <nav class="lf-links">
+      <a href="/aviso-legal/">Aviso Legal</a>
+      <a href="/privacidad/">Política de Privacidad</a>
+      <a href="/cookies/" class="active">Política de Cookies</a>
+      <a href="/">Inicio</a>
+    </nav>
+    <p class="lf-copy">© 2026 Lucas y Leo Digital · Alex Lucas Torrubia · NIF 41003566V · Gavà (Barcelona)</p>
+  </div>
+</footer>
+
+</body>
+</html>
