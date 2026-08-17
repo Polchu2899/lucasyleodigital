@@ -95,10 +95,13 @@
     {
       "source": "/",
       "destination": "/index.html"
-    },
+    }
+  ],
+  "redirects": [
     {
       "source": "/agencia",
-      "destination": "/agencia/index.html"
+      "destination": "/agencia/",
+      "permanent": true
     }
   ]
 }
