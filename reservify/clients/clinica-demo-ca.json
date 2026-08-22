@@ -1,0 +1,40 @@
+{
+  "business": "Clinica Dental Somriure — DEMO",
+  "firebase": {
+    "apiKey": "AIzaSyAf5cYK5vRUtfZ2RikRSu5qjqUAJHMhLiM",
+    "authDomain": "reservify-lucasyleo.firebaseapp.com",
+    "projectId": "reservify-lucasyleo",
+    "storageBucket": "reservify-lucasyleo.firebasestorage.app",
+    "messagingSenderId": "464767738256",
+    "appId": "1:464767738256:web:c0692dc6ba98d162101315"
+  },
+  "phone": "34624029617",
+  "email": "info@lucasyleodigital.com",
+  "lang": "ca",
+  "currency": "EUR",
+  "theme": "light",
+  "colors": {
+    "primary": "#2563eb",
+    "accent": "#f97316",
+    "available": "#10b981",
+    "occupied": "#ef4444",
+    "partial": "#f59e0b"
+  },
+  "texts": {
+    "title": "Reserva la teva cita",
+    "subtitle": "Selecciona un dia disponible i tria el teu horari",
+    "btnSubmit": "Confirmar reserva",
+    "btnWhatsapp": "Consultar disponibilitat",
+    "success": "Reserva enviada. Et contactarem per confirmar.",
+    "occupied": "Ocupat",
+    "available": "Disponible"
+  },
+  "tarifas_estaticas": {
+    "estandar": [
+      {"turno":"Mati","turno_es":"Manana","horario":"09:00-11:00","lu":40,"ma":40,"mi":40,"ju":40,"vi":40,"sa":50,"do":"—"},
+      {"turno":"Migdia","turno_es":"Medio dia","horario":"11:00-13:00","lu":40,"ma":40,"mi":40,"ju":40,"vi":40,"sa":50,"do":"—"},
+      {"turno":"Tarda","turno_es":"Tarde","horario":"16:00-18:00","lu":40,"ma":40,"mi":40,"ju":40,"vi":40,"sa":"—","do":"—"},
+      {"turno":"Tarda 2","turno_es":"Tarde 2","horario":"18:00-20:00","lu":40,"ma":40,"mi":40,"ju":40,"vi":"—","sa":"—","do":"—"}
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "business": "Sonrisa Dental Clinic — DEMO",
+  "firebase": {
+    "apiKey": "AIzaSyAf5cYK5vRUtfZ2RikRSu5qjqUAJHMhLiM",
+    "authDomain": "reservify-lucasyleo.firebaseapp.com",
+    "projectId": "reservify-lucasyleo",
+    "storageBucket": "reservify-lucasyleo.firebasestorage.app",
+    "messagingSenderId": "464767738256",
+    "appId": "1:464767738256:web:c0692dc6ba98d162101315"
+  },
+  "phone": "34624029617",
+  "email": "info@lucasyleodigital.com",
+  "lang": "en",
+  "currency": "EUR",
+  "theme": "light",
+  "colors": {
+    "primary": "#2563eb",
+    "accent": "#f97316",
+    "available": "#10b981",
+    "occupied": "#ef4444",
+    "partial": "#f59e0b"
+  },
+  "texts": {
+    "title": "Book your appointment",
+    "subtitle": "Pick an available day and choose your time",
+    "btnSubmit": "Confirm booking",
+    "btnWhatsapp": "Check availability",
+    "success": "Booking sent. We'll contact you to confirm.",
+    "occupied": "Booked",
+    "available": "Available"
+  },
+  "tarifas_estaticas": {
+    "estandar": [
+      {"turno":"Morning","turno_es":"Manana","horario":"09:00-11:00","lu":40,"ma":40,"mi":40,"ju":40,"vi":40,"sa":50,"do":"—"},
+      {"turno":"Midday","turno_es":"Medio dia","horario":"11:00-13:00","lu":40,"ma":40,"mi":40,"ju":40,"vi":40,"sa":50,"do":"—"},
+      {"turno":"Afternoon","turno_es":"Tarde","horario":"16:00-18:00","lu":40,"ma":40,"mi":40,"ju":40,"vi":40,"sa":"—","do":"—"},
+      {"turno":"Evening","turno_es":"Tarde 2","horario":"18:00-20:00","lu":40,"ma":40,"mi":40,"ju":40,"vi":"—","sa":"—","do":"—"}
+    ]
+  }
+}

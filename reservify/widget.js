@@ -66,6 +66,47 @@
     var texts = cfg.texts || {};
     var lang = cfg.lang || 'es';
 
+    // ══ 3b. I18N (textos fijos de la interfaz, no configurables por cliente) ══
+    var I18N = {
+      es: {
+        nombre: 'Nombre *', apellidos: 'Apellidos *', telefono: 'Telefono *', email: 'Email *',
+        tipoEvento: 'Tipo de evento', personas: 'Personas', notas: 'Notas', seleccionar: 'Seleccionar...',
+        eventTypes: ['Fiesta infantil', 'Fiesta adultos', 'Reunion familiar', 'Reunion empresa', 'Otro'],
+        phNombre: 'Tu nombre', phApellidos: 'Tus apellidos', phTelefono: '+34 600 000 000', phEmail: 'tu@email.com',
+        phPersonas: 'Num. personas', phNotas: 'Cualquier detalle que quieras indicar...',
+        horariosDisponibles: 'Horarios disponibles', parcial: 'Parcial',
+        sinHorarios: 'No hay horarios disponibles para este dia',
+        rellenaFormSuffix: ' — Rellena el formulario', rellenaTodos: 'Rellena todos los campos obligatorios',
+        errorEnviar: 'Error al enviar. Intentalo de nuevo.', especial: 'Especial',
+        waMsg: 'Hola! Me gustaria reservar', waDate: ' el ', waSlot: ' en el horario ', waEnd: '. Pueden confirmarme disponibilidad?'
+      },
+      en: {
+        nombre: 'First name *', apellidos: 'Last name *', telefono: 'Phone *', email: 'Email *',
+        tipoEvento: 'Event type', personas: 'People', notas: 'Notes', seleccionar: 'Select...',
+        eventTypes: ['Kids party', 'Adult party', 'Family gathering', 'Company event', 'Other'],
+        phNombre: 'Your first name', phApellidos: 'Your last name', phTelefono: '+34 600 000 000', phEmail: 'you@email.com',
+        phPersonas: 'No. of people', phNotas: 'Any details you\'d like to share...',
+        horariosDisponibles: 'Available times', parcial: 'Partial',
+        sinHorarios: 'No time slots available for this day',
+        rellenaFormSuffix: ' — Please fill in the form', rellenaTodos: 'Please fill in all required fields',
+        errorEnviar: 'Error sending your booking. Please try again.', especial: 'Special',
+        waMsg: 'Hi! I\'d like to book', waDate: ' on ', waSlot: ' at ', waEnd: '. Can you confirm availability?'
+      },
+      ca: {
+        nombre: 'Nom *', apellidos: 'Cognoms *', telefono: 'Telefon *', email: 'Email *',
+        tipoEvento: 'Tipus d\'esdeveniment', personas: 'Persones', notas: 'Notes', seleccionar: 'Selecciona...',
+        eventTypes: ['Festa infantil', 'Festa adults', 'Reunio familiar', 'Reunio empresa', 'Altre'],
+        phNombre: 'El teu nom', phApellidos: 'Els teus cognoms', phTelefono: '+34 600 000 000', phEmail: 'tu@email.com',
+        phPersonas: 'Num. persones', phNotas: 'Qualsevol detall que vulguis indicar...',
+        horariosDisponibles: 'Horaris disponibles', parcial: 'Parcial',
+        sinHorarios: 'No hi ha horaris disponibles per a aquest dia',
+        rellenaFormSuffix: ' — Omple el formulari', rellenaTodos: 'Omple tots els camps obligatoris',
+        errorEnviar: 'Error en enviar. Torna-ho a provar.', especial: 'Especial',
+        waMsg: 'Hola! M\'agradaria reservar', waDate: ' el ', waSlot: ' a l\'horari ', waEnd: '. Em podeu confirmar disponibilitat?'
+      }
+    };
+    var t = I18N[lang] || I18N.es;
+
     // ══ 4. ESTILOS ════════════════════════════════════════════════
     var cp = colors.primary || '#2563eb';
     var ca = colors.accent || '#f97316';
@@ -145,17 +186,17 @@
       '<div class="rfy-sub">' + (texts.subtitle || 'Selecciona fecha y horario') + '</div>' +
       '<div class="rfy-cal-head"><button class="rfy-cal-btn" id="rfy-prev">&larr;</button><span class="rfy-cal-title" id="rfy-month"></span><button class="rfy-cal-btn" id="rfy-next">&rarr;</button></div>' +
       '<div class="rfy-cal-grid" id="rfy-grid"></div>' +
-      '<div class="rfy-legend"><span><i class="dot-g" style="background:' + cg + '"></i> ' + (texts.available || 'Disponible') + '</span><span><i style="background:' + cw + '"></i> Parcial</span><span><i style="background:' + cr + '"></i> ' + (texts.occupied || 'Ocupado') + '</span></div>' +
-      '<div class="rfy-slots" id="rfy-slots" style="display:none"><div class="rfy-slots-title">Horarios disponibles</div><div class="rfy-slots-grid" id="rfy-slots-grid"></div></div>' +
+      '<div class="rfy-legend"><span><i class="dot-g" style="background:' + cg + '"></i> ' + (texts.available || 'Disponible') + '</span><span><i style="background:' + cw + '"></i> ' + t.parcial + '</span><span><i style="background:' + cr + '"></i> ' + (texts.occupied || 'Ocupado') + '</span></div>' +
+      '<div class="rfy-slots" id="rfy-slots" style="display:none"><div class="rfy-slots-title">' + t.horariosDisponibles + '</div><div class="rfy-slots-grid" id="rfy-slots-grid"></div></div>' +
       '<div class="rfy-form" id="rfy-form">' +
         '<div class="rfy-form-grid">' +
-          '<div class="rfy-field"><label>Nombre *</label><input id="rfy-name" placeholder="Tu nombre"></div>' +
-          '<div class="rfy-field"><label>Apellidos *</label><input id="rfy-surname" placeholder="Tus apellidos"></div>' +
-          '<div class="rfy-field"><label>Telefono *</label><input id="rfy-phone" type="tel" placeholder="+34 600 000 000"></div>' +
-          '<div class="rfy-field"><label>Email *</label><input id="rfy-email" type="email" placeholder="tu@email.com"></div>' +
-          '<div class="rfy-field"><label>Tipo de evento</label><select id="rfy-type"><option value="">Seleccionar...</option><option value="Fiesta infantil">Fiesta infantil</option><option value="Fiesta adultos">Fiesta adultos</option><option value="Reunion familiar">Reunion familiar</option><option value="Reunion empresa">Reunion empresa</option><option value="Otro">Otro</option></select></div>' +
-          '<div class="rfy-field"><label>Personas</label><input id="rfy-people" type="number" min="1" max="200" placeholder="Num. personas"></div>' +
-          '<div class="rfy-field full"><label>Notas</label><textarea id="rfy-notes" placeholder="Cualquier detalle que quieras indicar..."></textarea></div>' +
+          '<div class="rfy-field"><label>' + t.nombre + '</label><input id="rfy-name" placeholder="' + t.phNombre + '"></div>' +
+          '<div class="rfy-field"><label>' + t.apellidos + '</label><input id="rfy-surname" placeholder="' + t.phApellidos + '"></div>' +
+          '<div class="rfy-field"><label>' + t.telefono + '</label><input id="rfy-phone" type="tel" placeholder="' + t.phTelefono + '"></div>' +
+          '<div class="rfy-field"><label>' + t.email + '</label><input id="rfy-email" type="email" placeholder="' + t.phEmail + '"></div>' +
+          '<div class="rfy-field"><label>' + t.tipoEvento + '</label><select id="rfy-type"><option value="">' + t.seleccionar + '</option>' + t.eventTypes.map(function(et) { return '<option value="' + et + '">' + et + '</option>'; }).join('') + '</select></div>' +
+          '<div class="rfy-field"><label>' + t.personas + '</label><input id="rfy-people" type="number" min="1" max="200" placeholder="' + t.phPersonas + '"></div>' +
+          '<div class="rfy-field full"><label>' + t.notas + '</label><textarea id="rfy-notes" placeholder="' + t.phNotas + '"></textarea></div>' +
         '</div>' +
         '<div class="rfy-btns">' +
           '<button class="rfy-btn-primary" id="rfy-submit">' + (texts.btnSubmit || 'Enviar reserva') + '</button>' +
@@ -342,11 +383,11 @@
           var cls = 'rfy-slot' + (blocked ? ' occ' : '') + (sel ? ' sel' : '');
           var pre = f.precio || info.precioEsp || 0;
           var click = blocked ? '' : ' onclick="window._rfySelectSlot(\'' + hor + '\',' + pre + ')"';
-          html += '<div class="' + cls + '"' + click + '><div>' + (f.nombre || info.celebracion || 'Especial') + '</div><div>' + hor + '</div><div class="rfy-slot-price">' + pre + ' &euro;</div></div>';
+          html += '<div class="' + cls + '"' + click + '><div>' + (f.nombre || info.celebracion || t.especial) + '</div><div>' + hor + '</div><div class="rfy-slot-price">' + pre + ' &euro;</div></div>';
         });
       }
 
-      grid.innerHTML = html || '<div style="color:#999;font-size:13px;">No hay horarios disponibles para este dia</div>';
+      grid.innerHTML = html || '<div style="color:#999;font-size:13px;">' + t.sinHorarios + '</div>';
       wrap.style.display = 'block';
     }
 
@@ -363,7 +404,7 @@
       calSelectedSlot = slot;
       renderSlots(calSelected);
       document.getElementById('rfy-form').classList.add('vis');
-      toast(slot + ' · ' + precio + '€ — Rellena el formulario');
+      toast(slot + ' · ' + precio + '€' + t.rellenaFormSuffix);
       setTimeout(function() {
         document.getElementById('rfy-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 200);
@@ -389,7 +430,7 @@
       var notes = document.getElementById('rfy-notes').value.trim();
 
       if (!name || !surname || !phone || !email || !calSelected || !calSelectedSlot) {
-        toast('Rellena todos los campos obligatorios');
+        toast(t.rellenaTodos);
         return;
       }
 
@@ -457,7 +498,7 @@
 
       } catch (e) {
         console.error('Reservify error:', e);
-        toast('Error al enviar. Intentalo de nuevo.');
+        toast(t.errorEnviar);
       }
     };
 
@@ -467,7 +508,7 @@
       waBtn.onclick = function() {
         var slot = calSelectedSlot || '';
         var fecha = calSelected || '';
-        var msg = encodeURIComponent('Hola! Me gustaria reservar' + (fecha ? ' el ' + fecha : '') + (slot ? ' en el horario ' + slot : '') + '. Pueden confirmarme disponibilidad?');
+        var msg = encodeURIComponent(t.waMsg + (fecha ? t.waDate + fecha : '') + (slot ? t.waSlot + slot : '') + t.waEnd);
         window.open('https://wa.me/' + cfg.phone + '?text=' + msg, '_blank');
       };
     }
