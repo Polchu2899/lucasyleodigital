@@ -34,25 +34,49 @@ El proyecto lucasyleodigital-main es una landing page + portfolio + sistema de r
 
 ## Hallazgos
 
-### Cero señales de IA en el código
+### ✓ Chatbot encontrado en 2 páginas — Automatización sin IA
 
-```
-Búsqueda:  anthropic, openai, claude, langchain, chatbot, vision, ml, score
-Resultado: 0 coincidencias en código fuente (excluyendo node_modules y licencias)
+**Ubicaciones:** 
+- `/index.html` (landing principal) — 8 referencias
+- `/youwhole/index.html` (línea 629-636) — chatbot dedicado
+- JavaScript lógica: `/youwhole/js-deferred.js` (línea 119-200)
+
+**Descripción:**
+- Botón de chat fijo (abajo-derecha): `chat-bubble-btn` con label "Hablar con nuestro asistente"
+- Panel interactivo que recibe preguntas del usuario
+- Responde con lógica de palabras clave (`respuestaLocal()` en js-deferred.js)
+- **No es IA:** clasificación manual if/else por keywords, no ML ni LLM
+
+**Ejemplo de lógica:**
+```javascript
+if(msg.includes('verifactu')) {
+  return 'VeriFactu es el nuevo sistema de la Agencia Tributaria...'
+}
+else if(msg.includes('precio')||msg.includes('cuesta')) {
+  return 'YouWhole tiene 4 planes: Free (0€), Starter (29€/mes)...'
+}
 ```
 
-### Archivos mencionados como candidatos (verificados manualmente)
+**Estado:** Activo — visible y funcional en la página
+
+---
+
+### Otros archivos (verificados)
 
 | Archivo | Contenido | Conclusión |
 |---------|-----------|-----------|
-| `api/home-markdown.js` | Devuelve markdown con texto: "Automatización con IA, chatbots inteligentes" | Es solo copy de marketing. No hay API real, no hay chatbot. |
-| `llms.txt`, `llms-full.txt` | Descripción del sitio para AI search / LLM crawlers. Menciona servicios de IA. | Son archivos estáticos que describen QUÉ OFRECE la agencia a clientes, no QUÉ USA el sitio. |
-| `reservify/widget.js` | Sistema de reservas: formulario + calendario + Firestore | No es IA. Es automatización simple: formulario → guardar en BD. |
+| `api/home-markdown.js` | Devuelve markdown con texto: "Automatización con IA, chatbots inteligentes" | Es marketing. Los chatbots que menciona son servicios para clientes, no del sitio. |
+| `llms.txt`, `llms-full.txt` | Descripción del sitio para AI search / LLM crawlers | Describe servicios que ofrece la agencia, no funcionalidades del sitio. |
+| `reservify/widget.js` | Sistema de reservas: formulario + calendario + Firestore | No es IA. Es automatización simple. |
 
-### Confirmación: Marketing copy ≠ Implementación real
+---
 
-El sitio dice "Ofrecemos automatización con IA" (cierto: la agencia lo hace para clientes).  
-El sitio NO dice ni implementa "Este sitio usa IA" (correcto: no la usa).
+### Resumen técnico
+
+**Identificado:** 1 asistente automatizado (chat)  
+**Tipo:** Chatbot basado en reglas (keywords → respuesta)  
+**¿Es IA según AI Act?** No (no usa ML/LLM)  
+**¿Requiere transparencia?** Sí (se presenta como "asistente" sin avisar que no es IA)
 
 ---
 
@@ -64,20 +88,21 @@ El sitio NO dice ni implementa "Este sitio usa IA" (correcto: no la usa).
 - **Ley Orgánica 3/2024 (España)**: Traspone el AI Act. Entra en vigencia progresivamente (2025-2027 según el riesgo).
 - **AESIA (Autoridad Española de Supervisión de la IA)**: Supervisará el cumplimiento a partir de 2025.
 
-### ¿Aplica a lucasyleodigital-main?
+### ¿Aplica el AI Act a lucasyleodigital-main?
 
-**No.** El proyecto:
-- ✗ No contiene un sistema de IA según la definición legal
-- ✗ No toma decisiones automáticas sobre personas
-- ✗ No genera contenido sintético con modelo de ML/LLM
-- ✗ No procesa datos biométricos
+**No — No hay sistemas de IA según la ley.**
 
-**Sí aplica si llega a implementar:**
-- ✓ Un chatbot que responde con Claude/OpenAI
-- ✓ Un sistema de calificación de leads (scoring)
-- ✓ Recomendaciones personalizadas basadas en ML
-- ✓ Procesamiento de imágenes/visión
-- ✓ Cualquier integración de Anthropic API, OpenAI API, Google Vertex, etc.
+El chatbot de YouWhole es **automatización sin IA**: responde con reglas if/else, no es ML ni LLM. El AI Act solo regula sistemas que usan aprendizaje automático o toman decisiones basadas en datos procesados por patrones — no regula reglas manuales de if/else.
+
+**Pero sí hay una obligación de transparencia:**  
+Aunque el chatbot no sea IA regulable, presentarse como "asistente" sin avisar que es automatización simple puede inducir al usuario a error sobre sus capacidades. Según principios de transparencia (RGPD, buen trato comercial), es recomendable un aviso pequeño.
+
+**Sí aplica el AI Act si llega a implementar:**
+- ✓ Un chatbot que responde con Claude/OpenAI API
+- ✓ Un modelo de clasificación automática de preguntas (ML)
+- ✓ Recomendaciones personalizadas basadas en datos del usuario
+- ✓ Detección de intención usando NLP
+- ✓ Cualquier integración con LLM, ML, visión, o biometría
 
 ---
 
@@ -103,17 +128,49 @@ Según memory, hay un **asistente de IA pendiente en YouWhole** (Claude API).
 
 ---
 
+## Acciones necesarias
+
+**Prioridad alta — Transparencia chatbot:**
+
+- [ ] Añadir aviso de transparencia en el panel del chat  
+  El asistente se presenta sin avisar que es automatización, no IA. Sugerencia de texto: "Asistente automatizado · Responde según palabras clave"
+
+**Ubicación:** `/youwhole/index.html` línea 639 (`.chat-header-info h4`)
+
+Opción 1 — Texto pequeño:
+```html
+<h4>Asistente YouWhole</h4>
+<small style="font-size: 11px; opacity: 0.65;">Automatizado · No es IA</small>
+```
+
+Opción 2 — Emoji discreto:
+```html
+<h4>🤖 Asistente YouWhole <span style="font-size: 11px; opacity: 0.6;">(automatizado)</span></h4>
+```
+
+**Prioridad media — Futuro:**
+
+- [ ] Si en el futuro integráis Claude/OpenAI en el chat, re-auditar inmediatamente
+- [ ] Revisar si el chatbot en `/index.html` (landing principal) también necesita el mismo aviso
+
+---
+
 ## Conclusión
 
-✓ **Sin riesgo de incumplimiento.** El proyecto lucasyleodigital-main no requiere adaptación legal para operar bajo el AI Act.
+✓ **Sin riesgo legal crítico** bajo el AI Act, pero **necesita mejora de transparencia**.
 
-**Próxima revisión:** Manual — cuando hayas implementado la primera característica de IA real en el sitio.
+El chatbot es automatización simple (if/else por keywords), no IA. Por tanto, no aplica el AI Act. Pero como se presenta como "Asistente" sin avisar que no es IA, es recomendable añadir un aviso discreto para ser transparente con los usuarios.
+
+**Próxima revisión:** Manual — cuando hayas implementado la primera característica de IA real (LLM/ML) o después de añadir el aviso de transparencia.
 
 ---
 
 ## Historial de auditorías
 
-### Auditoría 2026-08-27 (primera)
-- **Resultado:** No aplica — sin sistemas de IA
-- **Método:** Escaneo código + verificación manual
-- **Riesgo residual:** Bajo (sin riesgo actual, pero vigilar integraciones futuras)
+### Auditoría 2026-08-27 (revisión)
+- **Resultado:** Sin riesgo legal, pero transparencia pendiente
+- **Hallazgo principal:** Chatbot automatizado en `/youwhole/index.html` e `/index.html` (8 referencias)
+- **Tipo:** Automatización con reglas if/else (palabras clave → respuesta)
+- **¿Es IA?** No — no usa ML/LLM
+- **Acción:** Añadir aviso "Asistente automatizado" para transparencia
+- **Riesgo residual:** Bajo (no es IA, pero mejorable en comunicación)
