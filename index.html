@@ -112,7 +112,7 @@
     </a>
     <nav class="header-nav">
       <a href="/agencia/">Agencia</a>
-      <a href="javascript:void(0)" onclick="goToYouWhole()" title="Accede a YouWhole en tu idioma">YouWhole</a>
+      <a href="/youwhole/" onclick="return goToYouWhole()">YouWhole</a>
       <a href="/reservify/">Reservify</a>
       <a href="/blog/">Blog</a>
       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:2px;padding-left:14px;border-left:1px solid rgba(255,255,255,.12);font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.04em;">
@@ -131,7 +131,7 @@
   <button class="landing-nav-mobile-close" id="landingNavClose" aria-label="Cerrar menú">&#10005;</button>
   <a href="/" class="lnm-link">Inicio</a>
   <a href="/agencia/" class="lnm-link">Agencia</a>
-  <a href="javascript:void(0)" onclick="goToYouWhole();document.getElementById('landingNavMobile').classList.remove('open');document.getElementById('landingMobileBtn').classList.remove('open');" class="lnm-link">YouWhole</a>
+  <a href="/youwhole/" onclick="return goToYouWhole()" class="lnm-link">YouWhole</a>
   <a href="/reservify/" class="lnm-link">Reservify</a>
   <a href="/blog/" class="lnm-link">Blog</a>
   <div style="display:flex;gap:16px;margin:12px 0;font-family:var(--font-display);font-size:15px;font-weight:700;">
@@ -142,15 +142,11 @@
 
 <script>
 function goToYouWhole(){
-  const lang=(navigator.language||navigator.userLanguage||'en').toLowerCase();
-  const domain=window.location.origin;
-  if(lang.startsWith('ca')){
-    window.location.href=domain+'/ca/youwhole/';
-  }else if(lang.startsWith('es')){
-    window.location.href=domain+'/youwhole/';
-  }else{
-    window.location.href=domain+'/en/youwhole/';
-  }
+  const lang=(navigator.language||'es').toLowerCase();
+  const path=lang.startsWith('ca')?'/ca/youwhole/':lang.startsWith('es')?'/youwhole/':'/en/youwhole/';
+  if(path==='/youwhole/')return true;
+  window.location.href=path;
+  return false;
 }
 </script>
 
