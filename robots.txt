@@ -40,6 +40,7 @@ User-agent: YouBot
 Allow: /
 
 Sitemap: https://www.lucasyleodigital.com/sitemap.xml
+Sitemap: https://www.lucasyleodigital.com/blog/feed.xml
 
 # ── Content Signals ──────────────────────────────────────────────────
 Content-Signal: ai-train=no, search=yes, ai-input=no

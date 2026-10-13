@@ -217,6 +217,71 @@ function articlePage(template, p, related) {
   return html.replace("<head>", `<head>\n${GENERATED}`);
 }
 
+const HOMES = [
+  { file: "index.html", locale: "es-ES", cats: CATS },
+  {
+    file: "en/index.html",
+    locale: "en-GB",
+    cats: {
+      "estrategia-digital": "Digital Strategy", "seo-local": "Local SEO", "redes-sociales": "Social Media",
+      "publicidad-online": "Online Advertising", "automatizacion-ia": "Automation &amp; AI",
+      "casos-exito": "Success Stories", "consejos-pymes": "Tips for SMEs",
+    },
+  },
+  {
+    file: "ca/index.html",
+    locale: "ca-ES",
+    cats: {
+      "estrategia-digital": "Estratègia Digital", "seo-local": "SEO Local", "redes-sociales": "Xarxes Socials",
+      "publicidad-online": "Publicitat Online", "automatizacion-ia": "Automatització i IA",
+      "casos-exito": "Casos d'Èxit", "consejos-pymes": "Consells per a Pimes",
+    },
+  },
+];
+
+// Misma tarjeta que pinta el JavaScript de la portada, pero en el HTML para que Google vea el enlace.
+function homeCard(p, home) {
+  const date = p.published.toLocaleDateString(home.locale, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Madrid" });
+  const img = p.coverImage
+    ? `<img src="${esc(p.coverImage)}" alt="${esc(p.title)}" loading="lazy" decoding="async" width="400" height="200">`
+    : '<div class="bpc-no-img"></div>';
+  return (
+    `<a class="blog-post-card" href="/blog/${p.slug}/">${img}<div class="bpc-body">` +
+    `<div class="bpc-cat">${home.cats[p.category] ?? esc(p.category ?? "")}</div>` +
+    `<div class="bpc-title">${esc(p.title)}</div><div class="bpc-excerpt">${esc(p.excerpt)}</div>` +
+    `<div class="bpc-meta"><span><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> ${date}</span>` +
+    `<span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ${esc(p.readTime ?? 1)} min</span></div></div></a>`
+  );
+}
+
+function rssFeed(posts) {
+  const items = posts.filter(indexable).slice(0, 20);
+  const last = items.reduce((m, p) => (p.updated > m ? p.updated : m), items[0]?.updated ?? new Date(0));
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Blog de Lucas y Leo Digital</title>
+  <link>${SITE}/blog/</link>
+  <atom:link href="${SITE}/blog/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Artículos prácticos sobre estrategia digital, SEO, automatización e IA para pymes.</description>
+  <language>es-ES</language>
+  <lastBuildDate>${last.toUTCString()}</lastBuildDate>
+${items
+  .map(
+    (p) => `  <item>
+    <title>${esc(p.title)}</title>
+    <link>${postUrl(p)}</link>
+    <guid isPermaLink="true">${postUrl(p)}</guid>
+    <pubDate>${p.published.toUTCString()}</pubDate>
+    <description>${esc(description(p))}</description>${p.category ? `\n    <category>${esc(CATS[p.category] ?? p.category)}</category>` : ""}
+  </item>`,
+  )
+  .join("\n")}
+</channel>
+</rss>
+`;
+}
+
 function sitemapBlock(posts) {
   return posts
     .filter(indexable)
@@ -281,6 +346,23 @@ async function main() {
     );
   }
   await writeIfChanged(sitemapFile, sitemap, changed, null);
+
+  await writeIfChanged(path.join(BLOG_DIR, "feed.xml"), rssFeed(posts), changed, null);
+
+  const latestForHome = posts.filter(indexable).slice(0, 3);
+  for (const home of HOMES) {
+    const file = path.join(ROOT, home.file);
+    let html = await readFile(file, "utf8");
+    if (latestForHome.length) html = replaceBetween(html, "HOME", latestForHome.map((p) => homeCard(p, home)).join("\n"));
+    html = replaceBetween(html, "STATIC", `<script>window.__BLOG_STATIC__=${JSON.stringify(posts.map((p) => p.slug))};</script>`);
+    if (posts.filter(indexable).length > 3) {
+      html = html.replace(
+        'id="blog-ver-todos" style="text-align:center;margin-top:36px;display:none;"',
+        'id="blog-ver-todos" style="text-align:center;margin-top:36px;display:block;"',
+      );
+    }
+    await writeIfChanged(file, html, changed, `${SITE}/${home.file.replace(/index\.html$/, "")}`);
+  }
 
   if (process.env.BLOG_CHANGED_FILE) await writeFile(process.env.BLOG_CHANGED_FILE, JSON.stringify([...changed]));
   console.log(changed.size ? `${changed.size} URL nuevas o modificadas` : "Sin cambios");
