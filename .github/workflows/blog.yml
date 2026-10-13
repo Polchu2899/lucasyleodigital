@@ -1,0 +1,68 @@
+name: Generar páginas del blog
+
+# Cada hora lee los artículos publicados desde el panel (Firestore) y crea o
+# actualiza su página propia, el listado de /blog/ y el sitemap.
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - blog/index.html
+      - scripts/build-blog.mjs
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: blog-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generar páginas
+        env:
+          BLOG_CHANGED_FILE: ${{ runner.temp }}/blog-changed.json
+        run: node scripts/build-blog.mjs
+
+      - name: Guardar cambios
+        id: commit
+        run: |
+          if [ -z "$(git status --porcelain -- blog sitemap.xml)" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A blog sitemap.xml
+          git commit -m "Blog: actualizar páginas de artículos"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # Los push hechos con GITHUB_TOKEN no disparan otros flujos, así que se
+      # pide la publicación en GitHub Pages explícitamente.
+      - name: Publicar en GitHub Pages
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "No se pudo pedir la publicación; GitHub Pages la hará con el push"
+
+      - name: Avisar a Bing y otros buscadores (IndexNow)
+        if: steps.commit.outputs.changed == 'true'
+        run: |
+          URLS=$(cat "${{ runner.temp }}/blog-changed.json")
+          if [ "$URLS" = "[]" ]; then exit 0; fi
+          sleep 60
+          curl -s -X POST "https://api.indexnow.org/IndexNow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"host\":\"www.lucasyleodigital.com\",\"key\":\"c404c1938b1c4d20dbf113a448904942\",\"keyLocation\":\"https://www.lucasyleodigital.com/c404c1938b1c4d20dbf113a448904942.txt\",\"urlList\":${URLS}}"
