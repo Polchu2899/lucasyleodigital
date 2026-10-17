@@ -100,7 +100,7 @@ async function initCalendar(){
   const SLOTS_LV=['17:00','17:45','18:30','19:15','20:00'];
   const SLOTS_SABM=['09:00','09:45','10:30','11:15','12:00','12:45','13:30'];
   const SLOTS_SABT=['16:00','16:45','17:30','18:15','19:00','19:45'];
-  const APPS='https://script.google.com/macros/d/1-IgLEHgRfpvw2v8rKEAGRe2LKwHsUDGx-Pv4B-wr8HJJXFfJFPJmqiBY4/usercodeapp';
+  const APPS='https://script.google.com/macros/s/AKfycbxMowit4KbOOgZtB5MIYrv33zUaPcJJsQ7rW5-zQn0-FwPfkm3nt4VZDEtMF3eo8hsgqA/exec';
   const FB_CFG={apiKey:'AIzaSyAf5cYK5vRUtfZ2RikRSu5qjqUAJHMhLiM',authDomain:'reservify-lucasyleo.firebaseapp.com',projectId:'reservify-lucasyleo',storageBucket:'reservify-lucasyleo.firebasestorage.app',messagingSenderId:'464767738256',appId:'1:464767738256:web:c0692dc6ba98d162101315'};
   let db=null;
 
